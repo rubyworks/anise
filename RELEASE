@@ -1,0 +1,9 @@
+= Annotable 0.1 hits the streets.
+
+This is the initial release of Annotable.
+
+Annotable is a spin off the the Facets annotations.rb library.
+It includes this Annotations functionality, put adds
+a mixin, Annotatable, that makes it easy to add new
+annotations on the fly.
+
