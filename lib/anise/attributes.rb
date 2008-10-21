@@ -24,6 +24,7 @@ module Anise
     module Attributes
 
       def self.append_features(base)
+        base.extend Annotations
         base.extend self
         base.module_eval do
           inheritor :instance_attributes, [], :|

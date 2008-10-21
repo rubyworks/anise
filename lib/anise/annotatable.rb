@@ -12,7 +12,8 @@ module Anise
   #
   #     annotation :doc
   #
-  #     doc "See waht I mean?"
+  #     doc "See what I mean?"
+  #
   #     def see
   #       # ...
   #     end
@@ -20,17 +21,17 @@ module Anise
   #
   #   X.ann(:see, :doc) #=> "See what I mean?"
   #
-  # TODO: This must work when included in a module or
-  #       class and also when included at the toplevel.
+  # TODO: Thread safety.
   #
   module Annotatable
 
     def self.append_features(base)
-      if base == Object
-        Module.send(:include, self)  # FIXME: Module ?
-      else
+      #if base == Object
+      #  Module.send(:include, self)  # FIXME: Module ?
+      #else
+        base.extend Annotations #unless base.is_a?(Annotations)
         base.extend self
-      end
+      #end
     end
 
     def pending_annotations
