@@ -1,13 +1,11 @@
-require 'anise/annotatable'
-
-include Anise::Annotatable
-
-#annotation :req  # THIS DOES NOT WORK :(
+require 'anise/annotator'
 
 class Test_Annotatable < Test::Unit::TestCase
 
   class X
-    annotation :req
+    include Anise::Annotator
+
+    annotator :req
 
     req 'r'
 

@@ -53,7 +53,7 @@ module Anise
   #
   # TODO: The ann(x).name notation is kind of nice. Would like to add that
   #       back-in if reasonable. Basically this require heritage to be an
-  #       OpenObject rather than just a hash.
+  #       OpenHash or OpenObject rather than just a Hash.
   #++
   module Annotations
 
@@ -61,24 +61,40 @@ module Anise
       base.extend self
     end
 
+    # Stores the classes or modules annotations.
+    #
     def annotations
       #$annotations[self]
       @annotations ||= {}
     end
 
-    def heritage(ref)
+    # Lookup an annotation. Unlike +annotations[ref]+
+    # this provides a complete annotation <i>heritage</i>,
+    # pulling annotations of the same reference name 
+    # from ancestor classes and modules.
+    #
+    def annotation(ref)
       ref = ref.to_sym
-      ancs = ancestors.select{ |a| a.is_a?(Annotations) }
-      ancs.inject({}) do |memo, ancestor|
-        ancestor.annotations[ref] ||= {}
-        ancestor.annotations[ref].merge(memo)
+      ann = {}
+      ancestors.reverse_each do |anc|
+        next unless anc.is_a?(Annotations)
+        #anc.annotations[ref] ||= {}
+        if anc.annotations[ref]
+          ann.update(anc.annotations[ref]) #.merge(ann)
+        end
       end
+      return ann
+      #ancs = ancestors.select{ |a| a.is_a?(Annotations) }
+      #ancs.inject({}) do |memo, ancestor|
+      #  ancestor.annotations[ref] ||= {}
+      #  ancestor.annotations[ref].merge(memo)
+      #end
     end
 
     # Set or read annotations.
-
+    #
     def ann( ref, keys_or_class=nil, keys=nil )
-      return heritage(ref) unless keys_or_class or keys
+      return annotation(ref) unless keys_or_class or keys
 
       if Class === keys_or_class
         keys ||= {}
@@ -94,16 +110,16 @@ module Anise
         annotations[ref].update(keys)
       else
         key = keys.to_sym
-        heritage(ref)[key]
+        annotation(ref)[key]
       end
     end
 
     # To change an annotation's value in place for a given class or module
     # it first must be duplicated, otherwise the change may effect annotations
     # in the class or module's ancestors.
-
+    #
     def ann!( ref, keys_or_class=nil, keys=nil )
-      #return heritage(ref) unless keys_or_class or keys
+      #return annotation(ref) unless keys_or_class or keys
       return annotations[ref] unless keys_or_class or keys
 
       if Class === keys_or_class
@@ -120,7 +136,7 @@ module Anise
         annotations[ref].update(keys)
       else
         key = keys.to_sym
-        annotations[ref][key] = heritage(ref)[key].dup
+        annotations[ref][key] = annotation(ref)[key].dup
       end
     end
 

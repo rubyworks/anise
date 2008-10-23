@@ -2,7 +2,7 @@
 require 'annotable/attributes'
 require 'test/unit'
 
-include Annotatable::Attributes
+include Anise::Attributes
 
 $self = self
 
@@ -27,7 +27,7 @@ end
 
 require 'anise/attributes'
 
-include Anise::Annotatable::Attributes
+include Anise::Attributes
 
 class Test_Attribute < Test::Unit::TestCase
   class X
