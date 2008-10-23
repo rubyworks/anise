@@ -1,9 +1,11 @@
-= Annotable 0.1 hits the streets.
+= Anise 0.2.0 hits the streets.
 
-This is the initial release of Annotable.
+This is the initial release of Anise.
 
-Annotable is a spin off the the Facets annotations.rb library.
-It includes this Annotations functionality, put adds
-a mixin, Annotatable, that makes it easy to add new
+Anise is a spin off the the Facets annotations.rb library.
+It includes the Annotations functionality, and adds
+a mixin, Annotator, that makes it easy to add new
 annotations on the fly.
+
+  http://anise.rubyforge.org
 

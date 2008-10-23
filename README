@@ -1,14 +1,13 @@
-= Annotable
+= Anise
 
   http://anise.rubyforge.org
 
 
 == INTRODUCTION
 
-Annotable is an Annotations Systems for the Ruby programming
+Anise is an Annotations Systems for the Ruby programming
 lanaguage. Unlike other annotations system it is not a comment-based
 system. Rather, it is a dynamic annotations system operating at runtime.
-
 
 
 == RELEASE NOTES
@@ -25,13 +24,13 @@ Please see the HISTORY file.
 
 To install with RubyGems simply open a console and type:
 
-  gem install annotable
+  gem install anise
 
 To manually install you will need Setup.rb (see http://setup.rubyforge.org).
 Then download the tarball package and do:
 
   $ tar -xvzf anise-0.4.0.tgz
-  $ cd annotated-0.4.0.tgz
+  $ cd annotated-0.4.0
   $ sudo setup.rb all
 
 
@@ -42,7 +41,7 @@ unit tests.
 
   $ turn test/test_*
 
-But we have include a script test/suite.rb so you can easily run the
+But we have include a script +test/suite.rb+ so you can easily run the
 unit tests with the testrb command:
 
   $ testrb test/suite.rb
