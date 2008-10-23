@@ -1,4 +1,3 @@
 ---
-ridoc:
-  service: RIDoc
+service: RIDoc
 
