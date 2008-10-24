@@ -1,7 +1,6 @@
 require 'anise'
 
-class TestAnise < Test::Unit::TestCase
-
+class Test_Anise_Annotation_0 < Test::Unit::TestCase
   class X
     include Anise
 
@@ -35,10 +34,9 @@ class TestAnise < Test::Unit::TestCase
     x = X.new(1)
     assert_nothing_raised{ x.validate }
   end
-
 end
 
-class TestAnise1 < Test::Unit::TestCase
+class Test_Anise_Annotation_1 < Test::Unit::TestCase
   class X
     include Anise
     def x1 ; end
@@ -56,7 +54,7 @@ class TestAnise1 < Test::Unit::TestCase
   end
 end
 
-class TestAnise2 < Test::Unit::TestCase
+class Test_Anise_Annotation_2 < Test::Unit::TestCase
   class X
     include Anise
     def x1 ; end
@@ -80,7 +78,7 @@ class TestAnise2 < Test::Unit::TestCase
   end
 end
 
-class TestAnise3 < Test::Unit::TestCase
+class Test_Anise_Annotation_3 < Test::Unit::TestCase
   class X
     include Anise
     ann :foo, Integer
@@ -97,7 +95,7 @@ class TestAnise3 < Test::Unit::TestCase
   end
 end
 
-class TestAnise4 < Test::Unit::TestCase
+class Test_Anise_Annotation_4 < Test::Unit::TestCase
   class X
     include Anise
     ann :foo, :doc => "hello"
@@ -133,6 +131,65 @@ class TestAnise4 < Test::Unit::TestCase
     assert_equal( ["1", "2"], Y.ann(:foo,:bar) )
     assert_equal( ["1", "2"], Y.ann(:foo,:bar) )
     assert_equal( ["1"], X.ann(:foo,:bar) )
+  end
+end
+
+class Test_Anise_Annotator < Test::Unit::TestCase
+  class X
+    include Anise
+
+    annotator :req
+
+    req 'r'
+
+    def a ; "a"; end
+
+    req 's'
+
+    attr :b
+  end
+
+  def test_annotated
+    assert_equal( {:req=>['r']}, X.ann(:a) )
+  end
+
+  def test_annotated
+    assert_equal( {:req=>['s']}, X.ann(:b) )
+  end
+end
+
+class Test_Anise_Attribute < Test::Unit::TestCase
+  class X
+    include Anise
+    attr :q
+    attr :a, :x => 1
+  end
+
+  def test_attr_a
+    assert_equal( {:x=>1}, X.ann(:a) )
+  end
+end
+
+class Test_Anise_Attribute_Using_Attr < Test::Unit::TestCase
+  class A
+    include Anise
+    attr :x, :cast=>"to_s"
+  end
+
+  def test_01
+    assert_equal( "to_s", A.ann(:x,:cast) )
+  end
+end
+
+class Test_Anise_Attribute_Using_Attr_Accessor < Test::Unit::TestCase
+  class A
+    include Anise
+    attr_accessor :x, :cast=>"to_s"
+  end
+
+  def test_instance_attributes
+    a = A.new
+    assert_equal( [:x], A.instance_attributes )
   end
 end
 

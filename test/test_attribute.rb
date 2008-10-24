@@ -1,8 +1,8 @@
-require 'anise/attributes'
+require 'anise/attribute'
 
 class Test_Attribute < Test::Unit::TestCase
   class X
-    include Anise::Attributes
+    include Anise::Attribute
     attr :q
     attr :a, :x => 1
   end
@@ -12,9 +12,9 @@ class Test_Attribute < Test::Unit::TestCase
   end
 end
 
-class TC_Attributes_Using_Attr < Test::Unit::TestCase
+class Test_Attribute_Using_Attr < Test::Unit::TestCase
   class A
-    include Anise::Attributes
+    include Anise::Attribute
     attr :x, :cast=>"to_s"
   end
 
@@ -23,9 +23,9 @@ class TC_Attributes_Using_Attr < Test::Unit::TestCase
   end
 end
 
-class TC_Attributes_Using_Attr_Accessor < Test::Unit::TestCase
+class Test_Attribute_Using_Attr_Accessor < Test::Unit::TestCase
   class A
-    include Anise::Attributes
+    include Anise::Attribute
     attr_accessor :x, :cast=>"to_s"
   end
 

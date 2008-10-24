@@ -1,11 +1,10 @@
 module Anise
-  require 'anise/annotations.rb'
+  require 'anise/annotation.rb'
 
   # = Annotator
   #
-  # Annotatable allows for the create of dynamic
-  # method annotations which attach to the next
-  # method defined.
+  # Annotator allows for the creation of dynamic method
+  # annotations which attach to the next method defined.
   #
   #   class X
   #     include Anise::Annotator
@@ -21,21 +20,22 @@ module Anise
   #
   #   X.ann(:see, :doc) #=> "See what I mean?"
   #
-  # TODO: Thread safety.
-  #
+  #--
+  # TODO: Thread safety of @pending_annotations.
+  #++
   module Annotator
 
     def self.append_features(base)
       #if base == Object
       #  Module.send(:include, self)  # FIXME: Module ?
       #else
-        base.extend Annotations #unless base.is_a?(Annotations)
+        base.extend Annotation #unless base.is_a?(Annotation)
         base.extend self
       #end
     end
 
     def annotator(name)
-      (class << self; self; end).instance_eval do
+      (class << self; self; end).module_eval do
         define_method(name) do |*args|
           @pending_annotations ||= []
           @pending_annotations << [name, args]

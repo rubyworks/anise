@@ -1,7 +1,7 @@
 #require 'facets/inheritor' # remove dependency
 
 module Anise
-  require 'anise/annotations'
+  require 'anise/annotation'
 
   # = Annotated Attributes
   #
@@ -12,19 +12,21 @@ module Anise
   # separate #ann statement.
   #
   #   class X
+  #     include Anise::Attribute
+  #
   #     attr :a, :valid => lambda{ |x| x.is_a?(Integer) }
   #   end
   #
   # See annotation.rb for more information.
   #
-  # NOTE This library was designed to be backward compatible with
-  # the standard versions of the same methods.
+  # NOTE: This library was designed to be backward compatible with
+  #      the standard versions of the same methods.
   #
-  module Attributes
+  module Attribute
 
     def self.append_features(base)
-      base.extend Annotations
-      base.extend self
+      base.extend Annotation
+      base.extend Attribute
       base.module_eval do
         #inheritor :instance_attributes, [], :|
         annotatable_attribute_method(:attr_reader)
@@ -36,12 +38,9 @@ module Anise
 
     #
     def annotatable_attribute_method(attr_method_name)
-      attr_method = method(attr_method_name)
-
-      (class << self; self; end).instance_eval do 
+      (class << self; self; end).module_eval do 
 
         define_method(attr_method_name) do |*args|
-
           args.flatten!
 
           harg={}; while args.last.is_a?(Hash)
@@ -51,15 +50,14 @@ module Anise
           raise ArgumentError if args.empty? and harg.empty?
 
           if args.empty?  # hash mode
-            harg.each { |a,h| send(attr_method_name,a,h) }
+            harg.each { |a,h| __send__(attr_method_name,a,h) }
           else
             klass = harg[:class] = args.pop if args.last.is_a?(Class)
 
-            attr_method.call(*args)
+            #attr_method.call(*args)
+            super(*args)
 
-            args.each { |a|
-              ann(a.to_sym,harg)
-            }
+            args.each{|a| ann(a.to_sym,harg)}
 
             instance_attributes!.concat(args)  #merge!
 
@@ -81,7 +79,7 @@ module Anise
     def instance_attributes
       a = []
       ancestors.each do |anc|
-        next unless anc.is_a?(Attributes)
+        next unless anc.is_a?(Attribute)
         if x = anc.instance_attributes!
           a |= x
         end
@@ -121,7 +119,7 @@ module Anise
       when TrueClass
         args.pop
         attr_accessor(*args)
-      when FalseClass
+      when FalseClass, NilClass
         args.pop
         attr_reader(*args)
       else

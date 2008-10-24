@@ -1,9 +1,9 @@
-require 'anise/annotation'
+require 'anise'
 
-class Test_Annotation_0 < Test::Unit::TestCase
+include Anise
+
+class Test_Anise_Toplevel_Annotation_0 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
-
     attr :a
 
     ann :@a, :valid => lambda{ |x| x.is_a?(Integer) }
@@ -36,9 +36,8 @@ class Test_Annotation_0 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_1 < Test::Unit::TestCase
+class Test_Anise_Toplevel_Annotation_1 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
     def x1 ; end
     ann :x1, :a=>1
     ann :x1, :b=>2
@@ -54,9 +53,8 @@ class Test_Annotation_1 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_2 < Test::Unit::TestCase
+class Test_Anise_Toplevel_Annotation_2 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
     def x1 ; end
     ann :x1, :a=>1
     ann :x1, :b=>2
@@ -78,9 +76,8 @@ class Test_Annotation_2 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_3 < Test::Unit::TestCase
+class Test_Anise_Toplevel_Annotation_3 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
     ann :foo, Integer
   end
   class Y < X
@@ -95,9 +92,8 @@ class Test_Annotation_3 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_4 < Test::Unit::TestCase
+class Test_Anise_Toplevel_Annotation_4 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
     ann :foo, :doc => "hello"
     ann :foo, :bar => []
   end
@@ -131,6 +127,70 @@ class Test_Annotation_4 < Test::Unit::TestCase
     assert_equal( ["1", "2"], Y.ann(:foo,:bar) )
     assert_equal( ["1", "2"], Y.ann(:foo,:bar) )
     assert_equal( ["1"], X.ann(:foo,:bar) )
+  end
+end
+
+class Test_Anise_Toplevel_Annotator < Test::Unit::TestCase
+  class X
+    annotator :req
+
+    req 'r'
+
+    def a ; "a"; end
+
+    req 's'
+
+    attr :b
+
+    def initialize
+      @b = "b"
+    end
+  end
+
+  def test_normal
+    x = X.new
+    assert_equal("a", x.a)
+    assert_equal("b", x.b)
+  end
+
+  def test_annotated_a
+    assert_equal( {:req=>['r']}, X.ann(:a) )
+  end
+
+  def test_annotated_b
+    assert_equal( {:req=>['s']}, X.ann(:b) )
+  end
+end
+
+class Test_Anise_Toplevel_Attribute < Test::Unit::TestCase
+  class X
+    attr :q
+    attr :a, :x => 1
+  end
+
+  def test_attr_a
+    assert_equal( {:x=>1}, X.ann(:a) )
+  end
+end
+
+class Test_Anise_Toplevel_Attribute_Using_Attr < Test::Unit::TestCase
+  class A
+    attr :x, :cast=>"to_s"
+  end
+
+  def test_01
+    assert_equal( "to_s", A.ann(:x,:cast) )
+  end
+end
+
+class Test_Anise_Toplevel_Attribute_Using_Attr_Accessor < Test::Unit::TestCase
+  class A
+    attr_accessor :x, :cast=>"to_s"
+  end
+
+  def test_instance_attributes
+    a = A.new
+    assert_equal( [:x], A.instance_attributes )
   end
 end
 

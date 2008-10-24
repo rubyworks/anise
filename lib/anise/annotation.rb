@@ -1,19 +1,19 @@
-#require 'facets/hash/rekey' # FIXME: remove dependency
-#require 'facets/hash/op'    # FIXME: remove dependency
-
 module Anise
 
-  # = Annotations
+  # = Runtime Annotations
   #
-  # Annotations allows you to annontate objects, including methods with arbitrary
-  # "metadata". These annotations don't do anything in themselves. They are
-  # merely data. But you can put them to use. For instance an attribute
-  # validator might check for an annotation called :valid and test against it.
+  # The Annotation module is the heart of the Anise system.
+  # It provides the framework for annotating class or module related
+  # objects, typically symbols representing methods, with arbitrary
+  # metadata. These annotations do not do anything in themselves.
+  # They are simply data. But you can put them to use. For instance
+  # an attribute validator might check for an annotation called
+  # :valid and test against it.
   #
   # == Synopsis
   #
   #   class X
-  #     include Anise::Annotations
+  #     include Anise::Annotation
   #
   #     attr :a
   #
@@ -22,12 +22,12 @@ module Anise
   #
   #   X.ann(:a, :desc)  #=> "A Number"
   #
-  # Annotations need not only annotate methods, they are arbitrary, so they
-  # can be used for any purpose. For example, we may want to annotate
-  # instance_varaibles.
+  # As stated, annotations need not only annotate methods, they are
+  # arbitrary, so they can be used for any purpose. For example, we
+  # may want to annotate instance variables.
   #
   #   class X
-  #     include Anise::Annotations
+  #     include Anise::Annotation
   #
   #     ann :@a, :valid => lambda{ |x| x.is_a?(Integer) }
   #
@@ -43,8 +43,19 @@ module Anise
   #     end
   #   end
   #
+  # Or, we could even annotate the class itself.
+  #
+  #   class X
+  #     include Anise::Annotation
+  #
+  #     ann self, :valid => lambda{ |x| x.is_a?(Integer) }
+  #   end
+  #
+  # Altough annotations are arbitrary they are tied to the class or
+  # module they are defined within.
+  #
   #--
-  # TODO: By using a global veriable rather the definining a class
+  # TODO: By using a global variable rather the definining a class
   #       instance variable for each class/module, it is possible to
   #       quicky scan all annotations for the entire system. To do
   #       the same without this would require scanning through
@@ -52,16 +63,16 @@ module Anise
   #         $annotations = Hash.new { |h,k| h[k] = {} }
   #
   # TODO: The ann(x).name notation is kind of nice. Would like to add that
-  #       back-in if reasonable. Basically this require heritage to be an
+  #       back-in if reasonable. This would require @annotations to be an
   #       OpenHash or OpenObject rather than just a Hash.
   #++
-  module Annotations
+  module Annotation
 
     def self.append_features(base)
       base.extend self
     end
 
-    # Stores the classes or modules annotations.
+    # Stores this classes or modules annotations.
     #
     def annotations
       #$annotations[self]
@@ -77,7 +88,7 @@ module Anise
       ref = ref.to_sym
       ann = {}
       ancestors.reverse_each do |anc|
-        next unless anc.is_a?(Annotations)
+        next unless anc.is_a?(Annotation)
         #anc.annotations[ref] ||= {}
         if anc.annotations[ref]
           ann.update(anc.annotations[ref]) #.merge(ann)
@@ -145,6 +156,5 @@ module Anise
 end
 
 # 2006-11-07 trans  Created this ultra-concise version of annotations.
-
 # Copyright (c) 2005, 2008 TigerOps
 

@@ -1,9 +1,8 @@
-require 'anise/annotations'
+require 'anise/annotation'
 
-# Universally use Annotations.
-include Anise::Annotations
+include Anise::Annotation
 
-class TestAnnotations < Test::Unit::TestCase
+class Test_Annotation_Toplevel_0 < Test::Unit::TestCase
   class X
     attr :a
     ann :a, :class => Integer
@@ -36,7 +35,7 @@ class TestAnnotations < Test::Unit::TestCase
 
 end
 
-class TestAnnotation1 < Test::Unit::TestCase
+class Test_Annotation_Toplevel_1 < Test::Unit::TestCase
   class X
     def x1 ; end
     ann :x1, :a=>1
@@ -53,7 +52,7 @@ class TestAnnotation1 < Test::Unit::TestCase
   end
 end
 
-class TestAnnotation2 < Test::Unit::TestCase
+class Test_Annotation_Toplevel_2 < Test::Unit::TestCase
   class X
     def x1 ; end
     ann :x1, :a=>1
@@ -76,7 +75,7 @@ class TestAnnotation2 < Test::Unit::TestCase
   end
 end
 
-class TestAnnotation3 < Test::Unit::TestCase
+class Test_Annotation_Toplevel_3 < Test::Unit::TestCase
   class X
     ann :foo, Integer
   end
@@ -92,7 +91,7 @@ class TestAnnotation3 < Test::Unit::TestCase
   end
 end
 
-class TestAnnotation4 < Test::Unit::TestCase
+class Test_Annotation_Toplevel_4 < Test::Unit::TestCase
   class X
     ann :foo, :doc => "hello"
     ann :foo, :bar => []

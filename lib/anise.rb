@@ -1,5 +1,5 @@
 require 'anise/annotator'
-require 'anise/attributes'
+require 'anise/attribute'
 
 # = Anise
 #
@@ -30,7 +30,7 @@ require 'anise/attributes'
 module Anise
 
   def self.append_features(base)
-    Attributes.append_features(base)
+    Attribute.append_features(base)
     Annotator.append_features(base)
   end
 

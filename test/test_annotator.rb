@@ -1,6 +1,6 @@
 require 'anise/annotator'
 
-class Test_Annotatable < Test::Unit::TestCase
+class Test_Annotator < Test::Unit::TestCase
 
   class X
     include Anise::Annotator

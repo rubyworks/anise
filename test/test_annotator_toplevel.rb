@@ -2,9 +2,7 @@ require 'anise/annotator'
 
 include Anise::Annotator
 
-#annotation :req  # THIS DOES NOT WORK :(
-
-class Test_Annotator < Test::Unit::TestCase
+class Test_Annotator_Toplevel < Test::Unit::TestCase
 
   class X
     annotator :req
@@ -27,4 +25,6 @@ class Test_Annotator < Test::Unit::TestCase
   end
 
 end
+
+#annotator :req  # THIS DOES NOT WORK :(
 
