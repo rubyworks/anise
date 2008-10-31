@@ -74,19 +74,14 @@ module Anise
       base.extend self
     end
 
-    # Stores this classes or modules annotations.
-    #
-    def annotations
-      #$annotations[self]
-      @annotations ||= {}
-    end
-
     # Lookup an annotation. Unlike +annotations[ref]+
     # this provides a complete annotation <i>heritage</i>,
-    # pulling annotations of the same reference name 
+    # pulling annotations of the same reference name
     # from ancestor classes and modules.
     #
-    def annotation(ref)
+    def annotation(ref=nil)
+      return(@annotations ||= {}) if ref.nil?
+
       ref = ref.to_sym
       ann = {}
       ancestors.reverse_each do |anc|
@@ -103,6 +98,16 @@ module Anise
       #  ancestor.annotations[ref].merge(memo)
       #end
     end
+
+    # Plural alias for #annotation.
+    alias_method :annotations, :annotation
+
+    # Stores this class' or module's annotations.
+    #
+    #def annotations
+    #  #$annotations[self]
+    #  @annotations ||= {}
+    #end
 
     # Set or read annotations.
     #
@@ -159,4 +164,3 @@ end
 
 # 2006-11-07 trans  Created this ultra-concise version of annotations.
 # Copyright (c) 2005, 2008 TigerOps
-
