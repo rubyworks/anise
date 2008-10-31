@@ -12,6 +12,8 @@ module Anise
   #
   # == Synopsis
   #
+  #   require 'anise/annotation'
+  #
   #   class X
   #     include Anise::Annotation
   #

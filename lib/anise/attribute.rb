@@ -11,6 +11,8 @@ module Anise
   # annotations to added to them directly rather than requireing a
   # separate #ann statement.
   #
+  #   require 'anise/attribute'
+  #
   #   class X
   #     include Anise::Attribute
   #

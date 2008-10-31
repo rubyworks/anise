@@ -1,66 +1,91 @@
 = Anise
 
-  http://anise.rubyforge.org
-
+   http://anise.rubyforge.org
 
 == INTRODUCTION
 
-Anise is an Annotations Systems for the Ruby programming
-lanaguage. Unlike other annotations system it is not a comment-based
-system. Rather, it is a dynamic annotations system operating at runtime.
-
+Anise is an Annotations Systems for the Ruby programming language.
+Unlike most other annotations systems it is not a comment-based
+system, or a "macro" system that sits over-and-above the rest of the 
+code. Rather, Anise is a dynamic annotations system operating at runtime.
 
 == RELEASE NOTES
 
 Please see the RELEASE file.
 
-
-== RECENT CHANGES
-
-Please see the HISTORY file.
-
-
 == INSTALLATION
 
 To install with RubyGems simply open a console and type:
 
-  gem install anise
+   gem install anise
 
 To manually install you will need Setup.rb (see http://setup.rubyforge.org).
 Then download the tarball package and do:
 
-  $ tar -xvzf anise-0.4.0.tgz
-  $ cd annotated-0.4.0
-  $ sudo setup.rb all
-
-
-== TESTING
-
-We recommend using Turn (http://turn.rubyforge.org) to run Anise's
-unit tests.
-
-  $ turn test/test_*
-
-But we have include a script +test/suite.rb+ so you can easily run the
-unit tests with the testrb command:
-
-  $ testrb test/suite.rb
-
-or with Ruby alone:
-
-  $ ruby -rtest/unit test/suite.rb
-
+   $ tar -xvzf anise-0.2.0.tgz
+   $ cd anise-0.2.0
+   $ sudo setup.rb all
 
 == USAGE
 
-For the moment please see the API documentation to learn how to use the library.
+The following example briefly demonstrates all three major features.
 
+   require 'anise'
+
+   class X
+
+     include Anise
+
+     # Annotations
+
+     ann :grape, :class=>String
+
+     # Annotators
+
+     annotator :doc
+
+     doc "This is an entry."
+
+     def bar
+       # ...
+     end
+
+     # Annotated Attributes
+
+     attr :baz, Integer, :max => 10
+
+   end
+
+Looking at the resulting annotations:
+
+   X.ann(:foo)  #=> {:class=>String}
+   X.ann(:bar)  #=> {:doc=>"This is an entry."}
+   X.ann(:baz)  #=> {:class=>Integer, :max=>10}
+
+The Anise library can be used as a whole, per the example above, or these
+features can be used separately. For more details see the RDoc API
+documentation.
+
+== TESTING
+
+Turn is the recommended way to run Anise's test suite (http://turn.rubyforge.org).
+
+  $ turn test/test_*
+
+But a script +test/suite.rb+ script is include so you can easily run
+the unit tests with the testrb command:
+
+  $ testrb -Ilib test/suite.rb
+
+or with Ruby alone:
+
+  $ ruby -Ilib -rtest/unit test/suite.rb
 
 == LICENSE
 
 Copyright (c) 2008 TigerOps
 
-This program is ditributed under the terms of the LGPL License.
+This program is distributed under the terms of the LGPL License.
 
 Please see COPYING file for details.
 

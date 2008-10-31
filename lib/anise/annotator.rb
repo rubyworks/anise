@@ -6,6 +6,8 @@ module Anise
   # Annotator allows for the creation of dynamic method
   # annotations which attach to the next method defined.
   #
+  #   require 'anise/annotator'
+  #
   #   class X
   #     include Anise::Annotator
   #

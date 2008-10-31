@@ -5,27 +5,29 @@ require 'anise/attribute'
 #
 # Dynamic Annotations system for Ruby.
 #
-#  class X
+#   require 'anise'
 #
-#    include Anise
+#   class X
 #
-#    # Provides annotations:
+#     include Anise
 #
-#    ann :foo, :class=>String
+#     # Provides annotations:
 #
-#    # Provides annotators:
+#     ann :foo, :class=>String
 #
-#    annotator :doc
-#    doc "Underdog is here!"
-#    def underdog
-#      UnderDog.new
-#    end
+#     # Provides annotators:
 #
-#    # Provides annotated attributes:
+#     annotator :doc
+#     doc "Underdog is here!"
+#     def underdog
+#       UnderDog.new
+#     end
 #
-#    attr :bar, Integer, :max => 10
+#     # Provides annotated attributes:
 #
-#  end
+#     attr :bar, Integer, :max => 10
+#
+#   end
 #
 module Anise
 

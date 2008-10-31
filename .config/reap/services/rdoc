@@ -1,4 +1,4 @@
 ---
 service  : RDoc
-template : jamis
+template : html
 inline   : true

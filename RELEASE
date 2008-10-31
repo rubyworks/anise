@@ -1,11 +1,16 @@
 = Anise 0.2.0 hits the streets.
 
-This is the initial release of Anise.
+This is the first public release of Anise.
 
 Anise is a spin off the the Facets annotations.rb library.
 It includes the Annotations functionality, and adds
 a mixin, Annotator, that makes it easy to add new
 annotations on the fly.
 
-  http://anise.rubyforge.org
+### 0.2.0 // 2008-09-23
+
+2 Major Enhancments
+
+  * All parts of lib are now modules and not core extensions.
+  * Names of modules are more consistant.
 
