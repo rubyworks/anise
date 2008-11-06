@@ -37,7 +37,7 @@ module Anise
   #       instance_variables.each do |iv|
   #         if validator = self.class.ann(iv)[:valid]
   #           value = instance_variable_get(iv)
-  #           unless validator.call(vale)
+  #           unless validator.call(value)
   #             raise "Invalid value #{value} for #{iv}"
   #           end
   #         end
@@ -50,11 +50,11 @@ module Anise
   #   class X
   #     include Anise::Annotation
   #
-  #     ann self, :valid => lambda{ |x| x.is_a?(Integer) }
+  #     ann self, :valid => lambda{ |x| x.is_a?(Enumerable) }
   #   end
   #
   # Altough annotations are arbitrary they are tied to the class or
-  # module they are defined within.
+  # module they are defined against.
   #
   #--
   # TODO: By using a global variable rather the definining a class

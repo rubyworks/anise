@@ -3,8 +3,8 @@ module Anise
 
   # = Annotator
   #
-  # Annotator allows for the creation of dynamic method
-  # annotations which attach to the next method defined.
+  # Annotator allows for the creation of dynamic <i>method
+  # annotations</i> which attach to the next method defined.
   #
   #   require 'anise/annotator'
   #
@@ -22,9 +22,16 @@ module Anise
   #
   #   X.ann(:see, :doc) #=> "See what I mean?"
   #
-  #--
-  # TODO: Thread safety of @pending_annotations.
-  #++
+  # This idiom of annotator before definition was popularized by
+  # Rake's desc/task pair. Annotator makes it very easy to add
+  # similar capabilites to any program.
+  #
+  # The library uses the #method_added callback, so be sure to
+  # respect good practices of calling +super+ if you need to override
+  # this method while using Annotator.
+  #
+  # TODO: Ensure thread safety of the internal <code>@pending_annotations</code> variable.
+  #
   module Annotator
 
     def self.append_features(base)

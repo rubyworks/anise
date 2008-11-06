@@ -8,8 +8,8 @@ module Anise
   # This framework modifies the major attr_* methods to allow easy
   # addition of annotations. It modifies the built in attribute methods
   # (attr, attr_reader, attr_writer and attr_accessor), to allow
-  # annotations to added to them directly rather than requireing a
-  # separate #ann statement.
+  # annotations to be added to them directly rather than requiring
+  # a separate #ann statement.
   #
   #   require 'anise/attribute'
   #
@@ -22,7 +22,7 @@ module Anise
   # See annotation.rb for more information.
   #
   # NOTE: This library was designed to be backward compatible with
-  #      the standard versions of the same methods.
+  #       the standard versions of the same methods.
   #
   module Attribute
 
