@@ -111,7 +111,7 @@ module Anise
 
     # Set or read annotations.
     #
-    def ann( ref, keys_or_class=nil, keys=nil )
+    def ann(ref, keys_or_class=nil, keys=nil)
       return annotation(ref) unless keys_or_class or keys
 
       if Class === keys_or_class
@@ -136,9 +136,11 @@ module Anise
     # it first must be duplicated, otherwise the change may effect annotations
     # in the class or module's ancestors.
     #
-    def ann!( ref, keys_or_class=nil, keys=nil )
+    def ann!(ref, keys_or_class=nil, keys=nil)
       #return annotation(ref) unless keys_or_class or keys
-      return annotations[ref] unless keys_or_class or keys
+      unless keys_or_class or keys
+        return annotations[ref] ||= {}
+      end
 
       if Class === keys_or_class
         keys ||= {}
@@ -154,7 +156,12 @@ module Anise
         annotations[ref].update(keys)
       else
         key = keys.to_sym
-        annotations[ref][key] = annotation(ref)[key].dup
+        annotations[ref] ||= {}
+        begin
+          annotations[ref][key] = annotation(ref)[key].dup
+        rescue TypeError
+          annotations[ref][key] = annotation(ref)[key]
+        end
       end
     end
 
