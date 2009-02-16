@@ -57,8 +57,6 @@ module Anise
     #
     def self.annotatable_attribute_method(base, attr_method_name)
       base.module_eval do
-        #attr_method = method(attr_method_name)
-
         define_method(attr_method_name) do |*args|
           args.flatten!
 
@@ -95,7 +93,6 @@ module Anise
     #
     def self.annotatable_attribute_method_for_module(attr_method_name)
       ::Module.module_eval do
-p "__#{attr_method_name}", attr_method_name
         alias_method "__#{attr_method_name}", attr_method_name
 
         define_method(attr_method_name) do |*args|
