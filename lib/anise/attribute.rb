@@ -27,20 +27,37 @@ module Anise
   module Attribute
 
     def self.append_features(base)
-      base.extend Annotation
-      base.extend Attribute
-      base.module_eval do
+      if base == ::Object
+        append_features(::Module)
+      elsif base == ::Module
+        unless ::Module <= self
+          ::Module.module_eval do
+            include Annotation
+            super(::Module)
+          end
+          annotatable_attribute_method_for_module(:attr)
+          annotatable_attribute_method_for_module(:attr_reader)
+          annotatable_attribute_method_for_module(:attr_writer)
+          annotatable_attribute_method_for_module(:attr_accessor)
+          annotatable_attribute_method_for_module(:attr_setter) if defined?(attr_setter)
+        end
+      else
+        base.extend Annotation
+        base.extend Attribute
+        base = (class << base; self; end)
         #inheritor :instance_attributes, [], :|
-        annotatable_attribute_method(:attr_reader)
-        annotatable_attribute_method(:attr_writer)
-        annotatable_attribute_method(:attr_accessor)
-        annotatable_attribute_method(:attr_setter) if defined?(attr_setter)
+        annotatable_attribute_method(base, :attr)
+        annotatable_attribute_method(base, :attr_reader)
+        annotatable_attribute_method(base, :attr_writer)
+        annotatable_attribute_method(base, :attr_accessor)
+        annotatable_attribute_method(base, :attr_setter) if defined?(attr_setter)
       end
     end
 
     #
-    def annotatable_attribute_method(attr_method_name)
-      (class << self; self; end).module_eval do 
+    def self.annotatable_attribute_method(base, attr_method_name)
+      base.module_eval do
+        #attr_method = method(attr_method_name)
 
         define_method(attr_method_name) do |*args|
           args.flatten!
@@ -71,9 +88,46 @@ module Anise
             # return the names of the attributes created
             return args
           end
-
         end
+      end
+    end
 
+    #
+    def self.annotatable_attribute_method_for_module(attr_method_name)
+      ::Module.module_eval do
+p "__#{attr_method_name}", attr_method_name
+        alias_method "__#{attr_method_name}", attr_method_name
+
+        define_method(attr_method_name) do |*args|
+
+          args.flatten!
+
+          harg={}; while args.last.is_a?(Hash)
+            harg.update(args.pop)
+          end
+
+          raise ArgumentError if args.empty? and harg.empty?
+
+          if args.empty?  # hash mode
+            harg.each { |a,h| __send__(attr_method_name,a,h) }
+          else
+            klass = harg[:class] = args.pop if args.last.is_a?(Class)
+
+            __send__("__#{attr_method_name}", *args)
+
+            args.each{|a| ann(a.to_sym,harg)}
+
+            instance_attributes!.concat(args)  #merge!
+
+            # Use this callback to customize for your needs.
+            if respond_to?(:attr_callback)
+              attr_callback(self, args, harg)
+            end
+
+            # return the names of the attributes created
+            return args
+          end
+        end
       end
     end
 

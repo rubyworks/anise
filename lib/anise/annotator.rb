@@ -35,12 +35,30 @@ module Anise
   module Annotator
 
     def self.append_features(base)
-      #if base == Object
-      #  Module.send(:include, self)  # FIXME: Module ?
-      #else
+      if base == Object
+        append_features(::Module)
+      elsif base == ::Module
+        unless Module < Annotator
+          ::Module.module_eval do
+            include Annotation
+          end
+          # can't include b/c it seem Module intercetps the call.
+          ::Module.module_eval do
+            def method_added(sym)
+              @pending_annotations ||= []
+              @pending_annotations.each do |name, args|
+                ann sym, name => args
+              end
+              @pending_annotations = []
+              #super if defined?(super)
+            end
+          end
+          super
+        end
+      else
         base.extend Annotation #unless base.is_a?(Annotation)
         base.extend self
-      #end
+      end
     end
 
     def annotator(name)

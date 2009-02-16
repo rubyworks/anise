@@ -1,3 +1,4 @@
+require 'anise/annotation'
 require 'anise/attribute'
 
 include Anise::Attribute

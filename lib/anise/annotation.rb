@@ -71,7 +71,15 @@ module Anise
   module Annotation
 
     def self.append_features(base)
-      base.extend self
+      if base == ::Object
+        append_features(::Module)
+      elsif base == ::Module
+        unless ::Module < Annotation
+          super
+        end
+      else
+        base.extend self
+      end
     end
 
     # Lookup an annotation. Unlike +annotations[ref]+
