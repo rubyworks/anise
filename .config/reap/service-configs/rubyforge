@@ -1,0 +1,6 @@
+---
+rubyforge:
+  service  : Rubyforge
+  unixname : anise
+  groupid  : 7160
+

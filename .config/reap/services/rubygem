@@ -1,4 +1,0 @@
----
-service: Gem
-include: [bin, lib, meta, test, spec, "[A-Z]*" ]
-
