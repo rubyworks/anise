@@ -134,6 +134,8 @@ module Anise
         keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
         annotations[ref] ||= {}
         annotations[ref].update(keys)
+        # callback
+        annotation_added(ref)
       else
         key = keys.to_sym
         annotation(ref)[key]
@@ -162,6 +164,8 @@ module Anise
         keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
         annotations[ref] ||= {}
         annotations[ref].update(keys)
+        # callback
+        annotation_added(ref) if method_defined?(:annotation_added)
       else
         key = keys.to_sym
         annotations[ref] ||= {}
@@ -171,6 +175,11 @@ module Anise
           annotations[ref][key] = annotation(ref)[key]
         end
       end
+    end
+
+    # callback method
+    def annotation_added(name)
+      super if defined?(super)
     end
 
   end
