@@ -1,3 +1,7 @@
+2009-05-28   trans <transfire@gmail.com>
+
+	*  added annotation_added callback
+
 2008-10-23   trans <transfire@gmail.com>
 
         * cleaned up work directory
