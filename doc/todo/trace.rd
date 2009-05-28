@@ -1,0 +1,30 @@
+An idea for making callbacks easier and more versitle.
+
+  trace_annotation :key => :default do |base, ref, key, value|
+    base.module_eval do
+      define_method(key) do
+        instance_variable_set(key, value) unless instance_variable_defined(key)
+        base.module_eval{ attr key }
+        instance_variable_get(key)
+      end 
+    }
+  end
+
+The method #trace_annotation could take a single key argument, or a hash specifying which of the
+four variables to match per above example, and/or perhaps an array in which a Hole could be used. Eg.
+
+  trace_annotation [__, __, :default, __] do |base, ref, key, value|
+    base.module_eval do
+      define_method(key) do
+        instance_variable_set(key, value) unless instance_variable_defined(key)
+        base.module_eval{ attr key }
+        instance_variable_get(key)
+      end 
+    }
+  end
+
+Technically all of this could be done with the current #annotation_added callback, but it would
+make it much easier to add callbacks without stepping on other peoples toes. As it stands we
+must play the alias_method, call alias and don't forget to call super game.
+
+
