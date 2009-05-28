@@ -1,13 +1,13 @@
-= Anise 0.3.0
+= Anise 0.4.0
 
 Anise is a spin off the the Facets annotations.rb library.
 It includes the Annotations functionality, and adds
 a mixin, Annotator, that makes it easy to add new
 annotations on the fly.
 
-### 0.3.0 // 2009-02-15
+### 0.4.0 // 2009-05-27
 
-1 Major Enhancments
+1 Major Enhancement
 
-  * Fixed some major bugs that prevented toplevel include from working.
+  * Added annotation_added callback.
 
