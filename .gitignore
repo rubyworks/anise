@@ -1,4 +1,6 @@
 .cache
-doc/log
+doc/qedoc
 doc/rdoc
 doc/ri
+log
+MANIFEST

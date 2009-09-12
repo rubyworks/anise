@@ -77,7 +77,7 @@ documentation.
 
 == TESTING
 
-Turn is the recommended way to run Anise's test suite (http://turn.rubyforge.org).
+Turn is the recommended way to run Anise's test suite (http://codeforpeople.rubyforge.org/turn/).
 
   $ turn test/test_*
 
