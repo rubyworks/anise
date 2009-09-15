@@ -1,5 +1,6 @@
 ---
 gem:
-  service: Gem
+  service: Box
+  types  : [gz, gem]
   include: [bin, lib, meta, test, spec, "[A-Z]*" ]
-
+  active : true

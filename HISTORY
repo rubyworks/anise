@@ -1,22 +1,37 @@
-2009-05-28   trans <transfire@gmail.com>
-
-	*  added annotation_added callback
-
-2008-10-23   trans <transfire@gmail.com>
-
-        * cleaned up work directory
-        * working on version 0.2.x
-        * added notes and ridoc reap services
-        * renamed some libs
+= RELEASE HISTORY
 
 
-2008-10-21   trans <transfire@gmail.com>
+== 0.4.0 / 2009-05-28
 
-        * Annotations is now module rather than a direct core extenstion to Module
+This version adds a callback method called #annotation_added
+--a striaght-forward callback method patterned after Ruby's 
+other built-in callback methods. The callback should be enough
+to allow for the creation of "active" annotations.
+
+Changes:
+
+* 1 Major Enhancement:
+
+    * Added annotation_added callback
 
 
-2008-10-17   trans <transfire@gmail.com>
+== 0.2.1 / 2008-10-31
 
-        * added .gitignore
-        * initial commit
+Changes:
+
+    * renamed some lib files
+
+
+== 0.2.0 / 2008-10-28
+
+Changes:
+
+    * Annotations is a module rather than a core extenstion to Module
+
+
+== 0.1.1 / 2008-10-17
+
+Changes:
+
+    * initial release
 
