@@ -1,6 +1,7 @@
 = Anise
 
-   http://anise.rubyforge.org
+* http://rubyworks.github.com/anise
+* http://anise.rubyforge.org (old site)
 
 
 == INTRODUCTION
