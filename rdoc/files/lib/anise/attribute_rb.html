@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: attribute.rb [Anise API]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>attribute.rb</h1>
+        <div class='paths'>
+          lib/anise/attribute.rb
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Sun Feb 15 21:10:46 -0500 2009</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            require &#8216;facets/inheritor&#8217; # remove dependency
+            </p>
+            <pre>---&#x000A;= Anise&#x000A;&#x000A;Dynamic Annotations system for Ruby.&#x000A;&#x000A;  require 'anise'&#x000A;&#x000A;  class X&#x000A;&#x000A;    include Anise&#x000A;&#x000A;    # Provides annotations:&#x000A;&#x000A;    ann :foo, :class=&gt;String&#x000A;&#x000A;    # Provides annotators:&#x000A;&#x000A;    annotator :doc&#x000A;    doc &quot;Underdog is here!&quot;&#x000A;    def underdog&#x000A;      UnderDog.new&#x000A;    end&#x000A;&#x000A;    # Provides annotated attributes:&#x000A;&#x000A;    attr :bar, Integer, :max =&gt; 10&#x000A;&#x000A;  end</pre>
+          </div>
+          <div id='context'>
+            <div id='requires'>
+              <h2>Required files</h2>
+              <ol>
+                <li>anise/annotation</li>
+              </ol>
+            </div>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

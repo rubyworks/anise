@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: TODO [Anise API]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>TODO</h1>
+        <div class='paths'>
+          TODO
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Thu May 28 16:00:13 -0400 2009</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            An idea for making callbacks easier and more versitle.
+            </p>
+            <pre>trace_annotation :key =&gt; :default do |base, ref, key, value|&#x000A;  base.module_eval do&#x000A;    define_method(key) do&#x000A;      instance_variable_set(key, value) unless instance_variable_defined(key)&#x000A;      base.module_eval{ attr key }&#x000A;      instance_variable_get(key)&#x000A;    end&#x000A;  }&#x000A;end</pre>
+            <p>
+            The method trace_annotation could take a single key argument, or a hash
+            specifying which of the four variables to match per above example, and/or
+            perhaps an array in which a Hole could be used. Eg.
+            </p>
+            <pre>trace_annotation [__, __, :default, __] do |base, ref, key, value|&#x000A;  base.module_eval do&#x000A;    define_method(key) do&#x000A;      instance_variable_set(key, value) unless instance_variable_defined(key)&#x000A;      base.module_eval{ attr key }&#x000A;      instance_variable_get(key)&#x000A;    end&#x000A;  }&#x000A;end</pre>
+            <p>
+            Technically all of this could be done with the current annotation_added
+            callback, but it would make it much easier to add callbacks without
+            stepping on other peoples toes. As it stands we must play the alias_method,
+            call alias and don&#8217;t forget to call super game.
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
