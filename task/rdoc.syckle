@@ -1,5 +1,5 @@
 ---
 rdoc:
-  service  : RDoc
-  template : html
-  inline   : true
+  service : RDoc
+  title   : Anise API
+  active  : true
