@@ -1,5 +1,6 @@
 ---
 rdoc:
-  service : RDoc
-  title   : Anise API
-  active  : true
+  service  : RDoc
+  title    : Anise API
+  template : hanna
+  active   : true
