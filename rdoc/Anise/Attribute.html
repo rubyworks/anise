@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: Anise::Attribute</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/anise/attribute_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/anise/attribute.rb">lib/anise/attribute.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000002">::annotatable_attribute_method</a></li>
+					
+					<li><a href="#M000005">::annotatable_attribute_method_for_module</a></li>
+					
+					<li><a href="#M000000">::append_features</a></li>
+					
+					<li><a href="#M000011">#attr</a></li>
+					
+					<li><a href="#M000010">#classified_attributes</a></li>
+					
+					<li><a href="#M000007">#instance_attributes</a></li>
+					
+					<li><a href="#M000009">#instance_attributes!</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+			<div id="includes-section" class="section">
+				<h3 class="section-header">Included Modules</h3>
+				<ul class="link-list">
+				
+				
+					<li><a class="include" href="Annotator.html">Anise::Annotator</a></li>
+				
+				
+				</ul>
+			</div>
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../COPYING.html">COPYING</a></li>
+				
+					<li class="file"><a href="../HISTORY.html">HISTORY</a></li>
+				
+					<li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+				
+					<li class="file"><a href="../TODO.html">TODO</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Anise.html">Anise</a></li>
+				
+					<li><a href="../Anise/Annotation.html">Anise::Annotation</a></li>
+				
+					<li><a href="../Anise/Annotator.html">Anise::Annotator</a></li>
+				
+					<li><a href="../Anise/Attribute.html">Anise::Attribute</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">Anise::Attribute</h1>
+
+		<div id="description">
+			<h1>Annotated Attributes</h1>
+<p>
+This framework modifies the major attr_* methods to allow easy addition of
+annotations. It modifies the built in attribute methods (attr, attr_reader,
+attr_writer and attr_accessor), to allow annotations to be added to them
+directly rather than requiring a separate ann statement.
+</p>
+<pre>
+  require 'anise/attribute'
+
+  class X
+    include Anise::Attribute
+
+    attr :a, :valid =&gt; lambda{ |x| x.is_a?(Integer) }
+  end
+</pre>
+<p>
+See annotation.rb for more information.
+</p>
+<p>
+NOTE: This library was designed to be backward compatible with
+</p>
+<pre>
+      the standard versions of the same methods.
+</pre>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="annotatable-attribute-method-method" class="method-detail ">
+				<a name="M000002"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">annotatable_attribute_method</span><span
+						class="method-args">(base, attr_method_name)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="annotatable-attribute-method-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 58</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">attr_method_name</span>)
+      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">attr_method_name</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span>
+
+          <span class="ruby-identifier">harg</span>={}; <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+            <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>)
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">empty?</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>  <span class="ruby-comment cmt"># hash mode</span>
+            <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">attr_method_name</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">h</span>) }
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">harg</span>[<span class="ruby-identifier">:class</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
+
+            <span class="ruby-comment cmt">#attr_method.call(*args)</span>
+            <span class="ruby-keyword kw">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+
+            <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ann</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_sym</span>,<span class="ruby-identifier">harg</span>)}
+
+            <span class="ruby-identifier">instance_attributes!</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>)  <span class="ruby-comment cmt">#merge!</span>
+
+            <span class="ruby-comment cmt"># Use this callback to customize for your needs.</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:attr_callback</span>)
+              <span class="ruby-identifier">attr_callback</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">harg</span>)
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-comment cmt"># return the names of the attributes created</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">args</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="annotatable-attribute-method-for-module-method" class="method-detail ">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">annotatable_attribute_method_for_module</span><span
+						class="method-args">(attr_method_name)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="annotatable-attribute-method-for-module-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 94</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">attr_method_name</span>)
+      <span class="ruby-operator">::</span><span class="ruby-constant">Module</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">alias_method</span> <span class="ruby-node">&quot;__#{attr_method_name}&quot;</span>, <span class="ruby-identifier">attr_method_name</span>
+
+        <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">attr_method_name</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span>
+
+          <span class="ruby-identifier">harg</span>={}; <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+            <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>)
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">empty?</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>  <span class="ruby-comment cmt"># hash mode</span>
+            <span class="ruby-identifier">harg</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">attr_method_name</span>,<span class="ruby-identifier">a</span>,<span class="ruby-identifier">h</span>) }
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">harg</span>[<span class="ruby-identifier">:class</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
+
+            <span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;__#{attr_method_name}&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+
+            <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ann</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_sym</span>,<span class="ruby-identifier">harg</span>)}
+
+            <span class="ruby-identifier">instance_attributes!</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>)  <span class="ruby-comment cmt">#merge!</span>
+
+            <span class="ruby-comment cmt"># Use this callback to customize for your needs.</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:attr_callback</span>)
+              <span class="ruby-identifier">attr_callback</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">harg</span>)
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-comment cmt"># return the names of the attributes created</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">args</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="append-features-method" class="method-detail ">
+				<a name="M000000"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">append_features</span><span
+						class="method-args">(base)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="append-features-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 29</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">base</span> <span class="ruby-operator">==</span> <span class="ruby-operator">::</span><span class="ruby-constant">Object</span>
+        <span class="ruby-identifier">append_features</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Module</span>)
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">base</span> <span class="ruby-operator">==</span> <span class="ruby-operator">::</span><span class="ruby-constant">Module</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-operator">::</span><span class="ruby-constant">Module</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-keyword kw">self</span>
+          <span class="ruby-operator">::</span><span class="ruby-constant">Module</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">include</span> <span class="ruby-constant">Annotation</span>
+            <span class="ruby-keyword kw">super</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Module</span>)
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">:attr</span>)
+          <span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">:attr_reader</span>)
+          <span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">:attr_writer</span>)
+          <span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">:attr_accessor</span>)
+          <span class="ruby-identifier">annotatable_attribute_method_for_module</span>(<span class="ruby-identifier">:attr_setter</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-identifier">attr_setter</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Annotation</span>
+        <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Attribute</span>
+        <span class="ruby-identifier">base</span> = (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">base</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>)
+        <span class="ruby-comment cmt">#inheritor :instance_attributes, [], :|</span>
+        <span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">:attr</span>)
+        <span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">:attr_reader</span>)
+        <span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">:attr_writer</span>)
+        <span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">:attr_accessor</span>)
+        <span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">:attr_setter</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-identifier">attr_setter</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="attr-method" class="method-detail ">
+				<a name="M000011"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">attr</span><span
+						class="method-args">(*args)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+This define a simple adjustment to <a
+href="Attribute.html#M000011">attr</a> to allow it to handle the boolean
+argument and to be able to accept attributes. It&#8217;s backward
+compatible and is not needed for Ruby 1.9 which gets rid of the secondary
+argument.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="attr-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 169</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span>
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-constant">TrueClass</span>
+        <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-identifier">attr_accessor</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FalseClass</span>, <span class="ruby-constant">NilClass</span>
+        <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-identifier">attr_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">attr_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="classified-attributes-method" class="method-detail ">
+				<a name="M000010"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">classified_attributes</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return list of attributes that have a :class annotation.
+</p>
+<pre>
+  class MyClass
+    attr_accessor :test
+    attr_accessor :name, String, :doc =&gt; 'Hello'
+    attr_accessor :age, Fixnum
+  end
+
+  MyClass.instance_attributes # =&gt; [:test, :name, :age, :body]
+  MyClass.classified_attributes # =&gt; [:name, :age]
+</pre>
+					
+
+					
+					<div class="method-source-code"
+						id="classified-attributes-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 159</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">classified_attributes</span>
+      <span class="ruby-identifier">instance_attributes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ann</span>(<span class="ruby-identifier">a</span>, <span class="ruby-identifier">:class</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="instance-attributes-method" class="method-detail ">
+				<a name="M000007"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">instance_attributes</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Instance attributes, including inherited attributes.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="instance-attributes-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 132</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance_attributes</span>
+      <span class="ruby-identifier">a</span> = []
+      <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">anc</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">anc</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Attribute</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span> = <span class="ruby-identifier">anc</span>.<span class="ruby-identifier">instance_attributes!</span>
+          <span class="ruby-identifier">a</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">x</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">a</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="instance-attributes--method" class="method-detail ">
+				<a name="M000009"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">instance_attributes!</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Local instance attributes.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="instance-attributes--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/anise/attribute.rb, line 144</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance_attributes!</span>
+      <span class="ruby-ivar">@instance_attributes</span> <span class="ruby-operator">||=</span> []
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
