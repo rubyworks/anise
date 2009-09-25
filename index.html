@@ -1,0 +1,81 @@
+<html>
+<head>
+  <title>Anise - Ruby Annotations</tile>
+  <link REL="SHORTCUT ICON" HREF="images/star.jpg"/>
+  <style>
+    body { font: bold 1em times; padding: 0; margin: 0; }
+    pre, div, img { margin: 0; padding: 0; border: none; }
+    #main { position: relative; margin: 0 auto; width: 900; }
+    #header { text-align: center; }
+    #header h1 { font-size: 90px; margin: 15 5 5 5; letter-spacing: 20px; }
+    #subtitle { color: #999; text-align: center; font-size: 10pt; margin-bottom: 20; letter-spacing: 4;}
+    #code { float: left; color: green; font-size: 1em; margin-left: 85;}
+    #menu { float: right; font-family: monospace; margin-right: 150;}
+    #menu li { margin: 5 5; }
+    #menu a { text-decoration: none; color: brown; }
+    #menu a:hover { text-decoration: underline; }
+    #logo { clear: both; text-align: center;}
+    #footer { color: #999; text-align: center; font-size: 10pt; margin-top: 30;  letter-spacing: 3;}
+    #addiv { width: 900px; margin: 30 auto; text-align: center; }
+  </style>
+</head>
+<body>
+  <div id="main">
+
+    <div id="header"><h1>A N I S E</h1></div>
+
+    <div id="subtitle">
+      Dynamic Annotations for Ruby
+    </div>
+
+    <br/>
+
+    <div id="code">
+      <pre><code>
+        class Song
+          include Anise
+          attr :title,  String, :size => 50
+          attr :length, Integer
+        end
+      </code></pre>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="rdoc/index.html">Documentation</a></li>
+        <li><a href="spec/index.html">Specification</a></li>
+        <li><a href="http://rubyforge.org/projects/anise">Rubyforge</a></li>
+        <li><a href="http://tigerops.org">TigerOps</a></li>
+        <li><a href="http://groups.google.com/group/tigerops-community?hl=en">Mailinglist</a></li>
+      </ul>
+    </div>
+
+    <div id="logo">
+      <img src="assets/images/star-anise.jpg" align="center"/>
+    </div>
+
+    <div id="footer">
+      Anise, Copyright &copy; 2005,2009 Tiger Ops<br/>
+      Distributed under the terms of the LGPL version 3.
+    </div>
+
+    <br/><hr style="border: 1px solid #ccc;"/>
+
+    <div id="addiv">
+      <script type="text/javascript"><!--
+      google_ad_client = "pub-1126154564663472";
+      /* TIGER 728x90 10/28/08 */
+      google_ad_slot = "2386645975";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+      </script>
+      <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+      <!-- <iframe src="http://tigerops.org/assets/adverts/banner-900-1.html" scrolling="no"></frame> -->
+    </div>
+  </div>
+</body>
+</html>
+
