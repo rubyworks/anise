@@ -14,7 +14,7 @@
     #menu li { margin: 5 5; }
     #menu a { text-decoration: none; color: brown; }
     #menu a:hover { text-decoration: underline; }
-    #logo { clear: both; text-align: center;}
+    #logo { clear: both; text-align: center; }
     #footer { color: #999; text-align: center; font-size: 10pt; margin-top: 30;  letter-spacing: 3;}
     #addiv { width: 900px; margin: 30 auto; text-align: center; }
   </style>
@@ -35,6 +35,7 @@
         class Song
           include Anise
           attr :title,  String, :size => 50
+          attr :artist, String
           attr :length, Integer
         end
       </code></pre>
@@ -42,16 +43,17 @@
 
     <div id="menu">
       <ul>
-        <li><a href="rdoc/index.html">RDocs</a></li>
-        <li><a href="qedoc/index.html">QEDocs</a></li>
-        <li><a href="http://github.com/rubyworks/anise">Github</a></li>
-        <li><a href="http://rubyworks.github.com">Rubyworks</a></li>
-        <li><a href="http://groups.google.com/group/rubyworks-mailinglist">GoggleGroup</a></li>
+        <li><a href="http://wiki.github.com/rubyworks/anise">Documentation</a></li>
+        <li><a href="rdoc/index.html">API Reference</a></li>
+        <li><a href="qedoc/index.html">Demostrandum</a></li>
+        <li><a href="http://groups.google.com/group/rubyworks-mailinglist">Mailing List</a></li>
+        <li><a href="http://github.com/rubyworks/anise">Development</a></li>
+        <li><a href="http://rubyworks.github.com">RubyWorks</a></li>
       </ul>
     </div>
 
     <div id="logo">
-      <img src="assets/images/star-anise.jpg" align="center"/>
+      <img src="assets/images/star-anise.jpg" align="center" style="margin-top: -10px;"/>
     </div>
 
     <div id="footer">
