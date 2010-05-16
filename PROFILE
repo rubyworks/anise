@@ -1,0 +1,16 @@
+--- 
+title     : Anise
+suite     : rubyworks
+summary   : Dynamic Annotations System
+copyright : Copyright (c) 2008 Thomas Sawyer
+license   : Ruby
+contact   : rubyworks-mailinglist@googlegroups.com
+created   : 2008-02-21
+
+authors:
+  - Thomas Sawyer
+
+description:
+  Anise is a runtime-baded annotations systems for the Ruby
+  programming lanaguage.
+
