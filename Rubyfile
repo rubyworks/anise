@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+name      'anise'
+
+title     'Anise'
+suite     'rubyworks'
+summary   'Dynamic Annotations System'
+license   'Apache 2.0'
+contact   'trans <transfire@gmail.com>'
+created   '2008-02-21'
+
+authors ['Thomas Sawyer']
+
+description %{
+  Anise is a runtime-baded annotations systems for the Ruby
+  programming lanaguage.
+}.strip
+
+copyright 'Copyright (c) 2008 Thomas Sawyer'
+
+version File.read('VERSION').strip
+date    Time.now
+
+manifest 'MANIFEST'
+
+gem 'syckle (build)'
+gem 'qed    (test)'
+

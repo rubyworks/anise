@@ -1,0 +1,7 @@
+name    : anise
+date    : 2009-05-28
+version : 0.4.0
+
+requires:
+- syckle (build)
+- qed    (test)
