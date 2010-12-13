@@ -1,0 +1,24 @@
+#!mast -x Syckle .ruby bin lib qed test [A-Z]*
+.ruby
+lib/anise/annotation.rb
+lib/anise/annotator.rb
+lib/anise/attribute.rb
+lib/anise.rb
+qed/01_annotations.qed
+qed/04_callbacks.qed
+test/suite.rb
+test/test_anise.rb
+test/test_anise_toplevel.rb
+test/test_annotations.rb
+test/test_annotations_module.rb
+test/test_annotations_toplevel.rb
+test/test_annotator.rb
+test/test_annotator_toplevel.rb
+test/test_attribute.rb
+test/test_attribute_toplevel.rb
+HISTORY.rdoc
+Profile
+LICENSE
+README.rdoc
+Syckfile
+VERSION
