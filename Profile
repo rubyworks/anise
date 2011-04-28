@@ -12,7 +12,7 @@ created   '2008-02-21'
 authors ['Thomas Sawyer']
 
 description %{
-  Anise is a runtime-baded annotations systems for the Ruby
+  Anise is a runtime-based annotations systems for the Ruby
   programming lanaguage.
 }.strip
 

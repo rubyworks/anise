@@ -1,4 +1,4 @@
-#!mast -x Syckle .ruby bin lib qed test [A-Z]*
+#!mast -x Syckfile .ruby bin lib qed test [A-Z]*
 .ruby
 lib/anise/annotation.rb
 lib/anise/annotator.rb
