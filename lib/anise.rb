@@ -32,8 +32,19 @@ require 'anise/attribute'
 module Anise
 
   def self.append_features(base)
+    super(base)
     Attribute.append_features(base)
     Annotator.append_features(base)
+    base.extend ClassMethods
+  end
+
+  module ClassMethods
+    def append_features(base)
+      super(base)
+      Attribute.append_features(base)
+      Annotator.append_features(base)
+      base.extend ClassMethods
+    end
   end
 
 end

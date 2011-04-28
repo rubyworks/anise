@@ -184,5 +184,4 @@ module Anise
 
 end
 
-# Copyright (c) 2005, 2008 TigerOps
-
+# Copyright (c) 2005, 2008 Thomas Sawyer
