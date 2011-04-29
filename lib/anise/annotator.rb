@@ -1,10 +1,14 @@
 module Anise
-  require 'anise/annotation.rb'
+  require 'anise/annotation'
 
   # = Annotator
   #
   # Annotator allows for the creation of dynamic <i>method
   # annotations</i> which attach to the next method defined.
+  #
+  # This idiom of annotator-before-definition was popularized by
+  # Rake's desc/task pair. Annotator makes it very easy to add
+  # similar capabilites to any program.
   #
   #   require 'anise/annotator'
   #
@@ -22,16 +26,18 @@ module Anise
   #
   #   X.ann(:see, :doc) #=> "See what I mean?"
   #
-  # This idiom of annotator before definition was popularized by
-  # Rake's desc/task pair. Annotator makes it very easy to add
-  # similar capabilites to any program.
-  #
-  # The library uses the #method_added callback, so be sure to
+  # Note that the library uses the #method_added callback, so be sure to
   # respect good practices of calling +super+ if you need to override
   # this method while using Annotator.
   #
-  # TODO: Ensure thread safety of the internal <code>@pending_annotations</code> variable.
+  # DEPRECATE: This module will be deprecated in a future version.
+  # It is superceeded by the more generally useful Callbacks module.
+  # See Callbacks for a demonstraction of achieving the same results
+  # as Annotator.
   #
+  #--
+  # TODO: Ensure thread safety of the internal <code>@pending_annotations</code> variable.
+  #++
   module Annotator
 
     def self.append_features(base)
@@ -83,5 +89,4 @@ module Anise
 
 end
 
-# Copyright (c) 2005, 2008 TigerOps
-
+# Copyright (c) 2005, 2011 Thomas Sawyer

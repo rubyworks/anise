@@ -66,7 +66,7 @@ module Anise
   #
   # TODO: The ann(x).name notation is kind of nice. Would like to add that
   #       back-in if reasonable. This would require @annotations to be an
-  #       OpenHash or OpenObject rather than just a Hash.
+  #       OpenHash or OpenObject rather than just a Hash though.
   #++
   module Annotation
 
