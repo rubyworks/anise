@@ -22,10 +22,11 @@ module Anise
   # See annotation.rb for more information.
   #
   # NOTE: This library was designed to be backward compatible with
-  #       the standard versions of the same methods.
+  # the standard versions of the same methods.
   #
   module Attribute
 
+    #
     def self.append_features(base)
       if base == ::Object
         append_features(::Module)
@@ -35,22 +36,28 @@ module Anise
             include Annotation
             super(::Module)
           end
-          annotatable_attribute_method_for_module(:attr)
-          annotatable_attribute_method_for_module(:attr_reader)
-          annotatable_attribute_method_for_module(:attr_writer)
-          annotatable_attribute_method_for_module(:attr_accessor)
-          annotatable_attribute_method_for_module(:attr_setter) if defined?(attr_setter)
+          ::Module.attribute_methods.each do |attr_method|
+            annotatable_attribute_method_for_module(attr_method)
+          end
+          #annotatable_attribute_method_for_module(:attr)
+          #annotatable_attribute_method_for_module(:attr_reader)
+          #annotatable_attribute_method_for_module(:attr_writer)
+          #annotatable_attribute_method_for_module(:attr_accessor)
+          #annotatable_attribute_method_for_module(:attr_setter) if defined?(attr_setter)
         end
       else
         base.extend Annotation
         base.extend Attribute
         base = (class << base; self; end)
         #inheritor :instance_attributes, [], :|
-        annotatable_attribute_method(base, :attr)
-        annotatable_attribute_method(base, :attr_reader)
-        annotatable_attribute_method(base, :attr_writer)
-        annotatable_attribute_method(base, :attr_accessor)
-        annotatable_attribute_method(base, :attr_setter) if defined?(attr_setter)
+        base.attribute_methods.each do |attr_method|
+          annotatable_attribute_method(base, attr_method)
+        end
+        #annotatable_attribute_method(base, :attr)
+        #annotatable_attribute_method(base, :attr_reader)
+        #annotatable_attribute_method(base, :attr_writer)
+        #annotatable_attribute_method(base, :attr_accessor)
+        #annotatable_attribute_method(base, :attr_setter) if defined?(attr_setter)
       end
     end
 
@@ -182,6 +189,25 @@ module Anise
 
   end
 
+end
+
+class Module
+  # Module extension to return attribute methods. These are all methods
+  # that start with `attr_`. This method can be overriden in special cases
+  # to work with the attribute annotations.
+  def attribute_methods
+    list = []
+    public_methods(true).each do |m|
+      list << m if m.to_s =~ /^attr_/
+    end
+    protected_methods(true).each do |m|
+      list << m if m.to_s =~ /^attr_/
+    end
+    private_methods(true).each do |m|
+      list << m if m.to_s =~ /^attr_/
+    end
+    return list
+  end
 end
 
 # Copyright (c) 2005, 2008 Thomas Sawyer
