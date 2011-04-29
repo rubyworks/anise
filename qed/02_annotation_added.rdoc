@@ -1,4 +1,4 @@
-= Callbacks
+= Annotation Added Callback
 
 Load the annotations, which supports callbacks out of the box.
 

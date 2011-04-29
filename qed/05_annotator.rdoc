@@ -1,0 +1,25 @@
+= Annotators
+
+Load the primary annotator library.
+
+  require 'anise/annotator'
+  
+Create a class that includes it.
+
+  class X
+    include Anise::Annotator
+
+    annotator :doc
+
+    doc "See what I mean?"
+  
+    def see
+      puts "Yes, I see!"
+    end
+  end
+
+See that it is set.
+  
+  X.ann(:see, :doc).assert == "See what I mean?"
+
+

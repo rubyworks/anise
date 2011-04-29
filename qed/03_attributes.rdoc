@@ -1,0 +1,14 @@
+= Annotated Attribute Methods
+
+Load the attributes library.
+
+  require 'anise/attribute'
+  
+Create a class that includes it.
+
+  class X
+    include Anise::Attribute
+
+    attr :a, :valid => lambda{ |x| x.is_a?(Integer) }
+  end
+
