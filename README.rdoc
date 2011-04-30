@@ -1,24 +1,23 @@
 = Anise
 
-* http://rubyworks.github.com/anise
-* http://anise.rubyforge.org (old site)
-
-
 == INTRODUCTION
 
-Anise is an Annotations Systems for the Ruby programming language.
-Unlike most other annotations systems it is not a comment-based
-system, or a "macro" system that sits over-and-above the rest of the 
-code. Rather, Anise is a dynamic annotations system operating at runtime.
-
-Anise is a spin off of the old Facets annotations.rb library.
-It includes the Annotations functionality, and adds a mixin,
-Annotator, that makes it easy to add new annotations on the fly.
+Anise is an Annotation System for the Ruby programming language.
+Unlike most other annotations systems it is not a comment-based or
+macro-based system that sits over-and-above the rest of the code.
+Rather, Anise is a dynamic annotations system operating at runtime.
 
 
 == RELEASE NOTES
 
 Please see the RELEASE file.
+
+
+== RESOURCES
+
+* home: http://rubyworks.github.com/anise
+* code: http://github.com/rubyworks/anise
+* main: http://groups.google.com/group/rubyworks-mailinglist
 
 
 == INSTALLATION
@@ -100,9 +99,9 @@ See Quarry project (http://quarry.rubyforge.org) for more informaiton.
 
 == LICENSE
 
-Copyright (c) 2008 TigerOps
+Copyright (c) 2008 Thomas Sawyer
 
-This program is distributed under the terms of the LGPL License.
+This program is distributed under the terms of the Apache 2.0 license.
 
-Please see COPYING file for details.
+Please see COPYING.rdoc file for details.
 
