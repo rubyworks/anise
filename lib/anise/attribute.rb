@@ -1,7 +1,7 @@
-#require 'facets/inheritor' # remove dependency
-
 module Anise
+  #require 'facets/inheritor' # removed dependency
   require 'anise/annotation'
+  require 'anise/module'
 
   # = Annotated Attributes
   #
@@ -75,6 +75,7 @@ module Anise
       end
     end
 
+=begin
     #
     def self.annotatable_attribute_method_for_module(attr_method_name)
       ::Module.module_eval do
@@ -112,6 +113,7 @@ module Anise
         end
       end
     end
+=end
 
     # Anise::Attributes Doman Language.
     module ClassMethods
@@ -120,7 +122,7 @@ module Anise
       def instance_attributes
         a = []
         ancestors.each do |anc|
-          next unless anc.is_a?(Attribute)
+          next unless anc < Attribute
           if x = anc.instance_attributes!
             a |= x
           end
@@ -172,25 +174,6 @@ module Anise
 
   end
 
-end
-
-class Module
-  # Module extension to return attribute methods. These are all methods
-  # that start with `attr_`. This method can be overriden in special cases
-  # to work with attribute annotations.
-  def attribute_methods
-    list = []
-    public_methods(true).each do |m|
-      list << m if m.to_s =~ /^attr_/
-    end
-    protected_methods(true).each do |m|
-      list << m if m.to_s =~ /^attr_/
-    end
-    private_methods(true).each do |m|
-      list << m if m.to_s =~ /^attr_/
-    end
-    return list
-  end
 end
 
 # Copyright (c) 2005, 2008 Thomas Sawyer
