@@ -1,4 +1,4 @@
-require 'anise/annotation'
+#require 'anise/annotation'
 require 'anise/attribute'
 
 include Anise::Attribute
@@ -31,7 +31,7 @@ class Test_Attribute_Toplevel_Using_Attr_Accessor < Test::Unit::TestCase
 
   def test_01
     a = A.new
-    assert_equal( [:x], A.instance_attributes )
+    assert_equal( [:x], A.instance_attributes - [:taguri] ) # taguri is from YAML :(
   end
 end
 

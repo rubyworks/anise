@@ -8,20 +8,18 @@ class Test_Annotator < Test::Unit::TestCase
     annotator :req
 
     req 'r'
-
     def a ; "a"; end
 
-    req 's'
-
+    req 'x', 'y'
     attr :b
   end
 
   def test_annotated
-    assert_equal( {:req=>['r']}, X.ann(:a) )
+    assert_equal( {:req=>'r'}, X.ann(:a) )
   end
 
   def test_annotated
-    assert_equal( {:req=>['s']}, X.ann(:b) )
+    assert_equal( {:req=>['x','y']}, X.ann(:b) )
   end
 
 end

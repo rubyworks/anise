@@ -31,7 +31,7 @@ class Test_Attribute_Using_Attr_Accessor < Test::Unit::TestCase
 
   def test_01
     a = A.new
-    assert_equal( [:x], A.instance_attributes )
+    assert_equal( [:x], A.instance_attributes - [:taguri] )
   end
 end
 

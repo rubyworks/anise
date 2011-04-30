@@ -141,20 +141,18 @@ class Test_Anise_Annotator < Test::Unit::TestCase
     annotator :req
 
     req 'r'
-
     def a ; "a"; end
 
-    req 's'
-
+    req 's', 't'
     attr :b
   end
 
   def test_annotated
-    assert_equal( {:req=>['r']}, X.ann(:a) )
+    assert_equal( {:req=>'r'}, X.ann(:a) )
   end
 
   def test_annotated
-    assert_equal( {:req=>['s']}, X.ann(:b) )
+    assert_equal( {:req=>['s','t']}, X.ann(:b) )
   end
 end
 
@@ -189,7 +187,7 @@ class Test_Anise_Attribute_Using_Attr_Accessor < Test::Unit::TestCase
 
   def test_instance_attributes
     a = A.new
-    assert_equal( [:x], A.instance_attributes )
+    assert_equal( [:x], A.instance_attributes - [:taguri] )
   end
 end
 
