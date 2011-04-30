@@ -1,15 +1,16 @@
 <html>
 <head>
   <title>Anise - Ruby Annotations</tile>
-  <link REL="SHORTCUT ICON" HREF="images/star.jpg"/>
+  <link REL="SHORTCUT ICON" HREF="assets/images/star.jpg"/>
   <style>
     body { font: bold 1em times; padding: 0; margin: 0; }
     pre, div, img { margin: 0; padding: 0; border: none; }
+    pre code { font-family: courier; line-height: 1.3em; }
     #main { position: relative; margin: 0 auto; width: 900; }
     #header { text-align: center; }
     #header h1 { font-size: 90px; margin: 15 5 5 5; letter-spacing: 20px; }
     #subtitle { color: #999; text-align: center; font-size: 10pt; margin-bottom: 20; letter-spacing: 4;}
-    #code { float: left; color: green; font-size: 1em; margin-left: 85;}
+    #code { float: left; color: #655; font-size: 1em; margin-left: 85; }
     #menu { float: right; font-family: monospace; margin-right: 150;}
     #menu li { margin: 5 5; }
     #menu a { text-decoration: none; color: brown; }
@@ -17,9 +18,22 @@
     #logo { clear: both; text-align: center; }
     #footer { color: #999; text-align: center; font-size: 10pt; margin-top: 30;  letter-spacing: 3;}
     #addiv { width: 900px; margin: 30 auto; text-align: center; }
+
+    #rubyworks{ position: fixed; bottom: 0; right: 3px; padding: 10px 7px 5px 4px; opacity: 0.2; }
   </style>
 </head>
 <body>
+
+  <div id="rubyworks">
+    <a href="http://rubyworks.github.com">
+      <img src="http://rubyworks.github.com/assets/images/seal.png" height="175px" />
+    </a>
+  </div>
+
+  <div style="position: absolute; top: 0; right: 0;">
+    <a href="http://github.com/rubyworks/anise"><img src="assets/images/fork-me.png"/></a>
+  </div>
+
   <div id="main">
 
     <div id="header"><h1>A N I S E</h1></div>
@@ -43,12 +57,11 @@
 
     <div id="menu">
       <ul>
-        <li><a href="http://wiki.github.com/rubyworks/anise">Documentation</a></li>
-        <li><a href="rdoc/index.html">API Reference</a></li>
-        <li><a href="qedoc/index.html">Demostrandum</a></li>
+        <li><a href="http://wiki.github.com/rubyworks/anise">User Guide</a></li>
+        <li><a href="docs/api/index.html">API Reference</a></li>
+        <li><a href="docs/qed/index.html">Demostrandum</a></li>
         <li><a href="http://groups.google.com/group/rubyworks-mailinglist">Mailing List</a></li>
         <li><a href="http://github.com/rubyworks/anise">Development</a></li>
-        <li><a href="http://rubyworks.github.com">RubyWorks</a></li>
       </ul>
     </div>
 
@@ -57,8 +70,8 @@
     </div>
 
     <div id="footer">
-      Anise, Copyright &copy; 2005,2009 Tiger Ops<br/>
-      Distributed under the terms of the LGPL version 3.
+      Anise, Copyright &copy; 2005,2011 Thomas Sawyer<br/>
+      Distributed under the terms of the Apache 2.0 license.
     </div>
 
     <br/><hr style="border: 1px solid #ccc;"/>
