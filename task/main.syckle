@@ -21,7 +21,7 @@ stats:
 
 rdoc:
   service : rdoc
-  format  : redfish  #hanna
+  format  : newfish  #hanna
   exclude : [VERSION]
   output  : site/docs/api
 
