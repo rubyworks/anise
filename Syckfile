@@ -22,7 +22,7 @@ stats:
 
 rdoc:
   service : rdoc
-  template: redfish
+  format  : redfish
   exclude : [Syckfile, PACKAGE, PROFILE, REQUIRE]
   output  : doc/api
 
