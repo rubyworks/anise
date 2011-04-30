@@ -22,4 +22,28 @@ See that it is set.
   
   X.ann(:see, :doc).assert == "See what I mean?"
 
+Annotators can override the standard annotation procedure with a
+custom procedure.
+
+  class Y
+    include Anise::Annotator
+
+    def self.list
+      @list ||= []
+    end
+
+    annotator :doc do |method, argument|
+      list << [method, argument]
+    end
+
+    doc "See here!"
+  
+    def see
+      puts "Yes, I see!"
+    end
+  end
+
+See that it is set.
+  
+  Y.list #=> [[:see, "See here!"]]
 

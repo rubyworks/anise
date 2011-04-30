@@ -4,11 +4,15 @@ Load the primary annotations library.
 
   require 'anise/annotation'
 
+Including Annotations at the toplevel should make them available to all classes.
+
+  class ::Object
+    include Anise::Annotation
+  end
+
 Given a example class X we can apply annotations to it using the #ann method. 
 
   class X
-    include Anise::Annotation
-
     ann :x1, :a=>1
     ann :x1, :b=>2
   end

@@ -3,12 +3,12 @@ module Anise
 
   # = Annotator
   #
-  # Annotator allows for the creation of dynamic <i>method
-  # annotations</i> which attach to the next method defined.
+  # The Annotator module allows for the creation of <i>method annotations</i>
+  # which attach to the next method defined.
   #
   # This idiom of annotator-before-definition was popularized by
-  # Rake's desc/task pair. Annotator makes it very easy to add
-  # similar capabilites to any program.
+  # Rake's desc/task pair. The Annotator module makes it very easy
+  # to add similar capabilites to any program.
   #
   #   require 'anise/annotator'
   #
@@ -30,63 +30,81 @@ module Anise
   # respect good practices of calling +super+ if you need to override
   # this method while using Annotator.
   #
-  # DEPRECATE: This module will be deprecated in a future version.
-  # It is superceeded by the more generally useful Callbacks module.
-  # See Callbacks for a demonstraction of achieving the same results
-  # as Annotator.
+  # NOTE: This module might be deprecated in a future version.
+  # The same effect can be achieved via other means such as the generally
+  # more useful `NoBacksies` gem.
+  #
+  # Here is an example of defining annotators using the NoBacksies mixin.
+  #
+  #   class Y
+  #     include NoBacksies::Callbacks
+  #     include Anise::Annotation
+  #
+  #     def self.doc(string)
+  #       callback :method_added, :once=>true do |method|
+  #         ann(method, :doc=>string)
+  #       end
+  #     end
+  #
+  #     doc "here"
+  #
+  #     def foo
+  #       # ...
+  #     end
+  #   end
+  #
+  #   Y.ann(:foo, :doc) #=> "here"
+  #
+  # While it is  not as concise as the orginal annotator code, it is far more
+  # succicent in that it makes it very clear as to what is occuring, and it is
+  # much more flexible in that it allows the callback procedure to work in
+  # any way possible.
   #
   #--
-  # TODO: Ensure thread safety of the internal <code>@pending_annotations</code> variable.
+  # TODO: Ensure thread-safety of <code>@_pending_annotations</code> variable.
   #++
   module Annotator
 
+    #
+
     def self.append_features(base)
-      if base == Object
-        append_features(::Module)
-      elsif base == ::Module
-        unless Module < Annotator
-          ::Module.module_eval do
-            include Annotation
-          end
-          # can't include b/c it seem Module intercetps the call.
-          ::Module.module_eval do
-            def method_added(sym)
-              @pending_annotations ||= []
-              @pending_annotations.each do |name, args|
-                ann sym, name => args
-              end
-              @pending_annotations = []
-              #super if defined?(super)
-            end
-          end
-          super
-        end
-      else
-        base.extend Annotation #unless base.is_a?(Annotation)
-        base.extend self
-      end
+      Annotation.append_features(base) #unless base.is_a?(Annotation)
+      base.extend ClassMethods
+      super(base)
     end
 
-    def annotator(name)
-      (class << self; self; end).module_eval do
-        define_method(name) do |*args|
-          @pending_annotations ||= []
-          @pending_annotations << [name, args]
+    module ClassMethods
+
+      # Define an annotator.
+
+      def annotator(name, &block)
+        (class << self; self; end).module_eval do
+          define_method(name) do |arg|
+            @_pending_annotations ||= []
+            @_pending_annotations << [name, arg, block]
+          end
         end
       end
-    end
 
-    def method_added(sym)
-      @pending_annotations ||= []
-      @pending_annotations.each do |name, args|
-        ann sym, name => args
+      #
+
+      def method_added(sym)
+        @_pending_annotations ||= []
+        @_pending_annotations.each do |name, arg, block|
+          if block
+            block.call(sym, arg)
+          else
+            ann(sym, name=>arg)
+          end
+        end
+        @_pending_annotations = []
+        super if defined?(super)
       end
-      @pending_annotations = []
-      super if defined?(super)
+
     end
 
   end
 
 end
 
-# Copyright (c) 2005, 2011 Thomas Sawyer
+# Copyright (c) 2005,2011 Thomas Sawyer

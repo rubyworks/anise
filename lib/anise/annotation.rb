@@ -1,21 +1,18 @@
 module Anise
 
-  # = Runtime Annotations
-  #
-  # The Annotation module is the heart of the Anise system.
-  # It provides the framework for annotating class or module related
-  # objects, typically symbols representing methods, with arbitrary
-  # metadata. These annotations do not do anything in themselves.
-  # They are simply data. But you can put them to use. For instance
-  # an attribute validator might check for an annotation called
-  # :valid and test against it.
+  # The Annotate module is the core of the Anise system. It provides the
+  # framework for annotating class or module related objects, typically
+  # symbols representing methods, with arbitrary metadata. These annotations
+  # do not do anything in themselves. They are simply data. But they can be
+  # put to good use. For instance an attribute validator might check for an
+  # annotation called :valid and test against it.
   #
   # == Synopsis
   #
-  #   require 'anise/annotation'
+  #   require 'anise/annotate'
   #
   #   class X
-  #     include Anise::Annotation
+  #     include Anise::Annotate
   #
   #     attr :a
   #
@@ -48,12 +45,12 @@ module Anise
   # Or, we could even annotate the class itself.
   #
   #   class X
-  #     include Anise::Annotation
+  #     include Anise::Annotate
   #
   #     ann self, :valid => lambda{ |x| x.is_a?(Enumerable) }
   #   end
   #
-  # Altough annotations are arbitrary they are tied to the class or
+  # Although annotations are arbitrary they are tied to the class or
   # module they are defined against.
   #
   #--
@@ -70,121 +67,111 @@ module Anise
   #++
   module Annotation
 
+    #
+
     def self.append_features(base)
-      if base == ::Object
-        append_features(::Module)
-      elsif base == ::Module
-        unless ::Module < Annotation
-          super
+      super(base)
+      base.extend ClassMethods
+    end
+
+    # Anise::Annotations Domain Language.
+
+    module ClassMethods
+
+      # Lookup an annotation. Unlike +annotations[ref]+
+      # this provides a complete annotation <i>heritage</i>,
+      # pulling annotations of the same reference name
+      # from ancestor classes and modules.
+
+      def annotation(ref=nil)
+        return(@annotations ||= {}) if ref.nil?
+
+        ref = ref.to_sym
+        ann = {}
+        ancestors.reverse_each do |anc|
+          next unless anc < Annotation
+          if h = anc.annotations[ref]
+            ann.merge!(h)
+          end
         end
-      else
-        base.extend self
+        return ann
       end
-    end
 
-    # Lookup an annotation. Unlike +annotations[ref]+
-    # this provides a complete annotation <i>heritage</i>,
-    # pulling annotations of the same reference name
-    # from ancestor classes and modules.
-    #
-    def annotation(ref=nil)
-      return(@annotations ||= {}) if ref.nil?
+      # Plural alias for #annotation.
 
-      ref = ref.to_sym
-      ann = {}
-      ancestors.reverse_each do |anc|
-        next unless anc.is_a?(Annotation)
-        #anc.annotations[ref] ||= {}
-        if anc.annotations[ref]
-          ann.update(anc.annotations[ref]) #.merge(ann)
+      alias_method :annotations, :annotation
+
+      # Set or read annotations.
+
+      def ann(ref, keys_or_class=nil, keys=nil)
+        return annotation(ref) unless keys_or_class or keys
+
+        if Class === keys_or_class
+          keys ||= {}
+          keys[:class] = keys_or_class
+        else
+          keys = keys_or_class
         end
-      end
-      return ann
-      #ancs = ancestors.select{ |a| a.is_a?(Annotations) }
-      #ancs.inject({}) do |memo, ancestor|
-      #  ancestor.annotations[ref] ||= {}
-      #  ancestor.annotations[ref].merge(memo)
-      #end
-    end
 
-    # Plural alias for #annotation.
-    alias_method :annotations, :annotation
-
-    # Stores this class' or module's annotations.
-    #
-    #def annotations
-    #  #$annotations[self]
-    #  @annotations ||= {}
-    #end
-
-    # Set or read annotations.
-    #
-    def ann(ref, keys_or_class=nil, keys=nil)
-      return annotation(ref) unless keys_or_class or keys
-
-      if Class === keys_or_class
-        keys ||= {}
-        keys[:class] = keys_or_class
-      else
-        keys = keys_or_class
-      end
-
-      if Hash === keys
-        ref  = ref.to_sym
-        keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
-        annotations[ref] ||= {}
-        annotations[ref].update(keys)
-        # callback
-        annotation_added(ref)
-      else
-        key = keys.to_sym
-        annotation(ref)[key]
-      end
-    end
-
-    # To change an annotation's value in place for a given class or module
-    # it first must be duplicated, otherwise the change may effect annotations
-    # in the class or module's ancestors.
-    #
-    def ann!(ref, keys_or_class=nil, keys=nil)
-      #return annotation(ref) unless keys_or_class or keys
-      unless keys_or_class or keys
-        return annotations[ref] ||= {}
-      end
-
-      if Class === keys_or_class
-        keys ||= {}
-        keys[:class] = keys_or_class
-      else
-        keys = keys_or_class
-      end
-
-      if Hash === keys
-        ref  = ref.to_sym
-        keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
-        annotations[ref] ||= {}
-        annotations[ref].update(keys)
-        # callback
-        annotation_added(ref) if method_defined?(:annotation_added)
-      else
-        key = keys.to_sym
-        annotations[ref] ||= {}
-        begin
-          annotations[ref][key] = annotation(ref)[key].dup
-        rescue TypeError
-          annotations[ref][key] = annotation(ref)[key]
+        if Hash === keys
+          ref  = ref.to_sym
+          keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
+          annotations[ref] ||= {}
+          annotations[ref].update(keys)
+          # callback
+          annotation_added(ref) #if method_defined?(:annotation_added)
+        else
+          key = keys.to_sym
+          annotation(ref)[key]
         end
       end
-    end
 
-    # callback method
-    def annotation_added(name)
-      super if defined?(super)
+      # To change an annotation's value in place for a given class or module
+      # it first must be duplicated, otherwise the change may effect annotations
+      # in the class or module's ancestors.
+
+      def ann!(ref, keys_or_class=nil, keys=nil)
+        #return annotation(ref) unless keys_or_class or keys
+        unless keys_or_class or keys
+          return annotations[ref] ||= {}
+        end
+
+        if Class === keys_or_class
+          keys ||= {}
+          keys[:class] = keys_or_class
+        else
+          keys = keys_or_class
+        end
+
+        if Hash === keys
+          ref  = ref.to_sym
+          keys = keys.inject({}){ |h,(k,v)| h[k.to_sym] = v; h} #rekey
+          annotations[ref] ||= {}
+          annotations[ref].update(keys)
+          # callback
+          annotation_added(ref) #if method_defined?(:annotation_added)
+        else
+          key = keys.to_sym
+          annotations[ref] ||= {}
+          begin
+            annotations[ref][key] = annotation(ref)[key].dup
+          rescue TypeError
+            annotations[ref][key] = annotation(ref)[key]
+          end
+        end
+      end
+
+      # Callback method. This method is called for each new annotation.
+
+      def annotation_added(name)
+        super if defined?(super)
+      end
+
     end
 
   end
 
 end
 
-# 2006-11-07 trans  Created this ultra-concise version of annotations.
-# Copyright (c) 2005, 2008 TigerOps
+# 2006-11-07  trans  Created this ultra-concise version of annotations.
+# Copyright (c) 2005,2011 Thomas Sawyer
