@@ -1,6 +1,0 @@
----
-rdoc:
-  service  : RDoc
-  title    : Anise API
-  template : hanna
-  active   : true

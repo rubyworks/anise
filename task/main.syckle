@@ -1,7 +1,6 @@
 ---
-box:
-  service: Box
-  types  : [gem]
+gem:
+  service: Gem
   active : true
 
 dnote:
@@ -22,8 +21,8 @@ stats:
 
 rdoc:
   service : rdoc
-  format  : redfish
-  exclude : [Syckfile, PACKAGE, PROFILE, REQUIRE]
+  format  : redfish  #hanna
+  exclude : [VERSION]
   output  : site/docs/api
 
 ridoc:
@@ -64,6 +63,8 @@ email:
   file    : ~
   subject : ~
   mailto  : ruby-talk@ruby-lang.org
+  active  : true
+
 #  from    : transfire@gmail.com
 #  server  : <%= ENV['EMAIL_SERVER'] %>
 #  port    : <%= ENV['EMAIL_PORT'] %>
@@ -71,13 +72,26 @@ email:
 #  domain  : <%= ENV['EMAIL_DOMAIN'] %>
 #  login   : <%= ENV['EMAIL_LOGIN'] %>
 #  secure  : <%= ENV['EMAIL_SECURE'] %>
-  active  : true
 
-vclog:
-  service  : VClog
-  format   : html   # xml, txt
-  layout   : rel    # gnu
-  typed    : false
-  output   : ~
-  active   : false
+#  from    : admin@tigerops.org
+#  server  : mail.tigerops.org
+#  port    : 25
+#  domain  : tigerops.org
+#  account : admin@tigerops.org
+#  secure  : false
+#  login   : login
+
+#vclog:
+#  service  : VClog
+#  format   : html   # xml, txt
+#  layout   : rel    # gnu
+#  typed    : false
+#  output   : ~
+#  active   : false
+
+#rubyforge:
+#  service  : Rubyforge
+#  unixname : anise
+#  groupid  : 7160
+#  active   : false
 
