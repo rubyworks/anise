@@ -1,5 +1,6 @@
 require 'anise/annotation'
 require 'anise/attribute'
+require 'anise/annotator'
 
 # = Anise
 #
@@ -43,5 +44,19 @@ module Anise
   #  end
   #end
 
+  #
+  def self.metadata
+    @metadata ||= (
+      require 'yaml'
+      YAML.load(File.new(File.dirname(__FILE__) + '/anise.yml'))
+    )
+  end
+
+  #
+  def self.const_missing(name)
+    metadata[name.to_s.downcase] || super(name)
+  end
+
+  VERSION = metadata['version']  # becuase Ruby 1.8~ gets in the way :(
 end
 
