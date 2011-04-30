@@ -1,7 +1,6 @@
-.cache
-doc/qedoc
-doc/rdoc
-doc/ri
+.ri
 log
 pkg
+tmp
+site/docs
 work/sandbox

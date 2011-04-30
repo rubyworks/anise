@@ -1,67 +1,41 @@
 --- 
+spec_version: 1.0.0
 replaces: []
 
+loadpath: 
+- lib
 name: anise
+repositories: {}
+
 conflicts: []
 
-title: Anise
-license: Apache 2.0
-contact: trans <transfire@gmail.com>
-resources: {}
+engine_check: []
 
-date: "2010-12-06"
+title: Anise
+contact: trans <transfire@gmail.com>
+resources: 
+  code: http://github.com/rubyworks/anise
+  main: http://groups.google.com/group/rubyworks-mailinglist
+  home: http://rubyworks.github.com/anise
+maintainers: []
+
 requires: 
-- group: 
-  - build
-  name: syckle
-  version: 0+
 - group: 
   - test
   name: qed
   version: 0+
-suite: rubyworks
-version: 0.4.0
-manifest: 
-- demo
-- demo/01_annotations.rd
-- demo/04_callbacks.rd
-- lib
-- lib/anise
-- lib/anise/annotation.rb
-- lib/anise/annotator.rb
-- lib/anise/attribute.rb
-- lib/anise.rb
-- meta
-- meta/abstract
-- meta/authors
-- meta/contact
-- meta/created
-- meta/homepage
-- meta/license
-- meta/package
-- meta/require
-- meta/summary
-- meta/version
-- test
-- test/suite.rb
-- test/test_anise.rb
-- test/test_anise_toplevel.rb
-- test/test_annotations.rb
-- test/test_annotations_module.rb
-- test/test_annotations_toplevel.rb
-- test/test_annotator.rb
-- test/test_annotator_toplevel.rb
-- test/test_attribute.rb
-- test/test_attribute_toplevel.rb
-- TODO
-- README.rdoc
-- HISTORY
-- COPYING
+- group: 
+  - build
+  name: syckle
+  version: 0+
+manifest: MANIFEST
+version: 0.5.0
+licenses: 
+- Apache 2.0
 copyright: Copyright (c) 2008 Thomas Sawyer
-summary: Dynamic Annotations System
 authors: 
 - Thomas Sawyer
-description: |-
-  Anise is a runtime-baded annotations systems for the Ruby
-    programming lanaguage.
+organization: Rubyworks
+description: Anise is an Annotation System for the Ruby programming language. Unlike most other annotations systems it is not a comment-based or macro-based system that sits over-and-above the rest of the code. Rather, Anise is a dynamic annotations system operating at runtime.
+summary: Dynamic Annotation System
 created: "2008-02-21"
