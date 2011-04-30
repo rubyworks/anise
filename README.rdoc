@@ -17,7 +17,7 @@ Please see the RELEASE file.
 
 * home: http://rubyworks.github.com/anise
 * code: http://github.com/rubyworks/anise
-* main: http://groups.google.com/group/rubyworks-mailinglist
+* mail: http://groups.google.com/group/rubyworks-mailinglist
 
 
 == INSTALLATION
@@ -48,6 +48,10 @@ The following example briefly demonstrates all three major features.
 
      ann :grape, :class=>String
 
+     # Annotated Attributes
+
+     attr :baz, Integer, :max => 10
+
      # Annotators
 
      annotator :doc
@@ -57,10 +61,6 @@ The following example briefly demonstrates all three major features.
      def bar
        # ...
      end
-
-     # Annotated Attributes
-
-     attr :baz, Integer, :max => 10
 
    end
 
@@ -90,11 +90,12 @@ or with Ruby alone:
 
   $ ruby -Ilib -rtest/unit test/suite.rb
 
-Anise also includes Quarry specifications. These can be run via:
+Anise also includes QED tests. These can be run via:
 
-  $ quarry -v spec/
+  $ qed -Ilib qed/
 
-See Quarry project (http://quarry.rubyforge.org) for more informaiton.
+See the QED homepage{http://rubyworks.github.com/qed} for more informaiton
+about QED.
 
 
 == LICENSE
@@ -104,4 +105,3 @@ Copyright (c) 2008 Thomas Sawyer
 This program is distributed under the terms of the Apache 2.0 license.
 
 Please see COPYING.rdoc file for details.
-

@@ -9,10 +9,10 @@ module Anise
   #
   # == Synopsis
   #
-  #   require 'anise/annotate'
+  #   require 'anise/annotation'
   #
   #   class X
-  #     include Anise::Annotate
+  #     include Anise::Annotation
   #
   #     attr :a
   #
@@ -70,8 +70,8 @@ module Anise
     #
 
     def self.append_features(base)
-      super(base)
       base.extend ClassMethods
+      super(base)
     end
 
     # Anise::Annotations Domain Language.
@@ -173,5 +173,4 @@ module Anise
 
 end
 
-# 2006-11-07  trans  Created this ultra-concise version of annotations.
-# Copyright (c) 2005,2011 Thomas Sawyer
+# Copyright (c) 2006-11-07 Thomas Sawyer
