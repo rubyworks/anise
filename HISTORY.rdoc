@@ -1,5 +1,20 @@
 = RELEASE HISTORY
 
+== 0.5.0 / 2011-04-30
+
+The primary changes in this release are behind the scenes implementation
+improvements. The most significant of which it the simplification of
+the #append_features code. In addition annotators have bee enhanced
+to assign a single argument, but an array of arguments if there are
+more than one. They can also override the callback altogether.
+
+Changes:
+
+* Simplified #append_features code.
+* Use ClassMethod submodules.
+* Annotators differentiate one vs. multiple arguments.
+* Annotators can override method_added callback.
+
 
 == 0.4.0 / 2009-05-28
 
