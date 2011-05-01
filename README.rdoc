@@ -94,7 +94,7 @@ Anise also includes QED tests. These can be run via:
 
   $ qed -Ilib qed/
 
-See the QED homepage{http://rubyworks.github.com/qed} for more informaiton
+See the {QED homepage}[http://rubyworks.github.com/qed] for more informaiton
 about QED.
 
 
