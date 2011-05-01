@@ -1,3 +1,7 @@
+= DEVELOPERS NOTES
+
+== Easier Annotation Callbacks
+
 An idea for making callbacks easier and more versitle.
 
   trace_annotation :key => :default do |base, ref, key, value|
@@ -25,6 +29,14 @@ four variables to match per above example, and/or perhaps an array in which a Ho
 
 Technically all of this could be done with the current #annotation_added callback, but it would
 make it much easier to add callbacks without stepping on other peoples toes. As it stands we
-must play the alias_method, call alias and don't forget to call super game.
+must play the "alias_method, call the alias and don't forget to call super game".
 
 
+== Reference
+
+Makoto Kuwata also put together an interesting Annotations project more recently.
+
+* https://github.com/kwatch/annotation/blob/master/lib/annotation.rb
+
+Basically his annotations are Anise's annotators. But his approach is appealling
+and eventually it would be nice if annotators could be inherited via mixins too.

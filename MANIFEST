@@ -1,11 +1,18 @@
-#!mast -x Syckfile .ruby bin lib qed test [A-Z]*
+#!mast .ruby bin lib qed test [A-Z]*
 .ruby
 lib/anise/annotation.rb
 lib/anise/annotator.rb
 lib/anise/attribute.rb
+lib/anise/module.rb
 lib/anise.rb
+lib/anise.yml
 qed/01_annotations.qed
-qed/04_callbacks.qed
+qed/02_annotation_added.rdoc
+qed/03_attributes.rdoc
+qed/04_annotator.rdoc
+qed/applique/ae.rb
+qed/toplevel/01_annotations.qed
+qed/toplevel/03_attributes.rdoc
 test/suite.rb
 test/test_anise.rb
 test/test_anise_toplevel.rb
@@ -17,8 +24,7 @@ test/test_annotator_toplevel.rb
 test/test_attribute.rb
 test/test_attribute_toplevel.rb
 HISTORY.rdoc
-Profile
-LICENSE
+APACHE2.txt
 README.rdoc
-Syckfile
 VERSION
+COPYING.rdoc

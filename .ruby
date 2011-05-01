@@ -15,7 +15,7 @@ title: Anise
 contact: trans <transfire@gmail.com>
 resources: 
   code: http://github.com/rubyworks/anise
-  main: http://groups.google.com/group/rubyworks-mailinglist
+  mail: http://groups.google.com/group/rubyworks-mailinglist
   home: http://rubyworks.github.com/anise
 maintainers: []
 
