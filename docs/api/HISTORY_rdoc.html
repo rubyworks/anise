@@ -49,7 +49,7 @@
       <h3 class="section-header">File Stats</h3>
       <dl>
         <dt class="modified-date">Last Modified</dt>
-        <dd class="modified-date">Mon Sep 14 22:41:07 -0400 2009</dd>
+        <dd class="modified-date">Sun May 01 00:04:19 -0400 2011</dd>
 
         
 
@@ -258,6 +258,25 @@
   <div id="documentation">
     
 <h1>RELEASE HISTORY</h1>
+
+<h2>0.5.0 / 2011-04-30</h2>
+
+<p>The primary changes in this release are behind the scenes implementation
+improvements. The most significant of which it the simplification of the
+#append_features code. In addition annotators have bee enhanced to assign a
+single argument, but an array of arguments if there are more than one. They
+can also override the callback altogether.</p>
+
+<p>Changes:</p>
+<ul><li>
+<p>Simplified #append_features code.</p>
+</li><li>
+<p>Use ClassMethod submodules.</p>
+</li><li>
+<p>Annotators differentiate one vs. multiple arguments.</p>
+</li><li>
+<p>Annotators can override method_added callback.</p>
+</li></ul>
 
 <h2>0.4.0 / 2009-05-28</h2>
 
