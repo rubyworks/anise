@@ -75,46 +75,6 @@ module Anise
       end
     end
 
-=begin
-    #
-    def self.annotatable_attribute_method_for_module(attr_method_name)
-      ::Module.module_eval do
-        alias_method "__#{attr_method_name}", attr_method_name
-
-        define_method(attr_method_name) do |*args|
-
-          args.flatten!
-
-          harg={}; while args.last.is_a?(Hash)
-            harg.update(args.pop)
-          end
-
-          raise ArgumentError if args.empty? and harg.empty?
-
-          if args.empty?  # hash mode
-            harg.each { |a,h| __send__(attr_method_name,a,h) }
-          else
-            klass = harg[:class] = args.pop if args.last.is_a?(Class)
-
-            __send__("__#{attr_method_name}", *args)
-
-            args.each{|a| ann(a.to_sym,harg)}
-
-            instance_attributes!.concat(args)  #merge!
-
-            # Use this callback to customize for your needs.
-            if respond_to?(:attr_callback)
-              attr_callback(self, args, harg)
-            end
-
-            # return the names of the attributes created
-            return args
-          end
-        end
-      end
-    end
-=end
-
     # Anise::Attributes Doman Language.
     module ClassMethods
 
