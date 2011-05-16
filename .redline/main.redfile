@@ -23,14 +23,14 @@ rdoc:
   service : rdoc
   format  : newfish  #hanna
   exclude : [VERSION]
-  output  : site/docs/api
+  output  : site/doc
 
-ridoc:
-  service: RIDoc
+ri:
+  service: RI
   include: ~
   exclude: ~
   output : .ri
-  active : true
+  active : false
 
 qedoc:
   service: custom
