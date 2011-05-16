@@ -1,13 +1,13 @@
 --- !ruby/object:Gem::Specification 
 name: anise
 version: !ruby/object:Gem::Version 
-  hash: 11
+  hash: 7
   prerelease: false
   segments: 
   - 0
-  - 5
+  - 6
   - 0
-  version: 0.5.0
+  version: 0.6.0
 platform: ruby
 authors: 
 - Thomas Sawyer

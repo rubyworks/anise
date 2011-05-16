@@ -29,7 +29,7 @@ requires:
   name: redline
   version: 0+
 manifest: MANIFEST
-version: 0.5.0
+version: 0.6.0
 licenses: 
 - Apache 2.0
 copyright: Copyright (c) 2008 Thomas Sawyer
