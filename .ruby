@@ -26,7 +26,7 @@ requires:
   version: 0+
 - group: 
   - build
-  name: syckle
+  name: redline
   version: 0+
 manifest: MANIFEST
 version: 0.5.0

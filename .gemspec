@@ -15,7 +15,7 @@ autorequire:
 bindir: bin
 cert_chain: []
 
-date: 2011-04-30 00:00:00 -04:00
+date: 2011-05-16 00:00:00 -04:00
 default_executable: 
 dependencies: 
 - !ruby/object:Gem::Dependency 
@@ -33,7 +33,7 @@ dependencies:
   type: :development
   version_requirements: *id001
 - !ruby/object:Gem::Dependency 
-  name: syckle
+  name: redline
   prerelease: false
   requirement: &id002 !ruby/object:Gem::Requirement 
     none: false
@@ -80,10 +80,9 @@ files:
 - test/test_attribute.rb
 - test/test_attribute_toplevel.rb
 - HISTORY.rdoc
-- APACHE2.txt
 - README.rdoc
-- VERSION
 - COPYING.rdoc
+- APACHE2.txt
 has_rdoc: true
 homepage: http://rubyworks.github.com/anise
 licenses: 
