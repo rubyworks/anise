@@ -79,7 +79,7 @@
         <h3 class="section-header">Namespace</h3>
         <ul class="link-list">
           
-          <li class="module"><a href="Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="Attribute/Aid.html">Anise::Attribute::Aid</a></li>
           
         </ul>
       </div>
@@ -98,7 +98,7 @@
           
             
             <li class="singleton">
-              <a href="#method-c-append_features">::append_features</a>
+              <a href="#method-c-included">::included</a>
             </li>
           
         </ul>
@@ -148,15 +148,15 @@
         
           <li class="module"><a href="../Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="../Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="../Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="../Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="../Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="../Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="../Module.html">Module</a></li>
         
@@ -235,7 +235,7 @@ versions of the same methods.</p>
           <div class="method-source-code"
             id="annotatable_attribute_method-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/attribute.rb, line 43</span>
+<span class="ruby-comment"># File lib/anise/attribute.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">annotatable_attribute_method</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">attr_method_name</span>)
   <span class="ruby-identifier">base</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">attr_method_name</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>*<span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
@@ -278,12 +278,12 @@ versions of the same methods.</p>
       </div>
 
     
-      <div id="append_features-method" class="method-detail ">
-        <a name="method-c-append_features"></a>
+      <div id="included-method" class="method-detail ">
+        <a name="method-c-included"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">append_features</span><span
+          <span class="method-name">included</span><span
             class="method-args">(base)</span>
           <span class="method-click-advice">click to toggle source</span>
         
@@ -296,13 +296,12 @@ versions of the same methods.</p>
 
           
           <div class="method-source-code"
-            id="append_features-source">
+            id="included-source">
 <pre>
 <span class="ruby-comment"># File lib/anise/attribute.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-constant">Annotation</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span> <span class="ruby-comment">#Attribute</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:include</span>, <span class="ruby-constant">Annotation</span>) <span class="ruby-comment">#.append_features(base)</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Aid</span>
 
   <span class="ruby-comment">#inheritor :instance_attributes, [], :|</span>
   <span class="ruby-identifier">base_class</span> = (<span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">base</span>; <span class="ruby-keyword">self</span>; <span class="ruby-keyword">end</span>)

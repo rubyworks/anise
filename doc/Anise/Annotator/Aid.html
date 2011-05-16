@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Module: Anise::Annotator::ClassMethods</title>
+  <title>Module: Anise::Annotator::Aid</title>
 
   
     <link rel="SHORTCUT ICON" href="../../assets/icon/module.png">
@@ -43,7 +43,7 @@
         <img src="../../assets/icon/module.png" align="absmiddle">&nbsp;
       
       <a href="../../index.html">&quot;Anise&quot;</a>&nbsp;
-      <a href="/">Anise::Annotator::ClassMethods</a>
+      <a href="/">Anise::Annotator::Aid</a>
     </h1>
   </div>
 
@@ -139,15 +139,15 @@
         
           <li class="module"><a href="../../Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="../../Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="../../Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="../../Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="../../Module.html">Module</a></li>
         
@@ -170,7 +170,7 @@
 
     <div id="description">
       
-        <h1>ClassMethods</h1>
+        <h1>Aid</h1>
       
 
       
@@ -208,7 +208,7 @@
           <div class="method-source-code"
             id="annotator-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotator.rb, line 50</span>
+<span class="ruby-comment"># File lib/anise/annotator.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">annotator</span>(<span class="ruby-identifier">name</span>, &amp;<span class="ruby-identifier">block</span>)
   (<span class="ruby-keyword">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>; <span class="ruby-keyword">self</span>; <span class="ruby-keyword">end</span>).<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>*<span class="ruby-identifier">args</span><span class="ruby-operator">|</span>
@@ -245,7 +245,7 @@
           <div class="method-source-code"
             id="method_added-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotator.rb, line 60</span>
+<span class="ruby-comment"># File lib/anise/annotator.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_added</span>(<span class="ruby-identifier">sym</span>)
   <span class="ruby-ivar">@_pending_annotations</span> <span class="ruby-operator">||=</span> []
   <span class="ruby-ivar">@_pending_annotations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span><span class="ruby-operator">|</span>

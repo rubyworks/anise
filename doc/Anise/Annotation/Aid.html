@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Module: Anise::Annotation::ClassMethods</title>
+  <title>Module: Anise::Annotation::Aid</title>
 
   
     <link rel="SHORTCUT ICON" href="../../assets/icon/module.png">
@@ -43,7 +43,7 @@
         <img src="../../assets/icon/module.png" align="absmiddle">&nbsp;
       
       <a href="../../index.html">&quot;Anise&quot;</a>&nbsp;
-      <a href="/">Anise::Annotation::ClassMethods</a>
+      <a href="/">Anise::Annotation::Aid</a>
     </h1>
   </div>
 
@@ -154,15 +154,15 @@
         
           <li class="module"><a href="../../Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="../../Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="../../Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="../../Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="../../Module.html">Module</a></li>
         
@@ -185,7 +185,7 @@
 
     <div id="description">
       
-        <h1>ClassMethods</h1>
+        <h1>Aid</h1>
       
 
       
@@ -225,7 +225,7 @@
           <div class="method-source-code"
             id="ann-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotation.rb, line 106</span>
+<span class="ruby-comment"># File lib/anise/annotation.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ann</span>(<span class="ruby-identifier">ref</span>, <span class="ruby-identifier">keys_or_class</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keys</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">annotation</span>(<span class="ruby-identifier">ref</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">keys_or_class</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">keys</span>
 
@@ -278,7 +278,7 @@ the class or module’s ancestors.</p>
           <div class="method-source-code"
             id="ann-21-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotation.rb, line 133</span>
+<span class="ruby-comment"># File lib/anise/annotation.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ann!</span>(<span class="ruby-identifier">ref</span>, <span class="ruby-identifier">keys_or_class</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keys</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-comment">#return annotation(ref) unless keys_or_class or keys</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">keys_or_class</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">keys</span>
@@ -339,7 +339,7 @@ name from ancestor classes and modules.</p>
           <div class="method-source-code"
             id="annotation-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotation.rb, line 86</span>
+<span class="ruby-comment"># File lib/anise/annotation.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">annotation</span>(<span class="ruby-identifier">ref</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span>(<span class="ruby-ivar">@annotations</span> <span class="ruby-operator">||=</span> {}) <span class="ruby-keyword">if</span> <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">nil?</span>
 
@@ -359,7 +359,7 @@ name from ancestor classes and modules.</p>
 
         
         <div class="aliases">
-          Also aliased as: <a href="ClassMethods.html#method-i-annotations">annotations</a>
+          Also aliased as: <a href="Aid.html#method-i-annotations">annotations</a>
         </div>
         
       </div>
@@ -385,7 +385,7 @@ name from ancestor classes and modules.</p>
           <div class="method-source-code"
             id="annotation_added-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/annotation.rb, line 166</span>
+<span class="ruby-comment"># File lib/anise/annotation.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">annotation_added</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">super</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-keyword">super</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -410,8 +410,7 @@ name from ancestor classes and modules.</p>
 
         <div class="method-description">
           
-          <p>Plural alias for <a
-href="ClassMethods.html#method-i-annotation">annotation</a>.</p>
+          <p>Plural alias for <a href="Aid.html#method-i-annotation">annotation</a>.</p>
           
 
           

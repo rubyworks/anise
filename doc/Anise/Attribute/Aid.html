@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Module: Anise::Attribute::ClassMethods</title>
+  <title>Module: Anise::Attribute::Aid</title>
 
   
     <link rel="SHORTCUT ICON" href="../../assets/icon/module.png">
@@ -43,7 +43,7 @@
         <img src="../../assets/icon/module.png" align="absmiddle">&nbsp;
       
       <a href="../../index.html">&quot;Anise&quot;</a>&nbsp;
-      <a href="/">Anise::Attribute::ClassMethods</a>
+      <a href="/">Anise::Attribute::Aid</a>
     </h1>
   </div>
 
@@ -149,15 +149,15 @@
         
           <li class="module"><a href="../../Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="../../Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="../../Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="../../Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="../../Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="../../Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="../../Module.html">Module</a></li>
         
@@ -180,7 +180,7 @@
 
     <div id="description">
       
-        <h1>ClassMethods</h1>
+        <h1>Aid</h1>
       
 
       
@@ -214,17 +214,16 @@
         <div class="method-description">
           
           <p>This define a simple adjustment to <a
-href="ClassMethods.html#method-i-attr">attr</a> to allow it to handle the
-boolean argument and to be able to accept attributes. It’s backward
-compatible and is not needed for Ruby 1.9 which gets rid of the secondary
-argument.</p>
+href="Aid.html#method-i-attr">attr</a> to allow it to handle the boolean
+argument and to be able to accept attributes. It’s backward compatible
+and is not needed for Ruby 1.9 which gets rid of the secondary argument.</p>
           
 
           
           <div class="method-source-code"
             id="attr-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/attribute.rb, line 119</span>
+<span class="ruby-comment"># File lib/anise/attribute.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">attr</span>(*<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten!</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>
@@ -275,7 +274,7 @@ MyClass.classified_attributes # =&gt; [:name, :age]</pre>
           <div class="method-source-code"
             id="classified_attributes-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/attribute.rb, line 109</span>
+<span class="ruby-comment"># File lib/anise/attribute.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">classified_attributes</span>
   <span class="ruby-identifier">instance_attributes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ann</span>(<span class="ruby-identifier">a</span>, <span class="ruby-value">:class</span>)
@@ -309,7 +308,7 @@ MyClass.classified_attributes # =&gt; [:name, :age]</pre>
           <div class="method-source-code"
             id="instance_attributes-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/attribute.rb, line 82</span>
+<span class="ruby-comment"># File lib/anise/attribute.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">instance_attributes</span>
   <span class="ruby-identifier">a</span> = []
   <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">anc</span><span class="ruby-operator">|</span>
@@ -348,7 +347,7 @@ MyClass.classified_attributes # =&gt; [:name, :age]</pre>
           <div class="method-source-code"
             id="instance_attributes-21-source">
 <pre>
-<span class="ruby-comment"># File lib/anise/attribute.rb, line 94</span>
+<span class="ruby-comment"># File lib/anise/attribute.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">instance_attributes!</span>
   <span class="ruby-ivar">@instance_attributes</span> <span class="ruby-operator">||=</span> []
 <span class="ruby-keyword">end</span></pre>

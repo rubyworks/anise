@@ -79,7 +79,7 @@
         <h3 class="section-header">Namespace</h3>
         <ul class="link-list">
           
-          <li class="module"><a href="Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="Annotation/Aid.html">Anise::Annotation::Aid</a></li>
           
         </ul>
       </div>
@@ -93,7 +93,7 @@
           
             
             <li class="singleton">
-              <a href="#method-c-append_features">::append_features</a>
+              <a href="#method-c-included">::included</a>
             </li>
           
         </ul>
@@ -143,15 +143,15 @@
         
           <li class="module"><a href="../Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="../Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="../Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="../Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="../Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="../Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="../Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="../Module.html">Module</a></li>
         
@@ -245,12 +245,12 @@ they are defined against.</p>
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="append_features-method" class="method-detail ">
-        <a name="method-c-append_features"></a>
+      <div id="included-method" class="method-detail ">
+        <a name="method-c-included"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">append_features</span><span
+          <span class="method-name">included</span><span
             class="method-args">(base)</span>
           <span class="method-click-advice">click to toggle source</span>
         
@@ -263,12 +263,11 @@ they are defined against.</p>
 
           
           <div class="method-source-code"
-            id="append_features-source">
+            id="included-source">
 <pre>
 <span class="ruby-comment"># File lib/anise/annotation.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">base</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Aid</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

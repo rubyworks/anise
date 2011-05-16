@@ -116,7 +116,7 @@
           
             
             <li class="method">
-              <a href="#method-i-append_features">#append_features</a>
+              <a href="#method-i-included">#included</a>
             </li>
           
         </ul>
@@ -166,15 +166,15 @@
         
           <li class="module"><a href="./Anise/Annotation.html">Anise::Annotation</a></li>
         
-          <li class="module"><a href="./Anise/Annotation/ClassMethods.html">Anise::Annotation::ClassMethods</a></li>
+          <li class="module"><a href="./Anise/Annotation/Aid.html">Anise::Annotation::Aid</a></li>
         
           <li class="module"><a href="./Anise/Annotator.html">Anise::Annotator</a></li>
         
-          <li class="module"><a href="./Anise/Annotator/ClassMethods.html">Anise::Annotator::ClassMethods</a></li>
+          <li class="module"><a href="./Anise/Annotator/Aid.html">Anise::Annotator::Aid</a></li>
         
           <li class="module"><a href="./Anise/Attribute.html">Anise::Attribute</a></li>
         
-          <li class="module"><a href="./Anise/Attribute/ClassMethods.html">Anise::Attribute::ClassMethods</a></li>
+          <li class="module"><a href="./Anise/Attribute/Aid.html">Anise::Attribute::Aid</a></li>
         
           <li class="class"><a href="./Module.html">Module</a></li>
         
@@ -321,12 +321,12 @@ end</pre>
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="append_features-method" class="method-detail ">
-        <a name="method-i-append_features"></a>
+      <div id="included-method" class="method-detail ">
+        <a name="method-i-included"></a>
 
         <div class="method-heading">
         
-          <span class="method-name">append_features</span><span
+          <span class="method-name">included</span><span
             class="method-args">(base)</span>
           <span class="method-click-advice">click to toggle source</span>
         
@@ -339,14 +339,14 @@ end</pre>
 
           
           <div class="method-source-code"
-            id="append_features-source">
+            id="included-source">
 <pre>
 <span class="ruby-comment"># File lib/anise.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
   <span class="ruby-comment">#super(base)</span>
-  <span class="ruby-constant">Attribute</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-constant">Annotator</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
-  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Anise</span> <span class="ruby-comment">#ClassMethods</span>
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:include</span>, <span class="ruby-constant">Attribute</span>)
+  <span class="ruby-identifier">base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:include</span>, <span class="ruby-constant">Annotator</span>)
+  <span class="ruby-comment">#base.extend Anise #ClassMethods</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
