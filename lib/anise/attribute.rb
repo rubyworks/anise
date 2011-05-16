@@ -27,10 +27,9 @@ module Anise
   module Attribute
 
     #
-    def self.append_features(base)
-      super(base)
-      Annotation.append_features(base)
-      base.extend ClassMethods #Attribute
+    def self.included(base)
+      base.send(:include, Annotation) #.append_features(base)
+      base.extend Aid
 
       #inheritor :instance_attributes, [], :|
       base_class = (class << base; self; end)
@@ -76,7 +75,7 @@ module Anise
     end
 
     # Anise::Attributes Doman Language.
-    module ClassMethods
+    module Aid
 
       # Instance attributes, including inherited attributes.
       def instance_attributes

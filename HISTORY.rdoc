@@ -1,5 +1,17 @@
 = RELEASE HISTORY
 
+== 0.6.0 / 2011-05-16
+
+This release fixes an bug in which append_features cant be called b/c
+it is a private method. This release also renames `ClassMethods`
+modules to `Aid`.
+
+Changes:
+
+* Fixed private method call to #append_features.
+* Rename ClassMethods to Aid.
+
+
 == 0.5.0 / 2011-04-30
 
 The primary changes in this release are behind the scenes implementation
@@ -25,28 +37,33 @@ to allow for the creation of "active" annotations.
 
 Changes:
 
-* 1 Major Enhancement:
-
-    * Added annotation_added callback
+* Added annotation_added callback.
 
 
 == 0.2.1 / 2008-10-31
 
+Project reorganization release --mostly some file names have changed.
+
 Changes:
 
-    * renamed some lib files
+* Renamed some lib files.
 
 
 == 0.2.0 / 2008-10-28
 
+By making Annotations a module, it can not be used in only the clases
+it is needed.
+
 Changes:
 
-    * Annotations is a module rather than a core extenstion to Module
+* Annotations is a module rather than a core extenstion to Module.
 
 
 == 0.1.1 / 2008-10-17
 
+Ahoy, mate! This is the first release of Anise.
+
 Changes:
 
-    * initial release
+* initial release
 

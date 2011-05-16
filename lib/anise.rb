@@ -28,11 +28,11 @@ require 'anise/annotator'
 module Anise
   extend self 
 
-  def append_features(base)
+  def included(base)
     #super(base)
-    Attribute.append_features(base)
-    Annotator.append_features(base)
-    base.extend Anise #ClassMethods
+    base.send(:include, Attribute)
+    base.send(:include, Annotator)
+    #base.extend Anise #ClassMethods
   end
 
   #module ClassMethods

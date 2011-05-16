@@ -69,14 +69,13 @@ module Anise
 
     #
 
-    def self.append_features(base)
-      base.extend ClassMethods
-      super(base)
+    def self.included(base)
+      base.extend Aid
     end
 
     # Anise::Annotations Domain Language.
 
-    module ClassMethods
+    module Aid
 
       # Lookup an annotation. Unlike +annotations[ref]+
       # this provides a complete annotation <i>heritage</i>,

@@ -38,13 +38,12 @@ module Anise
   module Annotator
 
     #
-    def self.append_features(base)
-      Annotation.append_features(base) #unless base.is_a?(Annotation)
-      base.extend ClassMethods
-      super(base)
+    def self.included(base)
+      base.send(:include, Annotation) #unless base.is_a?(Annotation)
+      base.extend Aid
     end
 
-    module ClassMethods
+    module Aid
 
       # Define an annotator.
       def annotator(name, &block)
