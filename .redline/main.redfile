@@ -36,7 +36,7 @@ qedoc:
   service: custom
   cycle: site
   document: |
-    puts `qedoc -o site/docs/qed -t "Anise Demonstrandum" qed`
+    puts `qedoc -o site/qed -t "Anise Demonstrandum" qed`
 
 testrb:
   service  : testrb
