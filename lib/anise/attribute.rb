@@ -113,7 +113,7 @@ module Anise
 
       # This define a simple adjustment to #attr to allow it to handle the boolean argument and
       # to be able to accept attributes. It's backward compatible and is not needed for Ruby 1.9
-      # which gets rid of the secondary argument.
+      # which gets rid of the secondary argument (or was suppose to!).
       #
       def attr(*args)
         args.flatten!
