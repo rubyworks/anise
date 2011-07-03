@@ -2,7 +2,8 @@ require 'anise/annotation'
 
 class Test_Annotation_0 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
+    #include Anise::Annotation
+    annotator :ann
 
     attr :a
 
@@ -38,7 +39,8 @@ end
 
 class Test_Annotation_1 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
+    #include Anise::Annotation
+    annotator :ann
     def x1 ; end
     ann :x1, :a=>1
     ann :x1, :b=>2
@@ -56,7 +58,8 @@ end
 
 class Test_Annotation_2 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
+    #include Anise::Annotation
+    annotator :ann
     def x1 ; end
     ann :x1, :a=>1
     ann :x1, :b=>2
@@ -80,7 +83,8 @@ end
 
 class Test_Annotation_3 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
+    #include Anise::Annotation
+    annotator :ann
     ann :foo, Integer
   end
   class Y < X
@@ -97,7 +101,8 @@ end
 
 class Test_Annotation_4 < Test::Unit::TestCase
   class X
-    include Anise::Annotation
+    #include Anise::Annotation
+    annotator :ann
     ann :foo, :doc => "hello"
     ann :foo, :bar => []
   end
@@ -133,4 +138,3 @@ class Test_Annotation_4 < Test::Unit::TestCase
     assert_equal( ["1"], X.ann(:foo,:bar) )
   end
 end
-

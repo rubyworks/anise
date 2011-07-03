@@ -1,6 +1,7 @@
 require 'anise/annotation'
 
-include Anise::Annotation
+#include Anise::Annotation
+annotator :ann
 
 class Test_Annotation_Toplevel_0 < Test::Unit::TestCase
   class X
