@@ -1,6 +1,7 @@
 require 'anise/annotation'
 require 'anise/attribute'
-require 'anise/annotator'
+require 'anise/method'
+require 'anise/variable'
 
 # = Anise
 #
@@ -30,8 +31,8 @@ module Anise
 
   def included(base)
     #super(base)
-    base.send(:include, Attribute)
-    base.send(:include, Annotator)
+    #base.send(:include, Attribute)
+    base.send(:include, Method)
     #base.extend Anise #ClassMethods
   end
 

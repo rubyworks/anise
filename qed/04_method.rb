@@ -1,15 +1,15 @@
-= Annotators
+= Method Annotation
 
-Load the primary annotator library.
+Load the `anise/method.rb` library.
 
-  require 'anise/annotator'
-  
+  require 'anise/method'
+
 Create a class that includes it.
 
   class X
-    include Anise::Annotator
+    include Anise::Method
 
-    annotator :doc
+    method_annotator :doc
 
     doc "See what I mean?"
   
@@ -20,19 +20,19 @@ Create a class that includes it.
 
 See that it is set.
   
-  X.ann(:see, :doc).assert == "See what I mean?"
+  X.ann(:see, :doc)  #=> "See what I mean?"
 
-Annotators can override the standard annotation procedure with a
-custom procedure.
+Method Annotators can override the standard annotation procedure
+with a custom procedure.
 
   class Y
-    include Anise::Annotator
+    include Anise::Method
 
     def self.list
       @list ||= []
     end
 
-    annotator :doc do |method, argument|
+    method_annotator :doc do |method, argument|
       list << [method, argument]
     end
 

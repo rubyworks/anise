@@ -1,11 +1,15 @@
 module Anise
 
-  # The Annotate module is the core of the Anise system. It provides the
-  # framework for annotating class or module related objects, typically
+  # The Annotation module is the core of the Anise system. It provides the
+  # framework for annotating class and module related objects, typically
   # symbols representing methods, with arbitrary metadata. These annotations
   # do not do anything in themselves. They are simply data. But they can be
   # put to good use. For instance an attribute validator might check for an
   # annotation called :valid and test against it.
+  #
+  # The name of an annotation store can be any symbol. The `:ann` store is 
+  # the <i>common annotaation store</i>, and is the defualt value of many
+  # annotating methods.
   #
   # == Synopsis
   #
@@ -16,9 +20,9 @@ module Anise
   #
   #     annotator :ann
   #
-  #     attr :a
-  #
   #     ann :a, :desc => "A Number"
+  #
+  #     attr :a
   #   end
   #
   #   X.ann(:a, :desc)  #=> "A Number"
@@ -28,8 +32,6 @@ module Anise
   # may want to annotate instance variables.
   #
   #   class X
-  #     include Anise::Annotation
-  #
   #     annotator :ann
   #
   #     ann :@a, :valid => lambda{ |x| x.is_a?(Integer) }
@@ -49,8 +51,6 @@ module Anise
   # Or, we could even annotate the class itself.
   #
   #   class X
-  #     include Anise::Annotation
-  #
   #     annotator :ann
   #
   #     ann self, :valid => lambda{ |x| x.is_a?(Enumerable) }
@@ -66,7 +66,13 @@ module Anise
   #++
   module Annotation
 
+    require 'anise/annotator'  # FIXME
+
+    # When included into a class or module, {Annotator::Aid} extends
+    # the class/module.
     #
+    # @param base [Class, Module]
+    #   The class or module to get features.
     #
     def self.included(base)
       base.extend Aid
@@ -78,29 +84,50 @@ module Anise
 
       # Define a new annotator.
       #
-      def annotator(name)
+      # @param ns [Symbol] Annotation namespace.
+      #
+      # @since 0.7.0
+      def annotator(ns=:ann)
         include Anise::Annotation
 
         module_eval <<-END, __FILE__, __LINE__
-          def self.#{name}(ref, *keys)
-            annotation_lookup(:#{name}, ref, *keys)
+          def self.#{ns}(ref, *keys)
+            if keys.empty?
+              annotations.lookup(ref, :#{ns})
+            else
+              annotations.annotate(:#{ns}, ref, *keys)
+            end
           end
-          def self.#{name}!(ref, *keys)
-            annotation_lookup!(:#{name}, ref, *keys)
+          def self.#{ns}!(ref, *keys)
+            if keys.empty?
+              annotations[ref, :#{ns}]
+            else
+              annotations.annotate!(:#{ns}, ref, *keys)
+            end
           end
         END
       end
 
-      # Lookup an annotation. Unlike +annotations[ref]+
+      # Access to class or module's annotations.
+      def annotations
+        @annotations ||= Annotations.new(self)
+      end
+
+=begin
+      # Lookup an annotation. Unlike +annotations[ns][ref]+
       # this provides a complete annotation <i>heritage</i>,
       # pulling annotations of the same reference name
       # from ancestor classes and modules.
       #
-      # @param ref [Object] annotation reference key
+      # Unlike the other annotation methods, this method takes
+      # the `ref` argument before the `ns` argument. This is
+      # it allow `ns` to default to the common annotator `ann`.
       #
-      # @param ns [Symbol] annotation namespace
+      # @param ref [Object] Annotation reference key.
       #
-      def annotation(ref=nil, ns=nil)
+      # @param ns [Symbol] Annotation namespace.
+      #
+      def annotation(ref=nil, ns=:ann)
         return(@annotations ||= Hash.new{|h,k| h[k]={}}) if ref.nil?
 
         ns  = ns.to_sym
@@ -115,18 +142,20 @@ module Anise
         return ann
       end
 
-      # Plural alias for #annotation.
-      #
       alias_method :annotations, :annotation
 
       # Set or read annotations.
       #
-      # @pararm ns [Symbol] namespace
+      # IMPORTANT! Do not use this for in-place modifications.
+      # Use #annotate! instead.
+      # 
+      # @pararm ns [Symbol] Annotation namespace.
       #
-      # @param ref [Object] annotation reference key
+      # @param ref [Object] Annotation reference key.
       #
-      def annotation_lookup(ns, ref, keys_or_class=nil, keys=nil)
-        return annotation(ref, ns) unless keys_or_class or keys
+      # @since 0.7.0
+      def annotate(ns, ref, keys_or_class=nil, keys=nil)
+        return annotations(ref, ns) unless keys_or_class or keys
 
         if Class === keys_or_class
           keys ||= {}
@@ -144,7 +173,7 @@ module Anise
           annotation_added(ns, ref) #if method_defined?(:annotation_added)
         else
           key = keys.to_sym
-          annotation(ref, ns)[key]
+          annotations(ref, ns)[key]
         end
       end
 
@@ -152,12 +181,13 @@ module Anise
       # it first must be duplicated, otherwise the change may effect annotations
       # in the class or module's ancestors.
       #
-      # @pararm ns [Symbol] namespace
+      # @pararm ns [Symbol] Annotation namespace.
       #
-      # @param ref [Object] annotation reference key
+      # @param ref [Object] Annotation reference key.
       #
-      def annotation_lookup!(ns, ref, keys_or_class=nil, keys=nil)
-        #return annotation(ref, ns) unless keys_or_class or keys
+      # @since 0.7.0
+      def annotate!(ns, ref, keys_or_class=nil, keys=nil)
+        #return annotations(ref, ns) unless keys_or_class or keys
         unless keys_or_class or keys
           return annotations[ns][ref] ||= {}
         end
@@ -180,17 +210,18 @@ module Anise
           key = keys.to_sym
           annotations[ns][ref] ||= {}
           begin
-            annotations[ns][ref][key] = annotation(ref, ns)[key].dup
+            annotations[ns][ref][key] = annotations(ref, ns)[key].dup
           rescue TypeError
-            annotations[ns][ref][key] = annotation(ref, ns)[key]
+            annotations[ns][ref][key] = annotations(ref, ns)[key]
           end
         end
       end
+=end
 
       # Callback method. This method is called for each new annotation.
       #
-      def annotation_added(ns, name)
-        super(ns, name) if defined?(super)
+      def annotation_added(ns, ref)
+        super(ns, ref) if defined?(super)
       end
 
     end
@@ -199,37 +230,4 @@ module Anise
 
 end
 
-=begin
-class Module
-  # Define a new annotator.
-  #
-  def annotator(name)
-    include Anise::Annotation
-
-    module_eval <<-END, __FILE__, __LINE__
-      def self.#{name}(ref, *keys)
-        annotation_lookup(:#{name}, ref, *keys)
-      end
-      def self.#{name}!(ref, *keys)
-        annotation_lookup!(:#{name}, ref, *keys)
-      end
-    END
-  end
-end
-=end
-
-def annotator(name)
-  include Anise::Annotation
-
-  Object.class_eval <<-END, __FILE__, __LINE__
-    def self.#{name}(ref, *keys)
-      annotation_lookup(:#{name}, ref, *keys)
-    end
-    def self.#{name}!(ref, *keys)
-      annotation_lookup!(:#{name}, ref, *keys)
-    end
-  END
-end
-
-
-# Copyright (c) 2006-11-07 Thomas Sawyer
+# Copyright (c) 2006,2011 Thomas Sawyer. All rights reserved. (BSD-2-Clause License)

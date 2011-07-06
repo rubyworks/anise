@@ -1,11 +1,9 @@
-require 'anise/annotation'
+require 'anise/annotator'
 
-class Module
-  #include Anise::Annotation
-  annotator :ann
-end
+annotator :ann
 
-class Test_Annotation_Module_0 < Test::Unit::TestCase
+class Test_Annotator_Toplevel_0 < Test::Unit::TestCase
+
   class X
     attr :a
     ann :a, :class => Integer
@@ -35,9 +33,10 @@ class Test_Annotation_Module_0 < Test::Unit::TestCase
     x = X.new(1)
     assert_nothing_raised{ x.validate }
   end
+
 end
 
-class Test_Annotation_Module_1 < Test::Unit::TestCase
+class Test_Annotator_Toplevel_1 < Test::Unit::TestCase
   class X
     def x1 ; end
     ann :x1, :a=>1
@@ -54,7 +53,7 @@ class Test_Annotation_Module_1 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_Module_2 < Test::Unit::TestCase
+class Test_Annotator_Toplevel_2 < Test::Unit::TestCase
   class X
     def x1 ; end
     ann :x1, :a=>1
@@ -77,7 +76,7 @@ class Test_Annotation_Module_2 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_Module_3 < Test::Unit::TestCase
+class Test_Annotator_Toplevel_3 < Test::Unit::TestCase
   class X
     ann :foo, Integer
   end
@@ -93,7 +92,7 @@ class Test_Annotation_Module_3 < Test::Unit::TestCase
   end
 end
 
-class Test_Annotation_Module_4 < Test::Unit::TestCase
+class Test_Annotator_Toplevel_4 < Test::Unit::TestCase
   class X
     ann :foo, :doc => "hello"
     ann :foo, :bar => []

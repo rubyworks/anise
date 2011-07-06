@@ -1,15 +1,13 @@
 module Anise
   #require 'facets/inheritor' # removed dependency
   require 'anise/annotation'
-  require 'anise/module'
+  require 'anise/core_ext/module'
 
-  # = Annotated Attributes
-  #
-  # This framework modifies the major attr_* methods to allow easy
-  # addition of annotations. It modifies the built in attribute methods
-  # (attr, attr_reader, attr_writer and attr_accessor), to allow
-  # annotations to be added to them directly rather than requiring
-  # a separate #ann statement.
+  # Annotated Attributes modifies the major attr_* methods to allow
+  # easy addition of annotations. It modifies the built in attribute
+  # methods (attr, attr_reader, attr_writer and attr_accessor), to
+  # allow annotations to be added to them directly rather than 
+  # requiring a separate annotating statement.
   #
   #   require 'anise/attribute'
   #
@@ -19,27 +17,39 @@ module Anise
   #     attr :a, :valid => lambda{ |x| x.is_a?(Integer) }
   #   end
   #
-  # See annotation.rb for more information.
+  # See {Annotation} module for more information.
   #
   # NOTE: This library was designed to be backward compatible with
   # the standard versions of the same methods.
   #
   module Attribute
 
+    # When included into a class or module, {Annotation} is also
+    # included and {Attribute::Aid} extends the class/module.
+    #
+    # @param base [Class, Module]
+    #   The class or module to get features.
     #
     def self.included(base)
       base.send(:include, Annotation) #.append_features(base)
       base.extend Aid
 
+      base.annotator :ann
+
       #inheritor :instance_attributes, [], :|
       base_class = (class << base; self; end)
-      base_class.attribute_methods.each do |attr_method|
-        annotatable_attribute_method(base_class, attr_method)
+      #base_class.attribute_methods.each do |attr_method|
+      base.attribute_methods.each do |attr_method|
+        define_annotated_attribute(base_class, attr_method)
       end
     end
 
-    #
-    def self.annotatable_attribute_method(base, attr_method_name)
+    # Define an annotated attribute method, given an existing
+    # non-annotated attribute method.
+    #--
+    # TODO: Might make an acceptable class extension.
+    #++
+    def self.define_annotated_attribute(base, attr_method_name)
       base.module_eval do
         define_method(attr_method_name) do |*args|
           args.flatten!
@@ -55,8 +65,7 @@ module Anise
           else
             klass = harg[:class] = args.pop if args.last.is_a?(Class)
 
-            #attr_method.call(*args)
-            super(*args)
+            super(*args) #attr_method.call(*args)
 
             args.each{|a| ann(a.to_sym,harg)}
 
@@ -74,7 +83,7 @@ module Anise
       end
     end
 
-    # Anise::Attributes Doman Language.
+    # Anise::Attribute Doman Language.
     module Aid
 
       # Instance attributes, including inherited attributes.
@@ -111,7 +120,7 @@ module Anise
         end
       end
 
-      # This define a simple adjustment to #attr to allow it to handle the boolean argument and
+      # This defines a simple adjustment to #attr to allow it to handle the boolean argument and
       # to be able to accept attributes. It's backward compatible and is not needed for Ruby 1.9
       # which gets rid of the secondary argument (or was suppose to!).
       #
@@ -135,4 +144,4 @@ module Anise
 
 end
 
-# Copyright (c) 2005, 2008 Thomas Sawyer
+# Copyright (c) 2006,2011 Thomas Sawyer. All rights reserved. (BSD-2-Clause License)

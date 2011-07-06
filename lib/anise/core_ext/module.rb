@@ -17,3 +17,4 @@ class Module
   end
 end
 
+# Copyright (c) 2006,2011 Thomas Sawyer. All rights reserved. (BSD-2-Clause License)

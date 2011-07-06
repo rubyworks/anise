@@ -1,6 +1,6 @@
-= Annotated Attribute Methods
+= Annotated Attributes
 
-Load the attributes library.
+Load the `anise/attribute.rb` library.
 
   require 'anise/attribute'
   
