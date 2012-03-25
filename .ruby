@@ -1,41 +1,44 @@
---- 
-spec_version: 1.0.0
-replaces: []
-
-loadpath: 
-- lib
-name: anise
-repositories: {}
-
-conflicts: []
-
-engine_check: []
-
-title: Anise
-contact: trans <transfire@gmail.com>
-resources: 
-  code: http://github.com/rubyworks/anise
-  mail: http://groups.google.com/group/rubyworks-mailinglist
-  home: http://rubyworks.github.com/anise
-maintainers: []
-
-requires: 
-- group: 
+---
+source:
+- meta
+authors:
+- name: trans
+  email: transfire@gmail.com
+copyrights:
+- holder: Rubyworks
+  year: '2008'
+  license: BSD-2-Clause
+replacements: []
+alternatives: []
+requirements:
+- name: qed
+  groups:
   - test
-  name: qed
-  version: 0+
-- group: 
+  development: true
+- name: citron
+  groups:
+  - test
+  development: true
+- name: detroit
+  groups:
   - build
-  name: redline
-  version: 0+
-manifest: MANIFEST
-version: 0.6.0
-licenses: 
-- Apache 2.0
-copyright: Copyright (c) 2008 Thomas Sawyer
-authors: 
-- Thomas Sawyer
-organization: Rubyworks
-description: Anise is an Annotation System for the Ruby programming language. Unlike most other annotations systems it is not a comment-based or macro-based system that sits over-and-above the rest of the code. Rather, Anise is a dynamic annotations system operating at runtime.
+  development: true
+dependencies: []
+conflicts: []
+repositories:
+- uri: http://github.com/rubyworks/anise.git
+  scm: git
+  name: public
+resources: {}
+extra: {}
+load_path:
+- lib
+revision: 0
+created: '2008-02-21'
 summary: Dynamic Annotation System
-created: "2008-02-21"
+title: Anise
+version: 0.6.0
+name: anise
+description: Anise is an annotations systems for the Ruby programming lanaguage.
+organization: Rubyworks
+date: '2012-01-12'
