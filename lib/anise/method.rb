@@ -1,6 +1,10 @@
 module Anise
   require 'anise/annotation'
 
+  # TODO: Allow method annotations to be inherited via module mixins.
+
+  # TODO: Ensure thread-safety of <code>@_pending_annotations</code> variable.
+
   # Method Annotations
   #
   # The MethodAnnotation module allows for the creation of <i>method annotations</i>
@@ -13,9 +17,11 @@ module Anise
   #   require 'anise/method'
   #
   #   class X
-  #     include Anise::Method
+  #     include Anise::MethodAnnotations
   #
-  #     method_annotator :doc
+  #     def self.doc(string)
+  #       pending_annotation(:ann, :doc => string)
+  #     end
   #
   #     doc "See what I mean?"
   #
@@ -26,16 +32,30 @@ module Anise
   #
   #   X.ann(:see, :doc) #=> "See what I mean?"
   #
+  # One can get a bit more control over the creation of annotations
+  # by using a block. In this case it is up the code to actually
+  # create the annotation.
+  #
+  #     def self.doc(string)
+  #       pending_annotation(:ann) do |meth|
+  #         ann meth, :doc => string
+  #       end
+  #     end
+  #
   # Note that the library uses the #method_added callback, so be sure to
   # respect good practices of calling +super+ if you need to override
   # this method.
   #
-  #--
-  # TODO: Allow method annotations to be inherited via module mixins.
-  #
-  # TODO: Ensure thread-safety of <code>@_pending_annotations</code> variable.
-  #++
-  module Method
+  module MethodAnnotations
+
+    #
+    # This a temporary store used to create method annotations.
+    #
+    def self.peinding_annotations
+      @_pending_annotations ||= Hash.new{ |h,k| h[k] = [] }
+    end
+
+    #
     # When included into a class or module, Annotation is also included
     # and Method::Aid extends the class/module.
     #
@@ -43,12 +63,19 @@ module Anise
     #   The class or module to get features.
     #
     def self.included(base)
-      base.send(:include, Annotation) #unless base.is_a?(Annotation)
+      base.__send__(:include, Annotation) #unless base.is_a?(Annotation)
       base.extend Aid
     end
 
+    # Class level extensions for {MethodAnnotations}.
+    #
     module Aid
+
+      #
       # Define a method annotation.
+      #
+      # @example
+      #   method_annotator :doc
       #
       # @param name [Symbol]
       #   Name of annotation.
@@ -56,31 +83,55 @@ module Anise
       # @param ns [Symbol]
       #   Annotator to use. Default is `:ann`.
       #
+      # @deprecated Define class method and use #pending_annotation instead.
+      #
       def method_annotator(name, ns=:ann, &block)
-        annotator ns  # TODO: unless defined annotator ?
+        include Annotator[ns] unless method_defind?(ns) # TODO: correct?
+
         (class << self; self; end).module_eval do
           define_method(name) do |*args|
-            @_pending_annotations ||= []
-            @_pending_annotations << [name, ns, args, block]
+            anns = { name => (args.size > 1 ? args : args.first) }
+            MethodAnnotations.pending_annotations[self] << [ns, anns, block]
           end
         end
       end
 
+      #
+      # Setup a pending method annotation.
+      #
+      # @param [Symbol] annotator (optional)
+      #   The name of the annotator, if different than standard `:ann`.
+      #
+      # @param [Hash] annotations
+      #   The annotation settings.
+      #
+      def pending_annotation(*args, &block)
+        anns = (Hash === args.last ? args.pop : {})
+        ns   = args.shift || :ann
+
+        include Annotator[ns] unless method_defind?(ns) # TODO: correct?
+
+        MethodAnnotations.pending_annotations[self] << [ns, anns, block]
+      end
+
+      #
       # When a method is added, run all pending annotations.
+      #
+      # @param [Symbol] sym
+      #   The name of the method added.
+      #
       def method_added(sym)
-        @_pending_annotations ||= []
-        @_pending_annotations.each do |name, ns, args, block|
+        annotations = MethodAnnotations.pending_annotations[self]
+
+        annotations.each do |ns, anns, block|
           if block
-            block.call(sym, *args)
-          else
-            if args.size == 1
-              send(ns, sym, name=>args.first)
-            else
-              send(ns, sym, name=>args)
-            end
+            block.call(sym)
           end
+          send(ns, sym, anns) if anns && !anns.empty?
         end
-        @_pending_annotations = []
+
+        MethodAnnotations.pending_annotations[self] = []
+
         super if defined?(super)
       end
     end

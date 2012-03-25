@@ -4,7 +4,7 @@ class Module
   # Start method annotations.
   #
   # @param ns [Symbol]
-  #   Annotator "namespace". Default is `:ann`.
+  #   Annotator namespace, default is `:ann`.
   #
   def annotate(ns=:ann, &block)
     include Anise::Annotate
@@ -20,7 +20,7 @@ end
 # Start method annotations.
 #
 # @param ns [Symbol]
-#   Annotator "namespace". Default is `:ann`.
+#   Annotator namespace, default is `:ann`.
 #
 def annotate(ns=:ann, &block)
   Object.annotate(ns, &block)

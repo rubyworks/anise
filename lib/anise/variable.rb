@@ -1,18 +1,21 @@
 module Anise
+
   require 'anise/annotation'
 
-  # Variable Annotations
-  #
+  # TODO: Allow annotations to be inherited via module mixins.
+
+  # TODO: Ensure thread-safety of `@_annotation_*` variables.
+
   # I bet you never imagined Ruby could suport `@style` annotations.
   # Well, I am here to tell you otherwise.
   #
-  # The MethodAnnotation module allows for the creation of <i>method annotations</i>
+  # The {VariableAnnotations} module allows for the creation of <i>attribute variable annotations</i>
   # which attach to the next method defined.
   #
   #   require 'anise/variable'
   #
   #   class X
-  #     include Anise::Variable
+  #     include Anise::VariableAnnotations
   #
   #     @doc     = "See what I mean?"
   #     @returns = NilClass
@@ -28,12 +31,7 @@ module Anise
   # respect good practices of calling +super+ if you need to override
   # this method.
   #
-  #--
-  # TODO: Allow annotations to be inherited via module mixins.
-  #
-  # TODO: Ensure thread-safety of `@_annotation_*` variables.
-  #++
-  module Variable
+  module VariableAnnotations
     # When included into a class or module, Annotator is also included
     # and VariableAnnotation::Aid extends the class/module.
     #
@@ -46,7 +44,10 @@ module Anise
       base.variable_annotator :ann  # setup default annotator
     end
 
+    # Class level extensions for {VariableAnnotations}.
+    #
     module Aid
+      #
       # Open method annotations.
       #
       # @param ns [Symbol]
@@ -55,12 +56,15 @@ module Anise
       def variable_annotator(ns=:ann, &block)
         annotator ns  # setup annotator
 
+        # TODO: merge into one variable
         @_annotation_space = ns
         @_annotation_block = block
         @_annotation_state = instance_variables
       end
 
+      #
       # When a method is added, run all pending annotations.
+      #
       def method_added(sym)
         if @_annotation_space
           annotations = (instance_variables - @_annotation_state)
@@ -75,6 +79,9 @@ module Anise
           end
           @_annotation_state = instance_variables
         end
+
+        # TODO: clear @_annotation_*
+
         super if defined?(super)
       end
     end
@@ -82,4 +89,4 @@ module Anise
 
 end
 
-# Copyright (c) 2006,2011 Thomas Sawyer. All rights reserved. (BSD-2-Clause License)
+# Copyright (c) 2006 Rubyworks. All rights reserved. (BSD-2-Clause License)

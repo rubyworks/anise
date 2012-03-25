@@ -1,24 +1,27 @@
 module Anise
 
-  # Annotations storage.
+  # The Annotations class stores annotations on a per-class bases.
+  #
+  # @todo Rename to AnnotationStore ?
+  #
   class Annotations
 
     # Setup new Annotations instance.
     #
-    # @param topic [Class,Module]
+    # @param space [Class,Module]
     #   Class or Module to have annotations.
     #
-    def initialize(topic)
-      @topic = topic
+    def initialize(space)
+      @space = space
       @table = Hash.new { |h,k| h[k]={} }
     end
 
-    # Ancestors of topical class/module.
+    # Ancestors of spaceal class/module.
     def ancestors
-      @topic.ancestors
+      @space.ancestors
     end
 
-    # Annotations local to topical class/module.
+    # Annotations local to spaceal class/module.
     def local
       @table
     end
@@ -123,7 +126,7 @@ module Anise
       end
 
       # callback
-      @topic.annotation_added(ns, ref) #if method_defined?(:annotation_added)
+      @space.annotation_added(ref, ns) #if method_defined?(:annotation_added)
     end
 
   end

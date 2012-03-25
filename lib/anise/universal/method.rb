@@ -1,3 +1,5 @@
+# DEPRECATED
+
 require 'anise/method'
 
 class Module

@@ -3,27 +3,29 @@ module Anise
   require 'anise/annotation'
   require 'anise/core_ext/module'
 
-  # Annotated Attributes modifies the major attr_* methods to allow
-  # easy addition of annotations. It modifies the built in attribute
-  # methods (attr, attr_reader, attr_writer and attr_accessor), to
-  # allow annotations to be added to them directly rather than 
-  # requiring a separate annotating statement.
+  # AnnotatedAttributes modifies the attr_* methods to allow easy
+  # addition of annotations for attributes. It modifies the built in
+  # attribute methods (attr, attr_reader, attr_writer and attr_accessor),
+  # and any other custom `attr_*` methods, to allow annotations to be
+  # added to them directly rather than requiring a separate annotating
+  # statement.
   #
   #   require 'anise/attribute'
   #
   #   class X
-  #     include Anise::Attribute
+  #     include Anise::AnnotatedAttributes
   #
   #     attr :a, :valid => lambda{ |x| x.is_a?(Integer) }
   #   end
   #
   # See {Annotation} module for more information.
   #
-  # NOTE: This library was designed to be backward compatible with
-  # the standard versions of the same methods.
+  # @todo Currently annotated attributes alwasy use the standard
+  #       annotator (:ann). In the future we might make this customizable.
   #
-  module Attribute
+  module AnnotatedAttributes
 
+    #
     # When included into a class or module, {Annotation} is also
     # included and {Attribute::Aid} extends the class/module.
     #
@@ -34,7 +36,7 @@ module Anise
       base.send(:include, Annotation) #.append_features(base)
       base.extend Aid
 
-      base.annotator :ann
+      #base.annotator :ann
 
       #inheritor :instance_attributes, [], :|
       base_class = (class << base; self; end)
@@ -44,11 +46,12 @@ module Anise
       end
     end
 
+    # TODO: Might #define_annotated_attribute make an acceptable class extension?
+
+    #
     # Define an annotated attribute method, given an existing
     # non-annotated attribute method.
-    #--
-    # TODO: Might make an acceptable class extension.
-    #++
+    #
     def self.define_annotated_attribute(base, attr_method_name)
       base.module_eval do
         define_method(attr_method_name) do |*args|
@@ -83,10 +86,15 @@ module Anise
       end
     end
 
-    # Anise::Attribute Doman Language.
+    # Anise::AnnotatedAttribute domain language.
+    #
+    # @todo Rename this module.
+    #
     module Aid
 
+      #
       # Instance attributes, including inherited attributes.
+      #
       def instance_attributes
         a = []
         ancestors.each do |anc|
@@ -98,11 +106,14 @@ module Anise
         return a
       end
 
+      #
       # Local instance attributes.
+      #
       def instance_attributes!
         @instance_attributes ||= []
       end
 
+      #
       # Return list of attributes that have a :class annotation.
       #
       #   class MyClass
@@ -120,6 +131,7 @@ module Anise
         end
       end
 
+      #
       # This defines a simple adjustment to #attr to allow it to handle the boolean argument and
       # to be able to accept attributes. It's backward compatible and is not needed for Ruby 1.9
       # which gets rid of the secondary argument (or was suppose to!).
