@@ -8,10 +8,12 @@ copyrights:
 - holder: Rubyworks
   year: '2008'
   license: BSD-2-Clause
-replacements: []
-alternatives: []
 requirements:
 - name: qed
+  groups:
+  - test
+  development: true
+- name: ae
   groups:
   - test
   development: true
@@ -24,6 +26,7 @@ requirements:
   - build
   development: true
 dependencies: []
+alternatives: []
 conflicts: []
 repositories:
 - uri: http://github.com/rubyworks/anise.git
@@ -37,8 +40,8 @@ revision: 0
 created: '2008-02-21'
 summary: Dynamic Annotation System
 title: Anise
-version: 0.6.0
+version: 0.7.0
 name: anise
 description: Anise is an annotations systems for the Ruby programming lanaguage.
 organization: Rubyworks
-date: '2012-01-12'
+date: '2012-03-26'
