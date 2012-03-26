@@ -1,6 +1,11 @@
 = Anise
 
-== INTRODUCTION
+* home: http://rubyworks.github.com/anise
+* code: http://github.com/rubyworks/anise
+* mail: http://groups.google.com/group/rubyworks-mailinglist
+
+
+== Introduction
 
 Anise is an Annotation System for the Ruby programming language.
 Unlike most other annotations systems it is not a comment-based or
@@ -8,100 +13,97 @@ macro-based system that sits over-and-above the rest of the code.
 Rather, Anise is a dynamic annotations system operating at runtime.
 
 
-== RELEASE NOTES
-
-Please see the RELEASE file.
-
-
-== RESOURCES
-
-* home: http://rubyworks.github.com/anise
-* code: http://github.com/rubyworks/anise
-* mail: http://groups.google.com/group/rubyworks-mailinglist
-
-
-== INSTALLATION
+== Installation
 
 To install with RubyGems simply open a console and type:
 
-   gem install anise
+    gem install anise
 
 To manually install you will need Setup.rb (see http://setup.rubyforge.org).
 Then download the tarball package and do:
 
-   $ tar -xvzf anise-0.2.0.tgz
-   $ cd anise-0.2.0
-   $ sudo setup.rb all
+    $ tar -xvzf anise-0.2.0.tgz
+    $ cd anise-0.2.0
+    $ sudo setup.rb all
 
 
-== USAGE
+== Instruction
 
-The following example briefly demonstrates all three major features.
+The following example briefly demonstrates all three major features. To use
+any of them first require the `anise` library.
 
-   require 'anise'
+     require 'anise'
 
-   class X
+General annotations are provided by the `Anise::Annotations` module.
 
-     include Anise
+    class X
+      extend Anise::Annotations
 
-     # Annotations
+      ann :grape, :class=>String
+    end
 
-     ann :grape, :class=>String
+    X.ann(:grape, :class)  #=> String
 
-     # Annotated Attributes
+Annotated attributes can be easily added to a class via the `AnnotatedAttributes`
+module.
 
-     attr :baz, Integer, :max => 10
+    class X
+      extend Anise::AnnotatedAttributes
 
-     # Annotators
+      attr :baz, Integer, :max => 10
+    end
 
-     annotator :doc
+    X.ann(:baz)  #=> {:class=>Integer, :max=>10}
 
-     doc "This is an entry."
+Mewthod annotations can be had via the `AnnotatedMethods` module.
 
-     def bar
-       # ...
+     class X
+       extend Anise::AnnotatedMethods
+
+       def self.doc(string)
+         method_annotation(:doc=>string)
+       end
+
+       doc "This is an entry."
+
+       def bar
+         # ...
+       end
      end
 
-   end
+     X.ann(:bar)  #=> {:doc=>"This is an entry."}
 
-Looking at the resulting annotations:
+Any of these modules can be used in conjunction, as well. The `AnnotatedComplex` module
+is provided as a convenience to using the all in one go.
 
-   X.ann(:foo)  #=> {:class=>String}
-   X.ann(:bar)  #=> {:doc=>"This is an entry."}
-   X.ann(:baz)  #=> {:class=>Integer, :max=>10}
-
-The Anise library can be used as a whole, per the example above, or these
-features can be used separately. For more details see the RDoc API
-documentation.
+     class X
+       extend Anise::AnnotatedComplex
+     end
 
 
-== TESTING
+== Development
 
-Turn is the recommended way to run Anise's test suite (http://codeforpeople.rubyforge.org/turn/).
+=== Test Instructions
 
-  $ turn test/test_*
+Ainse has two test suites, one using QED and the other using Citron which is built on RubyTest.
 
-But a script +test/suite.rb+ script is include so you can easily run
-the unit tests with the testrb command:
+To run the QED demonstrations simple run:
 
-  $ testrb -Ilib test/suite.rb
+    $ qed
 
-or with Ruby alone:
+To run the unit tests use:
 
-  $ ruby -Ilib -rtest/unit test/suite.rb
-
-Anise also includes QED tests. These can be run via:
-
-  $ qed -Ilib qed/
+    $ rubytest
 
 See the {QED homepage}[http://rubyworks.github.com/qed] for more informaiton
 about QED.
 
 
-== LICENSE
+== Copyrights
 
-Copyright (c) 2008 Thomas Sawyer
+Copyright (c) 2008 Rubyworks. All rights reserved.
 
-This program is distributed under the terms of the Apache 2.0 license.
+This program is distributed under the terms of the **BSD-2-Clause** license.
 
-Please see COPYING.rdoc file for details.
+See LICNESE.txt file for details.
+
