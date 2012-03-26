@@ -1,11 +1,11 @@
-require 'anise/method'
-
-Test.case "Anise::Method" do
+testcase Anise::AnnotatedMethods do
 
   cX = Class.new do
-    include Anise::Method
+    extend Anise::AnnotatedMethods
 
-    method_annotator :req
+    def self.req(str)
+      method_annotation(:req=>str)
+    end
 
     req 'r'
     def a ; "a"; end

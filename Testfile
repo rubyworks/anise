@@ -1,0 +1,7 @@
+Test.run do |run|
+  require 'citron'
+  require 'ae'
+
+  run.files << 'test/*.rb'
+end
+

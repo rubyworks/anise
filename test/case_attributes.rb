@@ -1,11 +1,9 @@
-require 'anise/attribute'
-
-Test.case Anise::Attribute do
+testcase Anise::AnnotatedAttributes do
 
   concern "general" do
 
     cX = Class.new do
-      include Anise::Attribute
+      extend Anise::AnnotatedAttributes
       attr :q
       attr :a, :x => 1
     end
@@ -19,7 +17,7 @@ Test.case Anise::Attribute do
   concern "attr" do
 
     cA = Class.new do
-      include Anise::Attribute
+      extend Anise::AnnotatedAttributes
       attr :x, :cast=>"to_s"
     end
 
@@ -32,7 +30,7 @@ Test.case Anise::Attribute do
   concern "attr_accessor" do
 
     cA = Class.new do
-      include Anise::Attribute
+      extend Anise::AnnotatedAttributes
       attr_accessor :x, :cast=>"to_s"
     end
 

@@ -1,19 +1,14 @@
 = TOPLEVEL Annotations
 
-Load the primary annotations library.
-
-  require 'anise/annotation'
-
-Including Annotations at the toplevel should make them available to all classes.
+Extending Object with `Annotations` should make them available to all classes.
 
   class ::Object
-    include Anise::Annotation
+    extend Anise::Annotations
   end
 
 Given a example class X we can apply annotations to it using the #ann method. 
 
   class X
-    annotator :ann
     ann :x1, :a=>1
     ann :x1, :b=>2
   end
@@ -26,4 +21,6 @@ The #ann method is a public interface, so we can define annotation externally as
 
    X.ann :x1, :a => 2
    X.ann(:x1, :a).should == 2
+
+Alternatively the `Annotations` module could be included into the `Module` class.
 

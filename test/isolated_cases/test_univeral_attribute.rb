@@ -1,6 +1,7 @@
-require 'anise/univeral/attribute'
-
-#include Anise::Attribute
+# This is one way to make them universally available.
+class ::Object
+  extend Anise::AnnotatedAttribute
+end
 
 class Test_Attribute_Toplevel < Test::Unit::TestCase
   class X

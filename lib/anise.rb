@@ -1,63 +1,46 @@
-require 'anise/annotation'
-require 'anise/attribute'
-require 'anise/method'
-require 'anise/variable'
-
-# = Anise
-#
 # Dynamic Annotations for Ruby.
 #
 #   require 'anise'
 #
+# Provides annotations:
+#
 #   class X
-#     include Anise
+#     extend Anise::Annotations
 #
-#     # Provides annotations
 #     ann :foo, :class=>String
+#   end
 #
-#     # Provides annotated attributes
-#     attr :bar, Integer, :max=>10
+# Provides method annotations:
 #
-#     # Provides method annotators.
-#     annotator :doc
+#   class Y
+#     extend Anise::MethodAnnotations
+#
+#     def self.doc(string)
+#       method_annotation(:doc=>string)
+#     end
+#
 #     doc "foo is cool"
 #     def foo
 #       # ...
 #     end
 #   end
 #
+# Provides annotated attributes:
+#
+#   class Z
+#     extend Anise::Attributes
+#
+#     attr :bar, Integer, :max=>10
+#   end
+#
 module Anise
-  extend self 
 
-  def included(base)
-    #super(base)
-    #base.send(:include, Attribute)
-    base.send(:include, Method)
-    #base.extend Anise #ClassMethods
-  end
+  require 'anise/version'
+  require 'anise/core_ext'
+  require 'anise/store'
+  require 'anise/annotations'
+  require 'anise/methods'
+  require 'anise/attributes'
+  require 'anise/complex'
 
-  #module ClassMethods
-  #  def append_features(base)
-  #    super(base)
-  #    Attribute.append_features(base)
-  #    Annotator.append_features(base)
-  #    base.extend ClassMethods
-  #  end
-  #end
-
-  #
-  def self.metadata
-    @metadata ||= (
-      require 'yaml'
-      YAML.load(File.new(File.dirname(__FILE__) + '/anise.yml'))
-    )
-  end
-
-  #
-  def self.const_missing(name)
-    metadata[name.to_s.downcase] || super(name)
-  end
-
-  VERSION = metadata['version']  # becuase Ruby 1.8~ gets in the way :(
 end
-

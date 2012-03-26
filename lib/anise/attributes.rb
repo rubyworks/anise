@@ -1,7 +1,4 @@
 module Anise
-  #require 'facets/inheritor' # removed dependency
-  require 'anise/annotation'
-  require 'anise/core_ext/module'
 
   # AnnotatedAttributes modifies the attr_* methods to allow easy
   # addition of annotations for attributes. It modifies the built in
@@ -24,6 +21,7 @@ module Anise
   #       annotator (:ann). In the future we might make this customizable.
   #
   module AnnotatedAttributes
+    include Annotations
 
     #
     # When included into a class or module, {Annotation} is also
@@ -32,12 +30,7 @@ module Anise
     # @param base [Class, Module]
     #   The class or module to get features.
     #
-    def self.included(base)
-      base.send(:include, Annotation) #.append_features(base)
-      base.extend Aid
-
-      #base.annotator :ann
-
+    def self.extended(base)
       #inheritor :instance_attributes, [], :|
       base_class = (class << base; self; end)
       #base_class.attribute_methods.each do |attr_method|
@@ -86,70 +79,62 @@ module Anise
       end
     end
 
-    # Anise::AnnotatedAttribute domain language.
     #
-    # @todo Rename this module.
+    # Instance attributes, including inherited attributes.
     #
-    module Aid
-
-      #
-      # Instance attributes, including inherited attributes.
-      #
-      def instance_attributes
-        a = []
-        ancestors.each do |anc|
-          next unless anc < Attribute
-          if x = anc.instance_attributes!
-            a |= x
-          end
-        end
-        return a
-      end
-
-      #
-      # Local instance attributes.
-      #
-      def instance_attributes!
-        @instance_attributes ||= []
-      end
-
-      #
-      # Return list of attributes that have a :class annotation.
-      #
-      #   class MyClass
-      #     attr_accessor :test
-      #     attr_accessor :name, String, :doc => 'Hello'
-      #     attr_accessor :age, Fixnum
-      #   end
-      #
-      #   MyClass.instance_attributes # => [:test, :name, :age, :body]
-      #   MyClass.classified_attributes # => [:name, :age]
-      #
-      def classified_attributes
-        instance_attributes.find_all do |a|
-          self.ann(a, :class)
+    def instance_attributes
+      a = []
+      ancestors.each do |anc|
+        next unless anc < Attribute
+        if x = anc.instance_attributes!
+          a |= x
         end
       end
+      return a
+    end
 
-      #
-      # This defines a simple adjustment to #attr to allow it to handle the boolean argument and
-      # to be able to accept attributes. It's backward compatible and is not needed for Ruby 1.9
-      # which gets rid of the secondary argument (or was suppose to!).
-      #
-      def attr(*args)
-        args.flatten!
-        case args.last
-        when TrueClass
-          args.pop
-          attr_accessor(*args)
-        when FalseClass, NilClass
-          args.pop
-          attr_reader(*args)
-        else
-          attr_reader(*args)
-        end
+    #
+    # Local instance attributes.
+    #
+    def instance_attributes!
+      @instance_attributes ||= []
+    end
+
+    #
+    # Return list of attributes that have a :class annotation.
+    #
+    #   class MyClass
+    #     attr_accessor :test
+    #     attr_accessor :name, String, :doc => 'Hello'
+    #     attr_accessor :age, Fixnum
+    #   end
+    #
+    #   MyClass.instance_attributes # => [:test, :name, :age, :body]
+    #   MyClass.classified_attributes # => [:name, :age]
+    #
+    def classified_attributes
+      instance_attributes.find_all do |a|
+        self.ann(a, :class)
       end
+    end
 
+    #
+    # This defines a simple adjustment to #attr to allow it to handle the boolean argument and
+    # to be able to accept attributes. It's backward compatible and is not needed for Ruby 1.9
+    # which gets rid of the secondary argument (or was suppose to!).
+    #
+    def attr(*args)
+      args.flatten!
+      case args.last
+      when TrueClass
+        args.pop
+        attr_accessor(*args)
+      when FalseClass, NilClass
+        args.pop
+        attr_reader(*args)
+      else
+        attr_reader(*args)
+      end
     end
 
   end

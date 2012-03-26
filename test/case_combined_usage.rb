@@ -1,21 +1,89 @@
-require 'anise'
-
 # The intent of this testcase is test the variant annotaiton modules
 # in conjunction, to make sure they can all be used together without
 # conflict.
 #
-# All good intentions aside these cases need HELP, as they are really other
-# cases just thrown together and not really thought out as such. Still,
-# something is better than nothing.
+# All good intentions aside these cases need some *love*, as they are 
+# really just other cases thrown together and not really thought out 
+# as such. Still, something is better than nothing.
 
-Test.case "Integration" do
+testcase "Combined Usage" do
+
+  context "simple co-existence of annotated methods and attributes" do
+
+    cX = Class.new do
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
+    end
+
+    test "initialize" do
+      cX.new
+    end
+
+  end
+
+  context "method annotations work" do
+
+    cX = Class.new do
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
+
+      method_annotator :doc
+
+      doc "a-okay captain"
+      def x; end
+    end
+
+    test "doc is defined for method" do
+      cX.ann(:x,:doc) == "a-okay captain"
+    end
+
+  end
+
+  context "attribute annotations work" do
+
+    cX = Class.new do
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
+
+      attr :x, :doc => "still okay"
+    end
+
+    test "annotation defined for attribute" do
+      cX.ann(:x,:doc) == "still okay"
+    end
+
+  end
+
+  context "both method and attribute annotations work" do
+
+    cX = Class.new do
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
+
+      method_annotator :doc
+
+      attr :x, :doc => "still okay"
+
+      doc "sure does"
+      def y; end
+    end
+
+    test "annotation defined for attribute" do
+      cX.ann(:x,:doc) == "still okay"
+    end
+
+    test "doc is defined for method" do
+      cX.ann(:y,:doc) == "sure does"
+    end
+
+  end
 
   context "using an annotation for attribute validation" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       attr :a
 
@@ -53,9 +121,9 @@ Test.case "Integration" do
   context "2" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       def x1 ; end
 
@@ -82,9 +150,9 @@ Test.case "Integration" do
   context "3" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       def x1 ; end
 
@@ -122,9 +190,9 @@ Test.case "Integration" do
   context "4" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       annotator :ann
       ann :foo, Integer
@@ -147,9 +215,9 @@ Test.case "Integration" do
   context "5" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       annotator :ann
       ann :foo, :doc => "hello"
@@ -198,9 +266,9 @@ Test.case "Integration" do
   context "6" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       method_annotator :req
 
@@ -224,9 +292,9 @@ Test.case "Integration" do
   context "attribute" do
 
     cX = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       attr :q
       attr :a, :x => 1
@@ -241,9 +309,9 @@ Test.case "Integration" do
   context "attribute using attr" do
 
     cA = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       attr :x, :cast=>"to_s"
     end
@@ -257,9 +325,9 @@ Test.case "Integration" do
   context "attribute using attr_accessor" do
 
     cA = Class.new do
-      include Anise::Annotation
-      include Anise::Method
-      include Anise::Attribute
+      extend Anise::Annotations
+      extend Anise::AnnotatedMethods
+      extend Anise::AnnotatedAttributes
 
       attr_accessor :x, :cast=>"to_s"
     end

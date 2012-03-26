@@ -1,11 +1,9 @@
-require 'anise/variable'
-
-Test.case Anise::Variable do
+testcase Anise::Variable do
 
   concern "general" do
 
     cX = Class.new do
-      include Anise::Variable
+      extend Anise::AnnotatedVariables
 
       @doc     = "See what I mean?"
       @returns = NilClass

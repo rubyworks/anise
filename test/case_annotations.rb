@@ -1,12 +1,9 @@
-require 'anise/annotation'
-
-Test.case Anise::Annotation do 
+testcase Anise::Annotations do 
 
   concern "annotations can be defined" do
 
     cX = Class.new do
-      include Anise::Annotation
-      annotator :ann
+      extend Anise::Annotations
       def x1 ; end
       ann :x1, :a=>1
       ann :x1, :b=>2
@@ -34,8 +31,7 @@ Test.case Anise::Annotation do
   concern "parent annotations pass to subclass" do
 
     cX = Class.new do
-      include Anise::Annotation
-      annotator :ann
+      extend Anise::Annotations
       def x1 ; end
       ann :x1, :a=>1
       ann :x1, :b=>2
@@ -70,10 +66,7 @@ Test.case Anise::Annotation do
   concern "subclass can override parent annotation" do
 
     cX = Class.new do
-      include Anise::Annotation
-
-      annotator :ann
-
+      extend Anise::Annotations
       ann :foo, Integer
     end
 
@@ -94,8 +87,7 @@ Test.case Anise::Annotation do
   concern "subclass can override while parent also passes thru" do
 
     cX = Class.new do
-      include Anise::Annotation
-      annotator :ann
+      extend Anise::Annotations
       ann :foo, :doc => "hello"
       ann :foo, :bar => []
     end
@@ -144,9 +136,7 @@ Test.case Anise::Annotation do
   concern "example of using annotations for validation" do
 
     cX = Class.new do
-      include Anise::Annotation
-
-      annotator :ann
+      extend Anise::Annotations
 
       attr :a
 
