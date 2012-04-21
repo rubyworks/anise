@@ -1,14 +1,11 @@
 # Variable Annotations
 
-AnnotatedVariables is an experimental class and therefore must be
-required specifically.
-
-    require 'anise/variables'
-
-Create a class that uses the `AnnotatedVariables` mixin.
+Create a class that uses the `Annotative::Variables` mixin.
 
     class X
-      extend Anise::AnnotatedVariables
+      extend Anise::Annotative::Variables
+
+      variable_annotator :@doc
 
       @doc = "See what I mean?"
 
@@ -25,13 +22,13 @@ Variable annotations can override the standard annotation procedure with a
 custom procedure.
 
     class Y
-      extend Anise::AnnotatedVariables
+      extend Anise::Annotative::Variables
 
       def self.list
         @list ||= []
       end
 
-      variable_annotator :ann do |method, value|
+      variable_annotator :@doc do |method, value|
         list << [method, value]
       end
 

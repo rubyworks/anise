@@ -1,9 +1,9 @@
-# Annotated Attributes
+# Annotative Attributes
 
-Create a class that uses the `AnnotatedAttributes` module.
+Create a class that uses the `Annotative::Attributes` mixin.
 
     class X
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Attributes
 
       attr :a, :count => 1
     end

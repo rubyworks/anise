@@ -1,9 +1,9 @@
-testcase Anise::Variable do
+testcase Anise::Annotative::Variables do
 
-  concern "general" do
+  context "general" do
 
     cX = Class.new do
-      extend Anise::AnnotatedVariables
+      extend Anise::Annotative::Variables
 
       @doc     = "See what I mean?"
       @returns = NilClass

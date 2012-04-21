@@ -11,8 +11,8 @@ testcase "Combined Usage" do
   context "simple co-existence of annotated methods and attributes" do
 
     cX = Class.new do
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
     end
 
     test "initialize" do
@@ -24,8 +24,8 @@ testcase "Combined Usage" do
   context "method annotations work" do
 
     cX = Class.new do
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       method_annotator :doc
 
@@ -42,8 +42,8 @@ testcase "Combined Usage" do
   context "attribute annotations work" do
 
     cX = Class.new do
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       attr :x, :doc => "still okay"
     end
@@ -57,8 +57,8 @@ testcase "Combined Usage" do
   context "both method and attribute annotations work" do
 
     cX = Class.new do
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       method_annotator :doc
 
@@ -82,12 +82,11 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       attr :a
 
-      annotator :ann
       ann :@a, :valid => lambda{ |x| x.is_a?(Integer) }
       ann :a, :class => Integer
 
@@ -122,12 +121,12 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       def x1 ; end
 
-      annotator :ann
+      #annotator :ann
       ann :x1, :a=>1
       ann :x1, :b=>2
     end
@@ -151,12 +150,12 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       def x1 ; end
 
-      annotator :ann
+      #annotator :ann
       ann :x1, :a=>1
       ann :x1, :b=>2
     end
@@ -191,10 +190,10 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
-      annotator :ann
+      #annotator :ann
       ann :foo, Integer
     end
 
@@ -216,10 +215,10 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
-      annotator :ann
+      #annotator :ann
       ann :foo, :doc => "hello"
       ann :foo, :bar => []
     end
@@ -267,8 +266,8 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       method_annotator :req
 
@@ -293,8 +292,8 @@ testcase "Combined Usage" do
 
     cX = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       attr :q
       attr :a, :x => 1
@@ -310,8 +309,8 @@ testcase "Combined Usage" do
 
     cA = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       attr :x, :cast=>"to_s"
     end
@@ -326,8 +325,8 @@ testcase "Combined Usage" do
 
     cA = Class.new do
       extend Anise::Annotations
-      extend Anise::AnnotatedMethods
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Methods
+      extend Anise::Annotative::Attributes
 
       attr_accessor :x, :cast=>"to_s"
     end

@@ -1,9 +1,9 @@
-testcase Anise::AnnotatedAttributes do
+testcase Anise::Annotative::Attributes do
 
-  concern "general" do
+  context "general" do
 
     cX = Class.new do
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Attributes
       attr :q
       attr :a, :x => 1
     end
@@ -14,10 +14,10 @@ testcase Anise::AnnotatedAttributes do
 
   end
 
-  concern "attr" do
+  context "attr" do
 
     cA = Class.new do
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Attributes
       attr :x, :cast=>"to_s"
     end
 
@@ -27,10 +27,10 @@ testcase Anise::AnnotatedAttributes do
 
   end
 
-  concern "attr_accessor" do
+  context "attr_accessor" do
 
     cA = Class.new do
-      extend Anise::AnnotatedAttributes
+      extend Anise::Annotative::Attributes
       attr_accessor :x, :cast=>"to_s"
     end
 

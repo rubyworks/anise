@@ -1,6 +1,6 @@
-testcase Anise::Annotations do 
+testcase Anise::Annotations do
 
-  concern "annotations can be defined" do
+  context "annotations can be defined" do
 
     cX = Class.new do
       extend Anise::Annotations
@@ -28,7 +28,7 @@ testcase Anise::Annotations do
 
   end
 
-  concern "parent annotations pass to subclass" do
+  context "parent annotations pass to subclass" do
 
     cX = Class.new do
       extend Anise::Annotations
@@ -63,7 +63,7 @@ testcase Anise::Annotations do
 
   end
 
-  concern "subclass can override parent annotation" do
+  context "subclass can override parent annotation" do
 
     cX = Class.new do
       extend Anise::Annotations
@@ -84,7 +84,7 @@ testcase Anise::Annotations do
 
   end
 
-  concern "subclass can override while parent also passes thru" do
+  context "subclass can override while parent also passes thru" do
 
     cX = Class.new do
       extend Anise::Annotations
@@ -133,7 +133,7 @@ testcase Anise::Annotations do
 
   end
 
-  concern "example of using annotations for validation" do
+  context "example of using annotations for validation" do
 
     cX = Class.new do
       extend Anise::Annotations

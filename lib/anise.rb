@@ -13,7 +13,7 @@
 # Provides method annotations:
 #
 #   class Y
-#     extend Anise::MethodAnnotations
+#     extend Anise::Annotator::Method
 #
 #     def self.doc(string)
 #       method_annotation(:doc=>string)
@@ -28,19 +28,18 @@
 # Provides annotated attributes:
 #
 #   class Z
-#     extend Anise::Attributes
+#     extend Anise::Annotator::Attribute
 #
 #     attr :bar, Integer, :max=>10
 #   end
 #
 module Anise
-
   require 'anise/version'
   require 'anise/core_ext'
-  require 'anise/store'
   require 'anise/annotations'
-  require 'anise/methods'
-  require 'anise/attributes'
-  require 'anise/complex'
-
+  require 'anise/annotations/store'
+  require 'anise/annotative'
+  require 'anise/annotative/methods'
+  require 'anise/annotative/attributes'
+  require 'anise/annotative/variables'
 end

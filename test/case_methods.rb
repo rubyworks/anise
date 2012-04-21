@@ -1,28 +1,32 @@
-testcase Anise::AnnotatedMethods do
+testcase Anise::Annotative::Methods do
 
   cX = Class.new do
-    extend Anise::AnnotatedMethods
+    extend Anise::Annotative::Methods
 
-    def self.req(str)
-      method_annotation(:req=>str)
+    def self.req(val)
+      method_annotation(:req=>val)
     end
 
     req 'r'
     def a ; "a"; end
 
-    req 'x', 'y'
+    req ['x', 'y']
     attr :b
   end
 
-  test do |a, k|
-    cX.ann(a, k)
+  test do |a, h|
+    h.each do |k, r|
+      cX.ann(a, k).assert == r
+    end
   end
 
   ok :a, :req => 'r'
   ok :b, :req => ['x','y']
 
-  test do |a|
-    cX.ann(a)
+  test do |h|
+    h.each do |a, r|
+      cX.ann(a).assert == r
+    end
   end
 
   ok :a => {:req=>'r'}

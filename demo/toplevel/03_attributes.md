@@ -4,7 +4,7 @@ Including `AnnotatedAttributes` at the toplevel, i.e. Object, will make
 annotated attributes univerally available.
 
   class ::Object
-    extend Anise::AnnotatedAttributes
+    extend Anise::Annotative::Attributes
   end
 
 Create a class that uses it.
@@ -15,6 +15,6 @@ Create a class that uses it.
 
   X.ann(:a, :count) #=> 1
 
-Alternatively the `AnnotatedAttributes` module could be included into
+Alternatively the `Annotative::Attributes` module could be included into
 the `Module` class.
 

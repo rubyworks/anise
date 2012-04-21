@@ -72,7 +72,7 @@ module Anise
     # Access to a class or module's annotations.
     #
     def annotations
-      @annotations ||= AnnotationStore.new(self)
+      @annotations ||= Store.new(self)
     end
 
     #

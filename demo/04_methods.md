@@ -1,9 +1,9 @@
 # Method Annotations
 
-Create a class that uses the `AnnotatedMethods` mixin.
+Create a class that uses the `Annotative::Methods` mixin.
 
     class X
-      extend Anise::AnnotatedMethods
+      extend Anise::Annotative::Methods
 
       def self.doc(string)
         method_annotation(:doc=>string.to_s)
@@ -25,7 +25,7 @@ with a custom procedure. In such case no annotations will actually
 be created unless the `#ann` is called in the procedure.
 
     class Y
-      extend Anise::AnnotatedMethods
+      extend Anise::Annotative::Methods
 
       def self.list
         @list ||= []
