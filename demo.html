@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Anise Demonstrandum</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 
   <!-- TODO: most of the css before the '*' can be removed. -->
 
@@ -99,19 +100,22 @@
     .wikistyle pre.console code{padding:0!important;font-size:100%!important;background-color:black!important;border:none!important;color:white!important;}
     .wikistyle pre.console span{color:#888!important;}
     .wikistyle pre.console span.command{color:yellow!important;}
-
-    .title { font-size: 2em; }
   </style>
-
-  <!-- TODO: only include if these files exists -->
-  <link href="../assets/styles/spec.css" type="text/css" rel="stylesheet">
-  <!-- spec.css might be a problem with clobber -->
-  <link href="spec.css" type="text/css" rel="stylesheet">
 
   
 
   <!-- JQuery is needed -->
-  <script src="jquery.js" type="text/javascript" language="javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript" language="javascript"></script>
+
+  <!-- Highlight.js -->
+  <script src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/github.min.css">
+
+  <script>
+    $(document).ready(function() {
+      $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+    });
+  </script>
 
 </head>
 
@@ -120,7 +124,8 @@
   <!-- Side Table of Contents -->
   <div id="sidebar" style="position: fixed; top: 10; right: 10; background: white;">
     <a href="javascript: toc_toggle();">
-      <img src="img/icon/book.jpg" height="30px;" style="border: none;" alt="TOC" align="right"/>
+      <!-- TODO: find a preminatn image on web to use -->
+      <!-- <img src="http://www.cdnjs.com/images/poweredbycloudflare.png" style="border: none;" alt="TOC" align="right"/> -->
     </a>
 
     <div id="toc_side" class="toc">
@@ -129,9 +134,10 @@
 
   <div id="container">
     <div id="header">
-      <img src="img/icon/book.jpg" align="left" style="padding-right: 10px;" alt=""/>
+      <!-- TODO: find a preminatn image on web to use -->
+      <!-- <img src="http://www.cdnjs.com/images/poweredbycloudflare.png" align="left" style="padding-right: 10px;" alt=""/> -->
 
-      <div class="title">Anise Demonstrandum</div>
+      <div style="font-size: 2em">Anise Demonstrandum</div>
 
       <h1>Table of Contents</h1>
 
@@ -140,218 +146,272 @@
     </div>
 
     <div id="content">
-      
-<h1>Creating and Reading Annotations</h1>
+      <h1>Annotations</h1>
 
-<p>Load the primary annotations library.</p>
+<h2>Creating and Reading Annotations</h2>
 
-<pre>require 'anise/annotation'</pre>
+<p>Load the Anise library.</p>
 
-<p>Given a example class X we can apply annotations to it using the #ann
-method.</p>
+<pre><code>require 'anise'
+</code></pre>
 
-<pre>class X
-  include Anise::Annotation
+<p>Given an example class X we can apply annotations to it using the #ann method.</p>
+
+<pre><code>class X
+  extend Anise::Annotations
 
   ann :x1, :a=&gt;1
   ann :x1, :b=&gt;2
-end</pre>
+end
+</code></pre>
 
 <p>We can then use #ann to lookup the set annotations.</p>
 
-<pre>X.ann(:x1,:a).should == 1</pre>
+<pre><code>X.ann(:x1,:a).should == 1
+</code></pre>
 
-<p>The #ann method is a public interface, so we can define annotation
-externally as well.</p>
+<p>The #ann method is a public interface, so we can define annotation externally as well.</p>
 
-<pre>X.ann :x1, :a =&gt; 2
-X.ann(:x1, :a).should == 2</pre>
+<pre><code>X.ann :x1, :a =&gt; 2
+X.ann(:x1, :a).should == 2
+</code></pre>
 
-<p>QED.</p>
+<h2>Annotation Added Callback</h2>
 
+<p>Given a sample class Y, we can use a standard callback method #annotation_added().</p>
 
-<h1>Annotation Added Callback</h1>
-
-<p>Load the annotations, which supports callbacks out of the box.</p>
-
-<pre>require 'anise/annotation'</pre>
-
-<p>Given a sample class X, we can use a standard callback method
-#annotation_added().</p>
-
-<pre>class X
-  include Anise::Annotation
+<pre><code>class Y
+  extend Anise::Annotations
 
   class &lt;&lt; self
     attr :last_callback
 
-    def annotation_added(name)
-      @last_callback = [name, ann(name)]
+    def annotation_added(ref, ns)
+      @last_callback = [ns, ref, ann(ref/ns)]
     end
   end
-end</pre>
+end
+</code></pre>
 
 <p>Now if we add an annotation, we will see the callback catches it.</p>
 
-<pre>X.ann :x1, :a=&gt;1
-X.last_callback.should == [:x1, {:a =&gt; 1}]</pre>
+<pre><code>Y.ann :x1, :a=&gt;1
+Y.last_callback.should == [:ann, :x1, {:a =&gt; 1}]
+</code></pre>
 
-<p>We’ll do it again to be sure.</p>
+<p>We will do it again to be sure.</p>
 
-<pre>X.ann :x1, :b=&gt;2
-X.last_callback.should == [:x1, {:a =&gt; 1, :b =&gt; 2}]</pre>
+<pre><code>Y.ann :x1, :b=&gt;2
+Y.last_callback.should == [:ann, :x1, {:a =&gt; 1, :b =&gt; 2}]
+</code></pre>
 
 <h2>Using Callbacks for Attribute Defaults</h2>
 
-<pre>class ::Module
-  def annotation_added(key)
+<pre><code>class ::Module
+  def annotation_added(key, ns)
+    return unless ns == :ann
     base = self
     if value = ann(key, :default)
       define_method(key) do
-        instance_variable_set(&quot;@#{key}&quot;, value) unless instance_variable_defined?(&quot;@#{key}&quot;)
+        instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
         base.module_eval{ attr key }
-        instance_variable_get(&quot;@#{key}&quot;)
+        instance_variable_get("@#{key}")
       end 
     end
   end
-end</pre>
+end
+</code></pre>
 
 <p>Try it out.</p>
 
-<pre>class Y
-  include Anise::Annotation
+<pre><code>class Z
+  extend Anise::Annotations
 
   attr :a
   ann :a, :default =&gt; 10
 end
 
-x = Y.new
-x.a.should == 10
-x.a.should == 10</pre>
+z = Z.new
+z.a.should == 10
+z.a.should == 10
+</code></pre>
 
-<p>QED.</p>
+<h1>Annotative Attributes</h1>
 
+<p>Create a class that uses the <code>Annotative::Attributes</code> mixin.</p>
 
-<h1>Annotated Attribute Methods</h1>
-
-<p>Load the attributes library.</p>
-
-<pre>require 'anise/attribute'</pre>
-
-<p>Create a class that includes it.</p>
-
-<pre>class X
-  include Anise::Attribute
+<pre><code>class X
+  extend Anise::Annotative::Attributes
 
   attr :a, :count =&gt; 1
 end
+</code></pre>
 
-X.ann(:a, :count) #=&gt; 1</pre>
+<p>Then we can see tht the attribute method <code>:a</code> has an annotation entry.</p>
 
+<pre><code>X.ann(:a, :count) #=&gt; 1
+</code></pre>
 
-<h1>Annotators</h1>
+<h1>Method Annotations</h1>
 
-<p>Load the primary annotator library.</p>
+<p>Create a class that uses the <code>Annotative::Methods</code> mixin.</p>
 
-<pre>require 'anise/annotator'</pre>
+<pre><code>class X
+  extend Anise::Annotative::Methods
 
-<p>Create a class that includes it.</p>
+  def self.doc(string)
+    method_annotation(:doc=&gt;string.to_s)
+  end
 
-<pre>class X
-  include Anise::Annotator
-
-  annotator :doc
-
-  doc &quot;See what I mean?&quot;
+  doc "See what I mean?"
 
   def see
-    puts &quot;Yes, I see!&quot;
+    puts "Yes, I see!"
   end
-end</pre>
+end
+</code></pre>
 
 <p>See that it is set.</p>
 
-<pre>X.ann(:see, :doc).assert == &quot;See what I mean?&quot;</pre>
+<pre><code>X.ann(:see, :doc)  #=&gt; "See what I mean?"
+</code></pre>
 
-<p>Annotators can override the standard annotation procedure with a custom
-procedure.</p>
+<p>Method Annotators can override the standard annotation procedure
+with a custom procedure. In such case no annotations will actually
+be created unless the <code>#ann</code> is called in the procedure.</p>
 
-<pre>class Y
-  include Anise::Annotator
+<pre><code>class Y
+  extend Anise::Annotative::Methods
 
   def self.list
     @list ||= []
   end
 
-  annotator :doc do |method, argument|
-    list &lt;&lt; [method, argument]
+  def self.doc(string)
+    method_annotation do |method|
+      list &lt;&lt; [method, string]
+    end
   end
 
-  doc &quot;See here!&quot;
+  doc "See here!"
 
   def see
-    puts &quot;Yes, I see!&quot;
+    puts "Yes, I see!"
   end
-end</pre>
+end
+</code></pre>
 
 <p>See that it is set.</p>
 
-<pre>Y.list #=&gt; [[:see, &quot;See here!&quot;]]</pre>
+<pre><code>Y.list #=&gt; [[:see, "See here!"]]
+</code></pre>
 
+<h1>Variable Annotations</h1>
 
-<h1>Creating and Reading Annotations</h1>
+<p>Create a class that uses the <code>Annotative::Variables</code> mixin.</p>
 
-<p>Load the primary annotations library.</p>
+<pre><code>class X
+  extend Anise::Annotative::Variables
 
-<pre>require 'anise/annotation'</pre>
+  variable_annotator :@doc
 
-<p>Including Annotations at the toplevel should make them available to all
-classes.</p>
+  @doc = "See what I mean?"
 
-<pre>class ::Object
-  include Anise::Annotation
-end</pre>
+  def see
+    puts "Yes, I see!"
+  end
+end
+</code></pre>
 
-<p>Given a example class X we can apply annotations to it using the #ann
-method.</p>
+<p>See that it is set.</p>
 
-<pre>class X
-  ann :x1, :a=&gt;1
-  ann :x1, :b=&gt;2
-end</pre>
+<pre><code>X.ann(:see, :@doc).should == "See what I mean?"
+</code></pre>
+
+<p>Variable annotations can override the standard annotation procedure with a
+custom procedure.</p>
+
+<pre><code>class Y
+  extend Anise::Annotative::Variables
+
+  def self.list
+    @list ||= []
+  end
+
+  variable_annotator :@doc do |method, value|
+    list &lt;&lt; [method, value]
+  end
+
+  @doc = "See here!"
+
+  def see
+    puts "Yes, I see!"
+  end
+end
+</code></pre>
+
+<p>See that it is set.</p>
+
+<pre><code>Y.list #=&gt; [[:see, "See here!"]]
+</code></pre>
+
+<p>= TOPLEVEL Annotations</p>
+
+<p>Extending Object with <code>Annotations</code> should make them available to all classes.</p>
+
+<p>  class ::Object</p>
+
+<pre><code>extend Anise::Annotations
+</code></pre>
+
+<p>  end</p>
+
+<p>Given a example class X we can apply annotations to it using the #ann method.</p>
+
+<p>  class X</p>
+
+<pre><code>ann :x1, :a=&gt;1
+ann :x1, :b=&gt;2
+</code></pre>
+
+<p>  end</p>
 
 <p>We can then use #ann to lookup the set annotations.</p>
 
-<pre>X.ann(:x1,:a).should == 1</pre>
+<p>   X.ann(:x1,:a).should == 1</p>
 
-<p>The #ann method is a public interface, so we can define annotation
-externally as well.</p>
+<p>The #ann method is a public interface, so we can define annotation externally as well.</p>
 
-<pre>X.ann :x1, :a =&gt; 2
-X.ann(:x1, :a).should == 2</pre>
+<p>   X.ann :x1, :a => 2
+   X.ann(:x1, :a).should == 2</p>
 
-<p>QED.</p>
+<p>Alternatively the <code>Annotations</code> module could be included into the <code>Module</code> class.</p>
 
+<p>= TOPLEVEL Annotated Attributes</p>
 
-<h1>Annotated Attribute Methods</h1>
+<p>Including <code>AnnotatedAttributes</code> at the toplevel, i.e. Object, will make
+annotated attributes univerally available.</p>
 
-<p>Load the attributes library.</p>
+<p>  class ::Object</p>
 
-<pre>require 'anise/attribute'</pre>
+<pre><code>extend Anise::Annotative::Attributes
+</code></pre>
 
-<p>Including Anise::Attribute at the toplevel (same as Object).</p>
-
-<pre>class ::Object
-  include Anise::Attribute
-end</pre>
+<p>  end</p>
 
 <p>Create a class that uses it.</p>
 
-<pre>class X
-  attr :a, :count=&gt;1
-end
+<p>  class X</p>
 
-X.ann(:a, :count) #=&gt; 1</pre>
+<pre><code>attr :a, :count=&gt;1
+</code></pre>
+
+<p>  end</p>
+
+<p>  X.ann(:a, :count) #=> 1</p>
+
+<p>Alternatively the <code>Annotative::Attributes</code> module could be included into
+the <code>Module</code> class.</p>
 
 
     </div>
