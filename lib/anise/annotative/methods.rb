@@ -76,6 +76,11 @@ module Anise
       end
 
       #
+      # Backward compatibility.
+      #
+      alias :annotator :method_annotator
+
+      #
       # Setup a pending method annotation.
       #
       # @param [Symbol] annotator (optional)
