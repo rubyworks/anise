@@ -12,7 +12,7 @@ module Anise
     # to any class or module.
     #
     #     class X
-    #       extend Anise::Annotator::Method
+    #       extend Anise::Annotative::Methods
     #
     #       def self.doc(string)
     #         method_annotation(:doc => string)
@@ -61,39 +61,39 @@ module Anise
       # @param name [Symbol]
       #   Name of annotation.
       #
-      # @param ns [Symbol]
-      #   Annotator to use. Default is `:ann`.
-      #
-      # @deprecated Define class method and use #method_annotation instead.
-      #
-      def method_annotator(name, ns=:ann, &block)
+      def method_annotator(name, &block)
         (class << self; self; end).module_eval do
           define_method(name) do |*args|
             anns = { name => (args.size > 1 ? args : args.first) }
-            Methods.pending_annotations[self] << [ns, anns, block]
+            Methods.pending_annotations[self] << [anns, block]
           end
         end
       end
 
       #
-      # Backward compatibility.
       #
-      alias :annotator :method_annotator
+      #
+      def annotator(name, &block)
+        if name.to_s.start_with?('@')
+          if defined?(super)
+            super(name, &block)
+          else
+            raise ArgumentError, "not a valid method name -- #{name}"
+          end
+        else
+          method_annotator(name, &block)
+        end
+      end
 
       #
       # Setup a pending method annotation.
-      #
-      # @param [Symbol] annotator (optional)
-      #   The name of the annotator, if different than standard `:ann`.
       #
       # @param [Hash] annotations
       #   The annotation settings.
       #
       def method_annotation(*args, &block)
         anns = (Hash === args.last ? args.pop : {})
-        ns   = args.shift || :ann
-
-        Methods.pending_annotations[self] << [ns, anns, block]
+        Methods.pending_annotations[self] << [anns, block]
       end
 
       #
@@ -104,16 +104,21 @@ module Anise
       #
       def method_added(sym)
         annotations = Methods.pending_annotations[self]
-
-        annotations.each do |ns, anns, block|
+        annotations.each do |anns, block|
           if block
             block.call(sym)
+          else
+            anns.each do |name, value|
+              if name.to_s.index('/')
+                name, ns = name.to_s.split('/')
+              else
+                ns = :ann
+              end
+              ann(sym/ns, name=>value)
+            end
           end
-          ann(sym/ns, anns) if anns && !anns.empty?
         end
-
         Methods.pending_annotations[self] = []
-
         super if defined?(super)
       end
 

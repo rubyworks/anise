@@ -9,7 +9,7 @@ module Anise
     # used method annotations which attach to the next defined method.
     #
     #   class X
-    #     extend Anise::VariableAnnotator
+    #     extend Anise::Annotative::Variables
     #
     #     variable_annotator :@doc
     #     variable_annotator :@returns
@@ -28,7 +28,7 @@ module Anise
     # good practices of calling +super+ if you need to override this method.
     #
     # **IMPORTANT!!!** This library is an interesting expirement, but it remains
-    # to be determined if it makes sense for production use.
+    # to be determined if it makes sense for general use.
     #
     module Variables
 
@@ -37,17 +37,34 @@ module Anise
       #
       # Open method annotations.
       #
+      # @example
+      #   variable_annotator :@doc
+      #
       # @param ns [Symbol]
       #   Annotator to use. Default is `:ann`.
       #
-      def variable_annotator(iv, ns=:ann, &block)
+      def variable_annotator(iv, &block)
+        # TODO: should none iv raise an error instead?
         iv = "@#{iv}".to_sym if iv.to_s !~ /^@/
 
         # TODO: use an annotation to record the annotators
-        #ann(:variable_annotator/ns, iv=>block)
+        #ann(:variable_annotator, iv=>block)
 
         @_variable_annotations ||= {}
-        @_variable_annotations[[iv, ns]] = block
+        @_variable_annotations[iv] = block
+      end
+
+      #
+      def annotator(iv, &block)
+        if not iv.to_s.start_with?('@')
+          if defined?(super)
+            super(iv, &block)
+          else
+            raise ArgumentError, "not a valid instance variable -- #{iv}"
+          end
+        else
+          variable_annotator(iv, ns, &block)
+        end
       end
 
       #
@@ -55,16 +72,22 @@ module Anise
       #
       def method_added(sym)
         @_variable_annotations ||= {}
-        @_variable_annotations.each do |(iv,ns),block|
+        @_variable_annotations.each do |iv, block|
+          if iv.to_s.index('/')
+            iv, ns = iv.to_s.split('/')
+          else
+            ns = :ann
+          end
           value = instance_variable_get(iv)
           if block
             block.call(sym, value)
           else
             ann(sym/ns, iv=>value)
           end
-          instance_variable_set(iv, nil) # TODO: can we undefine the instance variables?
+          # TODO: can we undefine the instance variable?
+          instance_variable_set(iv, nil)
         end
-        super if defined?(super)
+        super(sym) if defined?(super)
       end
 
     end
