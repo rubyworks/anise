@@ -16,8 +16,8 @@ qedoc:
 qed:
   active: true
 
-rubytest:
-  active: true
+#rubytest:
+#  active: true
 
 github:
   gh_pages: web

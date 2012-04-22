@@ -1,7 +1,7 @@
 #!/usr/bin/rnv ruby
 
-desc "run unit tests (with KO)"
+desc "run unit tests"
 task :test do
-  sh "ko -Ilib test/general/test_*.rb"
+  sh "rubytest"
 end
 

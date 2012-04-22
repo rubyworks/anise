@@ -32,7 +32,22 @@ repositories:
 - uri: http://github.com/rubyworks/anise.git
   scm: git
   name: public
-resources: {}
+resources:
+- uri: http://rubyworks.githuib.com/anise
+  name: home
+  type: home
+- uri: http://github.com/rubyworks/anise
+  name: code
+  type: code
+- uri: http://github.com/rubyworks/anise/issues
+  name: bugs
+  type: bugs
+- uri: http://chat.us.freenode.net/rubyworks
+  name: chat
+  type: chat
+- uri: http://groups.google.com/groups/rubyworks-mailinglist
+  name: mail
+  type: mail
 extra: {}
 load_path:
 - lib
@@ -44,4 +59,4 @@ version: 0.7.0
 name: anise
 description: Anise is an annotations systems for the Ruby programming lanaguage.
 organization: Rubyworks
-date: '2012-03-26'
+date: '2012-04-20'
