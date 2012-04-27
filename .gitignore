@@ -1,4 +1,4 @@
-.ri
+.fire/digest
 log
 pkg
 tmp
@@ -6,3 +6,4 @@ site/doc
 site/qed
 work/sandbox
 web
+DEMO.md
