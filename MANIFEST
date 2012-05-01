@@ -1,5 +1,6 @@
-#!mast .ruby bin demo lib test *.md *.rdoc *.txt
+#!mast .ruby .yardopts bin demo lib test *.md *.rdoc *.txt
 .ruby
+.yardopts
 demo/01_annotations.md
 demo/03_attributes.md
 demo/04_methods.md
