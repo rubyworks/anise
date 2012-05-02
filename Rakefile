@@ -5,3 +5,4 @@ task :test do
   sh "rubytest"
 end
 
+task :default => [:test]
