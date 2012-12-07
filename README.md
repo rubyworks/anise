@@ -1,6 +1,6 @@
 # <span class="ititle">Anise</span>
 
-<b class="isummary">A Dynamic Annotation System for Ruby</b>
+<b class="isummary">Dynamic Annotations for Ruby</b>
 
 [Hompage](http://rubyworks.github.com/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
@@ -36,14 +36,6 @@ Then download the tarball package and do:
     $ cd anise-0.2.0
     $ sudo setup.rb all
 
-### Requirements
-
-<ul>
-<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build</span>)</li>
-</ul>
 
 ### Getting Started
 
@@ -146,6 +138,15 @@ To run the Citron-based unit tests use:
 
     $ rubytest
 
+### Development Requirements
+
+<ul>
+<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build development</span>)</li>
+</ul>
+
 
 ## AUTHORS
 
@@ -156,7 +157,7 @@ To run the Citron-based unit tests use:
 </ul>
 
 
-### ORGANIZATIONS
+## ORGANIZATIONS
 
 <ul>
 <li class="iorganization"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
@@ -171,7 +172,7 @@ To run the Citron-based unit tests use:
 <p>This program is distributed under the terms of the <a href="http://www.spdx.org/licenses/BSD-2-Clause" class="license">BSD-2-Clause</a> license.</p>
 </div>
 
-This project was created on <p class="icreated">2008-02-21</p>.
-
 See LICNESE.txt file for details.
+
+This project was created on <i class="icreated">2008-02-21</i>.
 
