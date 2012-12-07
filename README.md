@@ -11,7 +11,7 @@
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
 
 
-## INTRODUCTION
+## Overview
 
 <p class="idescription">
 Anise is an Annotation System for the Ruby programming language.
@@ -19,25 +19,6 @@ Unlike most other annotations systems it is not a comment-based or
 macro-based system that sits over-and-above the rest of the code.
 Rather, Anise is a dynamic annotations system operating at runtime.
 </p>
-
-
-## DOCUMENTATION
-
-### Installation
-
-To install with RubyGems simply open a console and type:
-
-    gem install anise
-
-To manually install you will need Setup.rb (see http://setup.rubyforge.org).
-Then download the tarball package and do:
-
-    $ tar -xvzf anise-0.2.0.tgz
-    $ cd anise-0.2.0
-    $ sudo setup.rb all
-
-
-### Getting Started
 
 The following example briefly demonstrates all three major features. To use
 any of them first require the `anise` library.
@@ -109,7 +90,25 @@ inclusion in the toplevel namespace or your own applications namespace.
     end
 
 
-## RESOURCES
+## Installation
+
+### RubyGems
+
+To install with RubyGems simply open a console and type:
+
+    gem install anise
+
+### Setup.rb (not recommended)
+
+To manually install you will need Setup.rb (see http://setup.rubyforge.org).
+Then download the tarball package and do:
+
+    $ tar -xvzf anise-0.2.0.tgz
+    $ cd anise-0.2.0
+    $ sudo setup.rb all
+
+
+## Resources
 
 <ul>
 <li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
@@ -118,11 +117,15 @@ inclusion in the toplevel namespace or your own applications namespace.
 <li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
 <li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
 <li><a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a></li>
-<li><a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">Master Repository</a></li>
 </ul>
 
 
-## DEVELOPMENT
+## Development
+
+### Git Repository
+
+The <a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
+hosted on Github.
 
 ### Test Instructions
 
@@ -148,7 +151,7 @@ To run the Citron-based unit tests use:
 </ul>
 
 
-## AUTHORS
+## Authors
 
 <ul>
 <li class="iauthor vcard">
@@ -157,14 +160,14 @@ To run the Citron-based unit tests use:
 </ul>
 
 
-## ORGANIZATIONS
+## Organizations
 
 <ul>
 <li class="iorganization"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
 </ul>
 
 
-## COPYRIGHTS
+## Copyrights
 
 <div class="icopyright">
 <p>Copyright (c) <span class="year">2008</span> <span class="holder">Rubyworks</span>. All rights reserved.</p>
