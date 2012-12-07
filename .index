@@ -1,0 +1,47 @@
+---
+type: ruby
+revision: 2013
+sources:
+- meta
+authors:
+- name: trans
+  email: transfire@gmail.com
+organizations:
+- name: Rubyworks
+requirements: []
+conflicts: []
+alternatives: []
+resources:
+- type: home
+  uri: http://rubyworks.github.com/anise
+  label: Website
+- type: code
+  uri: http://github.com/rubyworks/anise
+  label: Source Code
+- type: bugs
+  uri: http://github.com/rubyworks/anise/issues
+  label: Issue Tracker
+- type: chat
+  uri: http://chat.us.freenode.net/rubyworks
+  label: IRC Channel
+- type: mail
+  uri: http://groups.google.com/groups/rubyworks-mailinglist
+  label: Mailing List
+repositories:
+- scm: git
+  uri: http://github.com/rubyworks/anise.git
+  name: public
+categories: []
+load_path:
+- lib
+copyrights:
+- holder: Rubyworks
+  year: '2008'
+  license: BSD-2-Clause
+created: '2008-02-21'
+summary: Dynamic Annotation System
+title: Anise
+version: 0.7.0
+name: anise
+description: Anise is an annotations systems for the Ruby programming lanaguage.
+date: '2012-05-02'
