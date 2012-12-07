@@ -1,4 +1,6 @@
-# Anise
+# <span class="ititle">Anise</span>
+
+<b class="isummary">A Dynamic Annotation System for Ruby</b>
 
 [Hompage](http://rubyworks.github.com/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
@@ -9,15 +11,19 @@
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
 
 
-## Introduction
+## INTRODUCTION
 
+<p class="idescription">
 Anise is an Annotation System for the Ruby programming language.
 Unlike most other annotations systems it is not a comment-based or
 macro-based system that sits over-and-above the rest of the code.
 Rather, Anise is a dynamic annotations system operating at runtime.
+</p>
 
 
-## Installation
+## DOCUMENTATION
+
+### Installation
 
 To install with RubyGems simply open a console and type:
 
@@ -33,14 +39,13 @@ Then download the tarball package and do:
 ### Requirements
 
 <ul>
-<li class="irequirement"><span class="name">qed</span> (<span class="groups">test</span>)</li>
-<li class="irequirement"><span class="name">ae</span> (<span class="groups">test</span>)</li>
-<li class="irequirement"><span class="name">citron</span> (<span class="groups">test</span>)</li>
-<li class="irequirement"><span class="name">detroit</span> (<span class="groups">build</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build</span>)</li>
 </ul>
 
-
-## Instruction
+### Getting Started
 
 The following example briefly demonstrates all three major features. To use
 any of them first require the `anise` library.
@@ -112,11 +117,11 @@ inclusion in the toplevel namespace or your own applications namespace.
     end
 
 
-
-## Resources
+## RESOURCES
 
 <ul>
 <li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
+<li><a class="iresource" href="http://rubygems.org/gems/anise" name="gem">Gem Page</a></li>
 <li><a class="iresource" href="http://github.com/rubyworks/anise" name="code">Source Code</a> (GitHub)</li>
 <li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
 <li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
@@ -125,7 +130,7 @@ inclusion in the toplevel namespace or your own applications namespace.
 </ul>
 
 
-## Development
+## DEVELOPMENT
 
 ### Test Instructions
 
@@ -142,10 +147,31 @@ To run the Citron-based unit tests use:
     $ rubytest
 
 
-## Copyrights
+## AUTHORS
 
-Copyright (c) 2008 Rubyworks. All rights reserved.
+<ul>
+<li class="iauthor vcard">
+  <span class="nickname">trans</span>&lt;<a href="mailto:transfire@gmail.com" class="email">transfire@gmail.com</a>&gt;</span>
+</li>
+</ul>
 
-This program is distributed under the terms of the **BSD-2-Clause** license.
+
+### ORGANIZATIONS
+
+<ul>
+<li class="iorganization"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
+</ul>
+
+
+## COPYRIGHTS
+
+<div class="icopyright">
+<p>Copyright (c) <span class="year">2008</span> <span class="holder">Rubyworks</span>. All rights reserved.</p>
+
+<p>This program is distributed under the terms of the <a href="http://www.spdx.org/licenses/BSD-2-Clause" class="license">BSD-2-Clause</a> license.</p>
+</div>
+
+This project was created on <p class="icreated">2008-02-21</p>.
 
 See LICNESE.txt file for details.
+

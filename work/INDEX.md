@@ -1,20 +1,12 @@
 # METADATA INDEX
 
-### NAME
+### TITLE
 
-<p class="iname">anise</p>
+<p class="ititle">Anise</p>
 
 ### VERSION
 
 <p class="iversion">0.7.0</p>
-
-### CREATED
-
-<p class="icreated">2008-02-21</p>
-
-### TITLE
-
-<p class="ititle">Anise</p>
 
 ### SUMMARY
 
@@ -68,3 +60,6 @@
 </li>
 </ul>
 
+### CREATED
+
+<p class="icreated">2008-02-21</p>

@@ -2,35 +2,34 @@
 type: ruby
 revision: 2013
 sources:
-- Indexfile
+- README.md
+- VERSION
 authors:
 - name: trans
   email: transfire@gmail.com
-organizations:
-- name: Rubyworks
+organizations: []
 requirements:
 - groups:
   - test
-  development: true
   name: qed
 - groups:
   - test
-  development: true
   name: ae
 - groups:
   - test
-  development: true
   name: citron
 - groups:
   - build
-  development: true
   name: detroit
 conflicts: []
 alternatives: []
 resources:
 - type: home
   uri: http://rubyworks.github.com/anise
-  label: Homepage
+  label: Website
+- type: dist
+  uri: http://rubygems.org/gems/anise
+  label: Gem Page
 - type: code
   uri: http://github.com/rubyworks/anise
   label: Source Code
@@ -43,10 +42,7 @@ resources:
 - type: mail
   uri: http://groups.google.com/groups/rubyworks-mailinglist
   label: Mailing List
-repositories:
-- name: upstream
-  scm: git
-  uri: http://github.com/rubyworks/anise.git
+repositories: []
 categories: []
 load_path:
 - lib
@@ -54,10 +50,15 @@ copyrights:
 - holder: Rubyworks
   year: '2008'
   license: BSD-2-Clause
+summary: A Dynamic Annotation System for Ruby
+description: ! 'Anise is an Annotation System for the Ruby programming language.
+
+  Unlike most other annotations systems it is not a comment-based or
+
+  macro-based system that sits over-and-above the rest of the code.
+
+  Rather, Anise is a dynamic annotations system operating at runtime.'
 name: anise
 title: Anise
 version: 0.7.0
-summary: Dynamic Annotation System
-description: Anise is an annotations systems for the Ruby programming lanaguage.
-created: '2008-02-21'
 date: '2012-12-07'
