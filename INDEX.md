@@ -1,4 +1,4 @@
-# INDEX
+# METADATA INDEX
 
 ## NAME
 
@@ -6,7 +6,7 @@
 
 ## VERSION
 
-<p class="iversion">0.7.0<p>
+<p class="iversion">0.7.0</p>
 
 ## CREATED
 
