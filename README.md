@@ -1,17 +1,13 @@
 # <span class="ititle">Anise</span>
 
-<b class="isummary">Dynamic Annotations for Ruby</b>
+<i class="isummary">Dynamic Annotations for Ruby</i>
 
 [Hompage](http://rubyworks.github.com/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
 [Source Code](http://github.com/rubyworks/anise) /
 [Mailing List](http://groups.google.com/group/rubyworks-mailinglist) /
-[IRC Channel](http://chat.us.freenode.new/rubyworks)
-
+[IRC Channel](http://chat.us.freenode.new/rubyworks) /
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
-
-
-## Overview
 
 <p class="idescription">
 Anise is an Annotation System for the Ruby programming language.
