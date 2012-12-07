@@ -17,10 +17,16 @@ module Indexer
   class GemspecExporter
 
     # File globs to include in package (unless manifest file exists).
-    FILES = ".index .ruby .yardopts alt bin ext lib man spec test [A-Z]*.*" unless defined?(FILES)
+    FILES = ".index .yardopts bin ext lib man spec test [A-Z]*.*" unless defined?(FILES)
 
     # File globs to omit.
-    OMIT = "Config.rb" unless defined?(OMIT)
+    IGNORE = "Config.rb" unless defined?(OMIT)
+
+    # Project maintainers can customize what files to included via the `gemfiles` file.
+    GEMINCLUDE = "{.gemfiles,admin/gemfiles,config/gemfiles}"
+
+    # Project maintainers can customize what files to included via the `gemfiles` file.
+    GEMIGNORE = "{.gemignore,admin/gemignore,config/gemignore}"
 
     # Standard file patterns.
     PATTERNS = {
@@ -90,23 +96,67 @@ module Indexer
     #
     def files
       return [] unless root
-      @files ||= \
+      @files ||= (
+        list = []
         if manifest
-          File.readlines(manifest).
-            map{ |line| line.strip }.
-            reject{ |line| line.empty? || line[0,1] == '#' }
+          list = read_manifest
         else
-          list = []
           Dir.chdir(root) do
-            FILES.split(/\s+/).each do |pattern|
+            file_globs.each do |pattern|
               list.concat(glob(pattern))
             end
-            OMIT.split(/\s+/).each do |pattern|
+            ignore_globs.each do |pattern|
               list = list - glob(pattern)
             end
           end
-          list
-        end.select{ |path| File.file?(path) }.uniq
+        end
+        list.select{ |path| File.file?(path) }.uniq
+      )
+    end
+
+    #
+    def read_manifest
+      read_useful_lines(manifest)
+    end
+
+    #
+    def file_globs
+      if geminclude_file
+        read_geminclude
+      elsif gemignore_file
+        "**/*"
+      else
+        FILES.split(/\s+/)
+      end
+    end
+
+    #
+    def ignore_globs
+      if gemignore_file
+        read_gemignore
+      else
+        IGNORE.split(/\s+/)
+      end
+    end
+
+    # Lookup `geminclude` file.
+    def geminclude_file
+      Dir.glob(File.join(File.dirname(__FILE__), GEMINCLUDE)).first
+    end
+
+    #
+    def read_geminclude
+      read_useful_lines(geminclude_file)
+    end
+
+    # Lookup `gemignore` file.
+    def gemignore_file
+      Dir.glob(File.join(File.dirname(__FILE__), GEMIGNORE)).first
+    end
+
+    #
+    def read_gemignore
+      read_useful_lines(gemignore_file)
     end
 
     #
@@ -297,6 +347,13 @@ module Indexer
       else
         version
       end
+    end
+
+    #
+    def read_useful_lines(file)
+      File.readlines(file).
+        map{ |line| line.strip }.
+        reject{ |line| line.empty? || line[0,1] == '#' }
     end
 
   end
