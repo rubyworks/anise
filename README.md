@@ -108,24 +108,23 @@ Then download the tarball package and do:
     $ sudo setup.rb all
 
 
-## Resources
-
-<ul>
-<li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
-<li><a class="iresource" href="http://rubygems.org/gems/anise" name="gem">Gem Page</a></li>
-<li><a class="iresource" href="http://github.com/rubyworks/anise" name="code">Source Code</a> (GitHub)</li>
-<li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
-<li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
-<li><a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a></li>
-</ul>
-
-
 ## Development
 
 ### Git Repository
 
 The <a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
 hosted on Github.
+
+### Development Requirements
+
+Anise uses the following development tools.
+
+<ul>
+<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test development</span>)</li>
+<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build development</span>)</li>
+</ul>
 
 ### Test Instructions
 
@@ -140,15 +139,6 @@ To run the QED demonstrations simple run:
 To run the Citron-based unit tests use:
 
     $ rubytest
-
-### Development Requirements
-
-<ul>
-<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build development</span>)</li>
-</ul>
 
 
 ## Authors
@@ -178,4 +168,17 @@ To run the Citron-based unit tests use:
 See LICNESE.txt file for details.
 
 This project was created on <i class="icreated">2008-02-21</i>.
+
+
+## Resources
+
+<ul>
+<li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
+<li><a class="iresource" href="http://rubygems.org/gems/anise" name="gem">Gem Page</a></li>
+<li><a class="iresource" href="http://github.com/rubyworks/anise" name="code">Source Code</a> (GitHub)</li>
+<li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
+<li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
+<li><a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a></li>
+</ul>
+
 
