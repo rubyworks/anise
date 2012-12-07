@@ -2,7 +2,7 @@
 type: ruby
 revision: 2013
 sources:
-- admin/index.rb
+- Indexfile
 authors:
 - name: trans
   email: transfire@gmail.com
