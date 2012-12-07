@@ -30,6 +30,15 @@ Then download the tarball package and do:
     $ cd anise-0.2.0
     $ sudo setup.rb all
 
+### Requirements
+
+<ul>
+<li class="irequirement"><span class="name">qed</span> (<span class="groups">test</span>)</li>
+<li class="irequirement"><span class="name">ae</span> (<span class="groups">test</span>)</li>
+<li class="irequirement"><span class="name">citron</span> (<span class="groups">test</span>)</li>
+<li class="irequirement"><span class="name">detroit</span> (<span class="groups">build</span>)</li>
+</ul>
+
 
 ## Instruction
 
@@ -101,6 +110,19 @@ inclusion in the toplevel namespace or your own applications namespace.
         ...
       end
     end
+
+
+
+## Resources
+
+<ul>
+<li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
+<li><a class="iresource" href="http://github.com/rubyworks/anise" name="code">Source Code</a> (GitHub)</li>
+<li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
+<li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
+<li><a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a></li>
+<li><a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">Master Repository</a></li>
+</ul>
 
 
 ## Development
