@@ -44,7 +44,7 @@ module.
 
     X.ann(:baz)  #=> {:class=>Integer, :max=>10}
 
-Mewthod annotations can be had via the `AnnotatedMethods` module.
+Mewthod annotations can be had via the `Annotative::Methods` module.
 
     class X
       extend Anise::Annotative::Methods
@@ -62,8 +62,8 @@ Mewthod annotations can be had via the `AnnotatedMethods` module.
 
     X.ann(:bar)  #=> {:doc=>"This is an entry."}
 
-Any of these modules can be used in conjunction. Since both `AnnotatedMethods`
-and `AnnotatedAttributes` preclude `Annotations` all three can be used by simply
+Any of these modules can be used in conjunction. Since both `Annotative::dMethods`
+and `Annotative::Attributes` preclude `Annotations` all three can be used by simply
 using the later two.
 
      class X
