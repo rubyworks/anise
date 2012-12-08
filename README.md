@@ -2,11 +2,11 @@
 
 <i class="isummary">Dynamic Annotations for Ruby</i>
 
-[Hompage](http://rubyworks.github.com/anise) /
+<a class="iresource" href="http://rubyworks.github.com/anise" name="home">Homepage</a> /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
-[Source Code](http://github.com/rubyworks/anise) /
 [Mailing List](http://groups.google.com/group/rubyworks-mailinglist) /
 [IRC Channel](http://chat.us.freenode.new/rubyworks) /
+[Source Code](http://github.com/rubyworks/anise) : :
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
 
 <p class="idescription">
@@ -90,7 +90,8 @@ inclusion in the toplevel namespace or your own applications namespace.
 
 ### RubyGems
 
-To install with RubyGems simply open a console and type:
+RubyGems.org hosts the <a class="iresource" href="http://rubygems.org/gems/anise" name="gem">gem</a> package.
+To install via RubyGems simply open a console and type:
 
     gem install anise
 
@@ -104,12 +105,35 @@ Then download the tarball package and do:
     $ sudo setup.rb all
 
 
+## Documentation
+
+### Demonstrations
+
+Fully tested demonstrations can be seen in the DEMO document.
+
+### API Reference
+
+The <a class="iresource" href="http://rubydoc.info/gems/anise/frames" name="home">API documentation</a> is available 
+in YARD format via <a href="http://rubydoc.info">rubydoc.info</a>.
+
+
+## Support
+
+If you experience a problem, have a question or a feature request file a ticket with the 
+<a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">issue tracker</a> on GitHub.
+
+If you would like to discuss something about this project in more detail try contacting the author(s) via
+the Rubyworks <a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC channel</a>
+or the <a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a>.
+
+
 ## Development
 
 ### Git Repository
 
 The <a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
-hosted on Github.
+hosted on <a class="iresource" href="http://github.com/rubyworks/anise" name="code">Github</a>.
+
 
 ### Development Requirements
 
@@ -164,17 +188,5 @@ To run the Citron-based unit tests use:
 See LICNESE.txt file for details.
 
 This project was created on <i class="icreated">2008-02-21</i>.
-
-
-## Resources
-
-<ul>
-<li><a class="iresource" href="http://rubyworks.github.com/anise" name="home">Website</a></li>
-<li><a class="iresource" href="http://rubygems.org/gems/anise" name="gem">Gem Page</a></li>
-<li><a class="iresource" href="http://github.com/rubyworks/anise" name="code">Source Code</a> (GitHub)</li>
-<li><a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">Issue Tracker</a> (GitHub)</li>
-<li><a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC Channel</a></li>
-<li><a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a></li>
-</ul>
 
 
