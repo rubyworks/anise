@@ -1,9 +1,0 @@
-.index
-.yardopts
-bin
-demo
-lib
-test
-*.md
-*.rdoc
-*.txt
