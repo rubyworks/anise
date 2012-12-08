@@ -9,6 +9,8 @@
 [Source Code](http://github.com/rubyworks/anise) : :
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
 
+-----
+
 <p class="idescription">
 Anise is an Annotation System for the Ruby programming language.
 Unlike most other annotations systems it is not a comment-based or
@@ -131,7 +133,7 @@ or the <a class="iresource" href="http://groups.google.com/groups/rubyworks-mail
 
 ### Git Repository
 
-The <a class="irepository" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
+The <a class="irepo" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
 hosted on <a class="iresource" href="http://github.com/rubyworks/anise" name="code">Github</a>.
 
 
@@ -165,7 +167,7 @@ To run the Citron-based unit tests use:
 
 <ul>
 <li class="iauthor vcard">
-  <span class="nickname">trans</span>&lt;<a href="mailto:transfire@gmail.com" class="email">transfire@gmail.com</a>&gt;</span>
+  <span class="nickname">Trans</span> &lt;<a href="mailto:transfire@gmail.com" class="email">transfire@gmail.com</a>&gt;</span>
 </li>
 </ul>
 
@@ -173,7 +175,7 @@ To run the Citron-based unit tests use:
 ## Organizations
 
 <ul>
-<li class="iorganization"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
+<li class="iorg"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
 </ul>
 
 

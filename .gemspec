@@ -1,7 +1,12 @@
+#!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'yaml'
-require 'pathname'
+# File globs to include in package (unless manifest file exists).
+$GEM_FILES = ".index .document .yardopts bin ext lib man spec test [A-Z]*.*"  #unless defined?(GEM_FILES)
+
+# File globs to omit from gem files.
+$GEM_IGNORE = "Config.rb"  #unless defined?(GEM_IGNORE)
+
 
 module Indexer
 
@@ -15,18 +20,6 @@ module Indexer
   #   * Support for rdoc entries is weak.
   #
   class GemspecExporter
-
-    # File globs to include in package (unless manifest file exists).
-    FILES = ".index .yardopts bin ext lib man spec test [A-Z]*.*" unless defined?(FILES)
-
-    # File globs to omit.
-    IGNORE = "Config.rb" unless defined?(OMIT)
-
-    # Project maintainers can customize what files to included via the `gemfiles` file.
-    GEMINCLUDE = "{.gemfiles,admin/gemfiles,config/gemfiles}"
-
-    # Project maintainers can customize what files to included via the `gemfiles` file.
-    GEMIGNORE = "{.gemignore,admin/gemignore,config/gemignore}"
 
     # Standard file patterns.
     PATTERNS = {
@@ -51,6 +44,8 @@ module Indexer
 
     #
     def initialize(metadata=nil)
+      require_support_libraries
+
       @root_check = false
 
       if metadata
@@ -67,6 +62,12 @@ module Indexer
       if @metadata['revision'].to_i != REVISION
         warn "This gemspec exporter was not designed for this revision of index metadata."
       end
+    end
+
+    #
+    def require_support_libraries
+      require 'yaml'
+      require 'pathname'
     end
 
     #
@@ -121,42 +122,12 @@ module Indexer
 
     #
     def file_globs
-      if geminclude_file
-        read_geminclude
-      elsif gemignore_file
-        "**/*"
-      else
-        FILES.split(/\s+/)
-      end
+      $GEM_FILES.split(/\s+/)
     end
 
     #
     def ignore_globs
-      if gemignore_file
-        read_gemignore
-      else
-        IGNORE.split(/\s+/)
-      end
-    end
-
-    # Lookup `geminclude` file.
-    def geminclude_file
-      Dir.glob(File.join(File.dirname(__FILE__), GEMINCLUDE)).first
-    end
-
-    #
-    def read_geminclude
-      read_useful_lines(geminclude_file)
-    end
-
-    # Lookup `gemignore` file.
-    def gemignore_file
-      Dir.glob(File.join(File.dirname(__FILE__), GEMIGNORE)).first
-    end
-
-    #
-    def read_gemignore
-      read_useful_lines(gemignore_file)
+      $GEM_IGNORE.split(/\s+/)
     end
 
     #
