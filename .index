@@ -2,8 +2,7 @@
 revision: 2013
 type: ruby
 sources:
-- Indexfile
-- VERSION
+- var
 authors:
 - name: trans
   email: transfire@gmail.com
@@ -57,10 +56,10 @@ customs: []
 paths:
   lib:
   - lib
-name: anise
-title: Anise
-version: 0.7.0
-summary: Dynamic Annotation System
-description: Anise is an annotations systems for the Ruby programming lanaguage.
 created: '2008-02-21'
+summary: Dynamic Annotations System for Ruby
+title: Anise
+version: 0.7.1
+name: anise
+description: Anise is an annotations systems for the Ruby programming lanaguage.
 date: '2013-02-16'
