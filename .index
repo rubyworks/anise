@@ -1,34 +1,29 @@
 ---
-type: ruby
 revision: 2013
+type: ruby
 sources:
-- README.md
+- Indexfile
 - VERSION
 authors:
-- name: Trans
+- name: trans
   email: transfire@gmail.com
 organizations:
 - name: Rubyworks
-  website: http://rubyworks.github.com
 requirements:
 - groups:
   - test
-  - development
   development: true
   name: qed
 - groups:
   - test
-  - development
   development: true
   name: ae
 - groups:
   - test
-  - development
   development: true
   name: citron
 - groups:
   - build
-  - development
   development: true
   name: detroit
 conflicts: []
@@ -37,43 +32,35 @@ resources:
 - type: home
   uri: http://rubyworks.github.com/anise
   label: Homepage
-- type: dist
-  uri: http://rubygems.org/gems/anise
-  label: gem
-- type: api
-  uri: http://rubydoc.info/gems/anise/frames
-  label: API documentation
+- type: code
+  uri: http://github.com/rubyworks/anise
+  label: Source Code
 - type: bugs
   uri: http://github.com/rubyworks/anise/issues
-  label: issue tracker
+  label: Issue Tracker
 - type: chat
   uri: http://chat.us.freenode.net/rubyworks
-  label: IRC channel
+  label: IRC Channel
 - type: mail
   uri: http://groups.google.com/groups/rubyworks-mailinglist
   label: Mailing List
-- uri: http://github.com/rubyworks/anise
-  label: Github
-- uri: http://github.com/rubyworks/anise.git
-  label: upstream git repository
-repositories: []
+repositories:
+- name: upstream
+  scm: git
+  uri: http://github.com/rubyworks/anise.git
 categories: []
-load_path:
-- lib
 copyrights:
 - holder: Rubyworks
   year: '2008'
   license: BSD-2-Clause
-summary: Dynamic Annotations for Ruby
-description: ! 'Anise is an Annotation System for the Ruby programming language.
-
-  Unlike most other annotations systems it is not a comment-based or
-
-  macro-based system that sits over-and-above the rest of the code.
-
-  Rather, Anise is a dynamic annotations system operating at runtime.'
-created: '2008-02-21'
+customs: []
+paths:
+  lib:
+  - lib
 name: anise
 title: Anise
 version: 0.7.0
-date: '2012-12-07'
+summary: Dynamic Annotation System
+description: Anise is an annotations systems for the Ruby programming lanaguage.
+created: '2008-02-21'
+date: '2013-02-16'

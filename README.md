@@ -1,8 +1,8 @@
-# <span class="ititle">Anise</span>
+# Anise
 
-<i class="isummary">Dynamic Annotations for Ruby</i>
+*Dynamic Annotations for Ruby*
 
-<a class="iresource" href="http://rubyworks.github.com/anise" name="home">Homepage</a> /
+[Homepage](http://rubyworks.github.com/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
 [Mailing List](http://groups.google.com/group/rubyworks-mailinglist) /
 [IRC Channel](http://chat.us.freenode.new/rubyworks) /
@@ -11,12 +11,10 @@
 
 -----
 
-<p class="idescription">
 Anise is an Annotation System for the Ruby programming language.
 Unlike most other annotations systems it is not a comment-based or
 macro-based system that sits over-and-above the rest of the code.
 Rather, Anise is a dynamic annotations system operating at runtime.
-</p>
 
 The following example briefly demonstrates all three major features. To use
 any of them first require the `anise` library.
@@ -92,7 +90,7 @@ inclusion in the toplevel namespace or your own applications namespace.
 
 ### RubyGems
 
-RubyGems.org hosts the <a class="iresource" href="http://rubygems.org/gems/anise" name="gem">gem</a> package.
+RubyGems.org hosts the [gem](http://rubygems.org/gems/anise) package.
 To install via RubyGems simply open a console and type:
 
     gem install anise
@@ -115,38 +113,37 @@ Fully tested demonstrations can be seen in the DEMO document.
 
 ### API Reference
 
-The <a class="iresource" href="http://rubydoc.info/gems/anise/frames" name="home">API documentation</a> is available 
-in YARD format via <a href="http://rubydoc.info">rubydoc.info</a>.
+The [API documentation](http://rubydoc.info/gems/anise/frames) is available 
+in YARD format via [rubydoc.info](a href="http://rubydoc.info").
 
 
 ## Support
 
-If you experience a problem, have a question or a feature request file a ticket with the 
-<a class="iresource" href="http://github.com/rubyworks/anise/issues" name="bugs">issue tracker</a> on GitHub.
+If you experience a problem, have a question or a feature request file a ticket
+with the [issue tracker](http://github.com/rubyworks/anise/issues) on GitHub.
 
-If you would like to discuss something about this project in more detail try contacting the author(s) via
-the Rubyworks <a class="iresource" href="http://chat.us.freenode.net/rubyworks" name="chat">IRC channel</a>
-or the <a class="iresource" href="http://groups.google.com/groups/rubyworks-mailinglist" name="mail">Mailing List</a>.
+If you would like to discuss something about this project in more detail try
+contacting the author(s) via the Rubyworks [IRC channel](http://chat.us.freenode.net/rubyworks)
+or the [Mailing List](http://groups.google.com/groups/rubyworks-mailinglist).
 
 
 ## Development
 
 ### Git Repository
 
-The <a class="irepo" href="http://github.com/rubyworks/anise.git" name="upstream">upstream git repository</a> is 
-hosted on <a class="iresource" href="http://github.com/rubyworks/anise" name="code">Github</a>.
+The [upstream git repository](http://github.com/rubyworks/anise.git)is 
+hosted on [GitHub](http://github.com/rubyworks/anise).
 
 
 ### Development Requirements
 
 Anise uses the following development tools.
 
-<ul>
-<li class="irequirement"><a href="http://rubyworks.github.com/qed" class="name">qed</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/ae" class="name">ae</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/citron" class="name">citron</a> (<span class="groups">test development</span>)</li>
-<li class="irequirement"><a href="http://rubyworks.github.com/detroit" class="name">detroit</a> (<span class="groups">build development</span>)</li>
-</ul>
+* [qed](http://rubyworks.github.com/qed) (test development)
+* [ae](http://rubyworks.github.com/ae) (test development)
+* [citron](http://rubyworks.github.com/citron) (test development)
+* [detroit](http://rubyworks.github.com/detroit) (build development)
+
 
 ### Test Instructions
 
@@ -165,30 +162,21 @@ To run the Citron-based unit tests use:
 
 ## Authors
 
-<ul>
-<li class="iauthor vcard">
-  <span class="nickname">Trans</span> &lt;<a href="mailto:transfire@gmail.com" class="email">transfire@gmail.com</a>&gt;</span>
-</li>
-</ul>
+* Trans &lt;[transfire@gmail.com](mailto:transfire@gmail.com)&gt;
 
 
 ## Organizations
 
-<ul>
-<li class="iorg"><span class="name">Rubyworks</span> (<a class="website" href="http://rubyworks.github.com">http://rubyworks.github.com</a>)</li>
-</ul>
+* [Rubyworks](http://rubyworks.github.com)
 
 
 ## Copyrights
 
-<div class="icopyright">
-<p>Copyright (c) <span class="year">2008</span> <span class="holder">Rubyworks</span>. All rights reserved.</p>
+Copyright (c) 2008 Rubyworks. All rights reserved.
 
-<p>This program is distributed under the terms of the <a href="http://www.spdx.org/licenses/BSD-2-Clause" class="license">BSD-2-Clause</a> license.</p>
-</div>
+This program is distributed under the terms of the
+[BSD-2-Clause](http://www.spdx.org/licenses/BSD-2-Clause) license.
 
 See LICNESE.txt file for details.
 
-This project was created on <i class="icreated">2008-02-21</i>.
-
-
+This project was created on *2008-02-21*.
