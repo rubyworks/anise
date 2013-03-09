@@ -1,6 +1,4 @@
-# Anise
-
-*Dynamic Annotations for Ruby*
+# Anise - *Dynamic Annotations for Ruby*
 
 [![Gem Version](https://badge.fury.io/rb/anise.png)](http://badge.fury.io/rb/anise)
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise) &nbsp; &nbsp;
