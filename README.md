@@ -2,9 +2,6 @@
 
 *Dynamic Annotations for Ruby*
 
------
-
-
 [![Gem Version](https://badge.fury.io/rb/anise.png)](http://badge.fury.io/rb/anise)
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise) &nbsp; &nbsp;
 [![Flattr Me](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/324911/Rubyworks-Ruby-Development-Fund)
@@ -13,8 +10,6 @@
 [API](http://rubydoc.info/gems/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
 [Source Code](http://github.com/rubyworks/anise)
-
------
 
 Anise is an Annotation System for the Ruby programming language.
 Unlike most other annotations systems it is not a comment-based or
