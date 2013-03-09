@@ -1,11 +1,11 @@
 # Anise
 
+*Dynamic Annotations for Ruby*
+
 [Homepage](http://rubyworks.github.com/anise) /
-[API](http://rubydoc.info/gems/anise) /
+[Documentation](http://rubydoc.info/gems/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
 [Source Code](http://github.com/rubyworks/anise)
-
-## *Dynamic Annotations for Ruby*
 
 [![Gem Version](https://badge.fury.io/rb/anise.png)](http://badge.fury.io/rb/anise)
 [![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise) &nbsp; &nbsp;
@@ -60,7 +60,7 @@ Mewthod annotations can be had via the `Annotative::Methods` module.
 
     X.ann(:bar)  #=> {:doc=>"This is an entry."}
 
-Any of these modules can be used in conjunction. Since both `Annotative::dMethods`
+Any of these modules can be used in conjunction. Since both `Annotative::Methods`
 and `Annotative::Attributes` preclude `Annotations` all three can be used by simply
 using the later two.
 
