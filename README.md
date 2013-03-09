@@ -2,12 +2,17 @@
 
 *Dynamic Annotations for Ruby*
 
+-----
+
+
+[![Gem Version](https://badge.fury.io/rb/anise.png)](http://badge.fury.io/rb/anise)
+[![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise) &nbsp; &nbsp;
+[![Flattr Me](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/324911/Rubyworks-Ruby-Development-Fund)
+
 [Homepage](http://rubyworks.github.com/anise) /
+[API](http://rubydoc.info/gems/anise) /
 [Report Issue](http://github.com/rubyworks/anise/issues) /
-[Mailing List](http://groups.google.com/group/rubyworks-mailinglist) /
-[IRC Channel](http://chat.us.freenode.new/rubyworks) /
-[Source Code](http://github.com/rubyworks/anise) : :
-[![Build Status](https://secure.travis-ci.org/rubyworks/anise.png)](http://travis-ci.org/rubyworks/anise)
+[Source Code](http://github.com/rubyworks/anise)
 
 -----
 
@@ -129,11 +134,23 @@ or the [Mailing List](http://groups.google.com/groups/rubyworks-mailinglist).
 
 ## Development
 
+### Contributing
+
+If you would like to contribute code or documentation to the Anise project, fork
+the upstream repository and create a branch for you changes. When your changes are
+ready for review (and no, they do not have to 100% perfect if you still have some
+issues you need help working out) then submit a pull request.
+
+It you need to personally discuss some ideas or issues you can try to get up with
+us via the mailing list or the IRC channel.
+
+* [IRC Channel](irc://irc.freenode.net/rubyworks) /
+* [Mailing List](http://googlegroups.com/group/rubyworks-mailinglist)
+
 ### Git Repository
 
-The [upstream git repository](http://github.com/rubyworks/anise.git)is 
+The [upstream git repository](http://github.com/rubyworks/anise.git) is 
 hosted on [GitHub](http://github.com/rubyworks/anise).
-
 
 ### Development Requirements
 
@@ -142,8 +159,9 @@ Anise uses the following development tools.
 * [qed](http://rubyworks.github.com/qed) (test development)
 * [ae](http://rubyworks.github.com/ae) (test development)
 * [citron](http://rubyworks.github.com/citron) (test development)
+* [rubytest-cli](http://rubyworks.github.com/rubytest-cli) (test development)
 * [detroit](http://rubyworks.github.com/detroit) (build development)
-
+* [ergo](http://rubyworks.github.com/ergo) (build development)
 
 ### Test Instructions
 

@@ -1,12 +1,7 @@
-#!/usr/bin/env ruby
 # encoding: utf-8
 
-# File globs to include in package (unless manifest file exists).
-$GEM_FILES = ".index .document .yardopts bin ext lib man spec test [A-Z]*.*"  #unless defined?(GEM_FILES)
-
-# File globs to omit from gem files.
-$GEM_IGNORE = "Config.rb"  #unless defined?(GEM_IGNORE)
-
+require 'yaml'
+require 'pathname'
 
 module Indexer
 
@@ -20,6 +15,12 @@ module Indexer
   #   * Support for rdoc entries is weak.
   #
   class GemspecExporter
+
+    # File globs to include in package --unless a manifest file exists.
+    FILES = ".index .yardopts alt bin data demo ext features lib man spec test try* [A-Z]*.*" unless defined?(FILES)
+
+    # File globs to omit from FILES.
+    OMIT = "Config.rb" unless defined?(OMIT)
 
     # Standard file patterns.
     PATTERNS = {
@@ -44,8 +45,6 @@ module Indexer
 
     #
     def initialize(metadata=nil)
-      require_support_libraries
-
       @root_check = false
 
       if metadata
@@ -62,12 +61,6 @@ module Indexer
       if @metadata['revision'].to_i != REVISION
         warn "This gemspec exporter was not designed for this revision of index metadata."
       end
-    end
-
-    #
-    def require_support_libraries
-      require 'yaml'
-      require 'pathname'
     end
 
     #
@@ -97,37 +90,23 @@ module Indexer
     #
     def files
       return [] unless root
-      @files ||= (
-        list = []
+      @files ||= \
         if manifest
-          list = read_manifest
+          File.readlines(manifest).
+            map{ |line| line.strip }.
+            reject{ |line| line.empty? || line[0,1] == '#' }
         else
+          list = []
           Dir.chdir(root) do
-            file_globs.each do |pattern|
+            FILES.split(/\s+/).each do |pattern|
               list.concat(glob(pattern))
             end
-            ignore_globs.each do |pattern|
+            OMIT.split(/\s+/).each do |pattern|
               list = list - glob(pattern)
             end
           end
-        end
-        list.select{ |path| File.file?(path) }.uniq
-      )
-    end
-
-    #
-    def read_manifest
-      read_useful_lines(manifest)
-    end
-
-    #
-    def file_globs
-      $GEM_FILES.split(/\s+/)
-    end
-
-    #
-    def ignore_globs
-      $GEM_IGNORE.split(/\s+/)
+          list
+        end.select{ |path| File.file?(path) }.uniq
     end
 
     #
@@ -176,7 +155,8 @@ module Indexer
     end
 
     def require_paths
-      metadata['load_path'] || ['lib']
+      paths = metadata['paths'] || {}
+      paths['load'] || ['lib']
     end
 
     #
@@ -290,7 +270,7 @@ module Indexer
       root_files = patterns[:root]
       if Dir.glob(root_files).first
         Pathname.new(Dir.pwd)
-      elsif Dir.glob("../#{ROOT}").first
+      elsif Dir.glob("../#{root_files}").first
         Pathname.new(Dir.pwd).parent
       else
         #raise "Can't find root of project containing `#{root_files}'."
@@ -318,13 +298,6 @@ module Indexer
       else
         version
       end
-    end
-
-    #
-    def read_useful_lines(file)
-      File.readlines(file).
-        map{ |line| line.strip }.
-        reject{ |line| line.empty? || line[0,1] == '#' }
     end
 
   end

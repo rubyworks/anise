@@ -10,6 +10,14 @@ organizations:
 - name: Rubyworks
 requirements:
 - groups:
+  - build
+  development: true
+  name: detroit
+- groups:
+  - build
+  development: true
+  name: ergo
+- groups:
   - test
   development: true
   name: qed
@@ -22,9 +30,13 @@ requirements:
   development: true
   name: citron
 - groups:
-  - build
+  - test
   development: true
-  name: detroit
+  name: rubytest
+- groups:
+  - test
+  development: true
+  name: rubytest-cli
 conflicts: []
 alternatives: []
 resources:
@@ -57,9 +69,9 @@ paths:
   lib:
   - lib
 created: '2008-02-21'
-summary: Dynamic Annotations System for Ruby
+summary: Dynamic Annotations for Ruby
 title: Anise
 version: 0.7.1
 name: anise
 description: Anise is an annotations systems for the Ruby programming lanaguage.
-date: '2013-02-16'
+date: '2013-03-09'
